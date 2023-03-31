@@ -45,12 +45,26 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpPut]
-        [Route("")]
-        public async Task<IActionResult> UpdateOrderStatus(OrderRequestModel request)
+        [Route("Process")]
+        public async Task<IActionResult> ProcessOrder(OrderRequestModel request)
         {
             try
             {
-                await _serivce.UpdateOrderStatus(request.Id, request.Status);
+                await _serivce.ProcessOrder(request.Id);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to Update Order");
+            }
+        }
+        [HttpPut]
+        [Route("Cancel")]
+        public async Task<IActionResult> CancelOrder(OrderRequestModel request)
+        {
+            try
+            {
+                await _serivce.CancelOrder(request.Id);
                 return Ok();
             }
             catch(Exception e)

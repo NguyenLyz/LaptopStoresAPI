@@ -28,7 +28,7 @@ namespace LaptopStoreAPI.Controllers
                 throw e;
             }
         }
-        [HttpPut]
+        /*[HttpPut]
         [Route("")]
         public async Task<IActionResult> Update(NoticeRequestModel request)
         {
@@ -40,7 +40,7 @@ namespace LaptopStoreAPI.Controllers
             {
                 throw e;
             }
-        }
+        }*/
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> Delete(int id)

@@ -114,8 +114,8 @@ namespace LaptopStore.Service.Services
         {
             try
             {
-                var query = _unitOfWork.UserRepository.GetAll();
-                query = query.Where(x => x.RoleId.ToString() != ("116e0deb-f72f-45cf-8ef8-423748b8e9b1"));
+                var query = _unitOfWork.UserRepository.GetAll();/*
+                query = query.Where(x => x.RoleId.ToString() != ("116e0deb-f72f-45cf-8ef8-423748b8e9b1"));*/
                 var user = query.ToList();
                 var result = _mapper.Map<List<User>, List<AuthRequestModel>>(user.ToList());
                 for(var i = 0; i < user.Count(); i++)
@@ -124,6 +124,9 @@ namespace LaptopStore.Service.Services
                     string roleId = user[i].RoleId.ToString();
                     switch (roleId)
                     {
+                        case "116e0deb-f72f-45cf-8ef8-423748b8e9b1":
+                            role = "Customer";
+                            break;
                         case "6fd0f97a-1522-475c-aba1-92f3ce5aeb04":
                             role = "Admin";
                             break;

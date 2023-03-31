@@ -10,6 +10,7 @@ namespace LaptopStore.Service.RequestModels
     public class OrderRequestModel
     {
         public int Id { get; set; }
+        public DateTime OrderDate { get; set; }
         public int OrderValue { get; set; }
         public int Status { get; set; }
         public string ShipName { get; set; }

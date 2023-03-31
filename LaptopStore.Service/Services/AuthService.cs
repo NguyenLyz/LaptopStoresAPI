@@ -119,6 +119,11 @@ namespace LaptopStore.Service.Services
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
                 _context.SaveChanges();
+                string role = "";
+                if (user.RoleId.ToString() == "116e0deb-f72f-45cf-8ef8-423748b8e9b1")
+                {
+                    role = "customer";
+                }
                 return new JwTToken
                 {
                     AccessToken = tokenHandler.WriteToken(token),
@@ -127,6 +132,7 @@ namespace LaptopStore.Service.Services
                         Name = user.Name,
                         Email = user.Email,
                         Phone = user.Phone,
+                        Role = role
                     }
                 };
             }

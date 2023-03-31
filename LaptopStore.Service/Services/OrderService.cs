@@ -35,26 +35,28 @@ namespace LaptopStore.Service.Services
                     ShipName = request.ShipName,
                     ShipAddress = request.ShipAddress,
                     ShipPhone = request.ShipPhone,
+                    Note = request.Note
                 };
                 order = await _unitOfWork.OrderRepository.AddAsync(order);
                 await _unitOfWork.SaveAsync();
-                /*List<CartResponeModel> carts = _unitOfWork.CartRepository.GetByUserId(_userId);
+                List<CartResponseModel> carts = _unitOfWork.CartRepository.GetByUserId(_userId);
                 foreach (var cart in carts)
                 {
+                    var product = _unitOfWork.ProductRepository.GetById(cart.ProductId);
                     var orderDetail = new OrderDetail
                     {
                         OrderId = order.Id,
                         ProductId = cart.ProductId,
-                        Amount = (cart.Price - ((cart.Discount / 100) * cart.Price)) * cart.Quantity,
+                        Amount = (product.Price - ((product.Discount / 100) * product.Price)) * cart.Quantity,
                         Quantity = cart.Quantity
                     };
                     order.OrderValue = order.OrderValue + orderDetail.Amount;
                     await _unitOfWork.OrderDetailRepository.AddAsync(orderDetail);
                     await _unitOfWork.SaveAsync();
-                }*/
+                }
                 _unitOfWork.CartRepository.DeleteByUserId(_userId);
-                /*_unitOfWork.OrderRepository.Update(order);
-                await _unitOfWork.SaveAsync();*/
+                _unitOfWork.OrderRepository.Update(order);
+                await _unitOfWork.SaveAsync();
                 var result = new OrderRequestModel
                 {
                     Id = order.Id,
@@ -72,31 +74,24 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task UpdateOrderStatus(int id, int status)
+        public async Task CancelOrder(int id)
         {
             try
             {
                 var order = _unitOfWork.OrderRepository.GetById(id);
-                if(status != 3)
+                if(order.Status == 0)
                 {
-                    if(order.Status < status)
-                    {
-                        order.Status = status;
-                        if(order.Status == 1)
-                        {
-                            await _unitOfWork.ProductRepository.SuccessfulProcessing(id);
-                        }
-                    }
+                    order.Status = 4;
                 }
-                else
+                if(order.Status >= 1 && order.Status <= 2)
                 {
-                    if(order.Status == 0)
-                    {
-                        order.Status = status;
-                    }
+                    order.Status = 4;
+                    await _unitOfWork.ProductRepository.CancelProcessing(id);
                 }
                 _unitOfWork.OrderRepository.Update(order);
-                await _unitOfWork.SaveAsync();
+                //await _unitOfWork.SaveAsync();
+                return;
+                throw new Exception("Fail to cancel order");
             }
             catch(Exception e)
             {
@@ -111,6 +106,10 @@ namespace LaptopStore.Service.Services
                 if (order.Status < 3)
                 {
                     order.Status++;
+                    if(order.Status == 1)
+                    {
+                        await _unitOfWork.ProductRepository.SuccessfulProcessing(id);
+                    }
                     _unitOfWork.OrderRepository.Update(order);
                     await _unitOfWork.SaveAsync();
                     return;

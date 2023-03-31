@@ -12,7 +12,8 @@ namespace LaptopStore.Service.Services.Interfaces
         Task<OrderRequestModel> Add(OrderRequestModel request, string _userId);
         Task<OrderRequestModel> GetById(int id);
         List<OrderRequestModel> GetByUserId(string userId);
-        Task UpdateOrderStatus(int id, int status);
+        Task CancelOrder(int id);
+        Task ProcessOrder(int id);
         List<OrderRequestModel> GetAll();
     }
 }

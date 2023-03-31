@@ -2,6 +2,7 @@
 using LaptopStore.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace LaptopStoreAPI.Controllers
 {
@@ -25,7 +26,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Creat Product");
             }
         }
         [HttpPut]
@@ -38,7 +39,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Update Product");
             }
         }
         [HttpDelete]
@@ -52,7 +53,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Delete Product");
             }
         }
         [HttpGet]
@@ -65,20 +66,35 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Get Product");
             }
         }
-        [HttpPost]
+        [HttpGet]
         [Route("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             try
             {
-                return Ok(_service.GetById(id));
+                var claimsIdentity = this.User.Identity as ClaimsIdentity;
+                string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
+                return Ok(await _service.GetById(id, _userId));
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Get Product");
+            }
+        }
+        [HttpGet]
+        [Route("Filter")]
+        public async Task<IActionResult> Filter(FilterRequestModel request)
+        {
+            try
+            {
+                return Ok(await _service.Filter(request));
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to Get Product");
             }
         }
     }

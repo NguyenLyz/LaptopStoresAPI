@@ -28,7 +28,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Add Cart");
             }
         }
         [HttpPut]
@@ -43,7 +43,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Update Cart");
             }
         }
         [HttpDelete]
@@ -59,10 +59,10 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Delete Product");
             }
         }
-        [HttpGet]
+        /*[HttpGet]
         [Route("")]
         public IActionResult GetByUserId()
         {
@@ -74,8 +74,8 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Get Cart");
             }
-        }
+        }*/
     }
 }

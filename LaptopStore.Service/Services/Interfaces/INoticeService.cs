@@ -13,6 +13,6 @@ namespace LaptopStore.Service.Services.Interfaces
         Task Delete(int id);
         List<NoticeRequestModel> GetAll();
         NoticeRequestModel GetById(int id);
-        Task<NoticeRequestModel> Update(NoticeRequestModel request);
+        //Task<NoticeRequestModel> Update(NoticeRequestModel request);
     }
 }

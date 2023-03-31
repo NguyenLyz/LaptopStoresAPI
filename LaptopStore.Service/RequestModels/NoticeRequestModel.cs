@@ -8,7 +8,9 @@ namespace LaptopStore.Service.RequestModels
 {
     public class NoticeRequestModel
     {
-        public Guid UserId { get; set; }
+        public int Id { get; set; }
+        public string Phone { get; set; }
+        public Guid RoleId { get; set; } = Guid.Empty;
         public string Message { get; set; }
     }
 }

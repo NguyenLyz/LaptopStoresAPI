@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\LaptopStoreAPI\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj": {}
+    "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\LaptopStoreAPI\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj": {
+    "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\LaptopStoreAPI\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
+        "projectUniqueName": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
         "projectName": "LaptopStore.Data",
-        "projectPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\LaptopStoreAPI\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
+        "projectPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
         "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\LaptopStoreAPI\\LaptopStoreAPI\\LaptopStore.Data\\obj\\",
+        "outputPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\LaptopStoreAPI\\LaptopStore.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",

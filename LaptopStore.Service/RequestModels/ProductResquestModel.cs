@@ -18,7 +18,7 @@ namespace LaptopStore.Service.RequestModels
         public int Discount { get; set; }
         public string Description { get; set; }
         public List<string> Tags { get; set; }
+        public List<string> Images { get; set; }
         public int Available { get; set; }
-        public List<ImageRequestModel> Images { get; set; }
     }
 }

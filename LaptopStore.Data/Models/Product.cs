@@ -16,6 +16,7 @@ namespace LaptopStore.Data.Models
         public int CategoryId { get; set; }
         public int SeriesId { get; set; }
         public string Tags { get; set; }
+        public string Images { get; set; }
         public int Price { get; set; }
         public int Discount { get; set; }
         public string Description { get; set; } = string.Empty;
@@ -28,7 +29,6 @@ namespace LaptopStore.Data.Models
 
         public List<OrderDetail> OrderDetails { get; set; }
         public List<Cart> Carts { get; set; }
-        public List<Image> Images { get; set; }
         public List<Comment> Comments { get; set; }
     }
 }

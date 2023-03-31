@@ -130,28 +130,6 @@ namespace LaptopStore.Data.Migrations
                     b.ToTable("Comments", (string)null);
                 });
 
-            modelBuilder.Entity("LaptopStore.Data.Models.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Link")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Images", (string)null);
-                });
-
             modelBuilder.Entity("LaptopStore.Data.Models.Notice", b =>
                 {
                     b.Property<int>("Id")
@@ -163,6 +141,9 @@ namespace LaptopStore.Data.Migrations
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -259,6 +240,10 @@ namespace LaptopStore.Data.Migrations
 
                     b.Property<int>("Discount")
                         .HasColumnType("int");
+
+                    b.Property<string>("Images")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -413,7 +398,7 @@ namespace LaptopStore.Data.Migrations
                             Id = new Guid("597c8190-753d-4bb4-9253-c23bfe7d192c"),
                             Email = "ly@gmail.com",
                             Name = "Ly",
-                            Password = "$2b$10$BQ613gs4HdWqNFZ04K5ctece57BxC0o2fjyZdeG9xlQnCg4UgFXv.",
+                            Password = "$2b$10$h6LmIzlm.zW11F8TkHiTyer6itCZjLGd0znNi1M3oDTIpJzqiQeB2",
                             Phone = "123456",
                             RoleId = new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04")
                         });
@@ -470,17 +455,6 @@ namespace LaptopStore.Data.Migrations
                 {
                     b.HasOne("LaptopStore.Data.Models.Product", "Product")
                         .WithMany("Comments")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("LaptopStore.Data.Models.Image", b =>
-                {
-                    b.HasOne("LaptopStore.Data.Models.Product", "Product")
-                        .WithMany("Images")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -629,8 +603,6 @@ namespace LaptopStore.Data.Migrations
                     b.Navigation("Carts");
 
                     b.Navigation("Comments");
-
-                    b.Navigation("Images");
 
                     b.Navigation("OrderDetails");
                 });

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Dc7Vs9ErZqvA9vqniBYxT/YaWxHPP6QnXHmKT5zkjWikp8TpWJikxp73GSpHmySYy1xlQkCpeAHB+87Jei8H0w==",
+  "dgSpecHash": "azlB+mMttEzHTztEt9zY6DEdkZ55hANFy+ovQdolFvDb0LUypswDIDXoQ9t+iauZZEE/7ZLWb3O6zE1ZhgS/Sg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\LaptopStoreAPI\\LaptopStoreAPI\\LaptopStore.Service\\LaptopStore.Service.csproj",
+  "projectFilePath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\LaptopStoreAPI\\LaptopStore.Service\\LaptopStore.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

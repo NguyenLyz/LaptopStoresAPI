@@ -19,7 +19,6 @@ namespace LaptopStore.Service.AutoMapper
             CreateMap<CartRequestModel,Cart>().ReverseMap();
             CreateMap<CategoryRequestModel, Category>().ReverseMap();
             CreateMap<CommentRequestModel, Comment>().ReverseMap();
-            CreateMap<ImageRequestModel, Image>().ReverseMap();
             CreateMap<NoticeRequestModel, Notice>().ReverseMap();
             CreateMap<OrderRequestModel, Order>().ReverseMap();
             CreateMap<ProductResquestModel, Product>().ReverseMap();
@@ -27,7 +26,7 @@ namespace LaptopStore.Service.AutoMapper
             CreateMap<UserRequestModel, User>().ReverseMap();
             CreateMap<AuthRequestModel, User>().ReverseMap();
 
-            CreateMap<ProductResponeModel, Product>().ReverseMap();
+            CreateMap<ProductResponseModel, Product>().ReverseMap();
         }
     }
 }

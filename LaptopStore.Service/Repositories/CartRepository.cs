@@ -28,12 +28,12 @@ namespace LaptopStore.Service.Repositories
                         select cart;
             return query.FirstOrDefault();
         }
-        public List<CartResponeModel> GetByUserId(string userId)
+        public List<CartResponseModel> GetByUserId(string userId)
         {
             var query = from cart in _context.Carts
                         join product in _context.Products on cart.ProductId equals product.Id
                         where cart.UserId == new Guid(userId)
-                        select new CartResponeModel
+                        select new CartResponseModel
                         {
                             ProductId = product.Id,
                             Quantity = cart.Quantity,

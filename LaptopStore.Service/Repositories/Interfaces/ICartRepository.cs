@@ -11,7 +11,7 @@ namespace LaptopStore.Service.Repositories.Interfaces
     public interface ICartRepository : IF0GenericRepository<Cart>
     {
         Cart GetById(string userId, int productId);
-        List<CartResponeModel> GetByUserId(string userId);
+        List<CartResponseModel> GetByUserId(string userId);
         void DeleteByUserId(string userId);
     }
 }

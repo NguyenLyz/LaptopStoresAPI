@@ -25,22 +25,22 @@ namespace LaptopStore.Service.Services
         {
             try
             {
+                var user = new User();
                 var notice = _mapper.Map<NoticeRequestModel, Notice>(request);
+                if (request.Phone != null)
+                {
+                    user = _unitOfWork.UserRepository.GetByPhone(request.Phone);
+                    if(user != null)
+                    {
+                        notice.UserId = user.Id;
+                        notice.RoleId = user.RoleId;
+                    }
+                }
+                if(request.RoleId != new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04") && request.RoleId != new Guid("116e0deb-f72f-45cf-8ef8-423748b8e9b1") && request.RoleId != new Guid("a1d06430-35af-433a-aefb-283f559059fb"))
+                {
+                    throw new Exception("Fail to Check");
+                }
                 notice = await _unitOfWork.NoticeRepository.AddAsync(notice);
-                await _unitOfWork.SaveAsync();
-                return _mapper.Map<Notice, NoticeRequestModel>(notice);
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
-        }
-        public async Task<NoticeRequestModel> Update(NoticeRequestModel request)
-        {
-            try
-            {
-                var notice = _mapper.Map<NoticeRequestModel, Notice>(request);
-                notice = _unitOfWork.NoticeRepository.Update(notice);
                 await _unitOfWork.SaveAsync();
                 return _mapper.Map<Notice, NoticeRequestModel>(notice);
             }
@@ -86,5 +86,12 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
+        /*public List<NoticeRequestModel> Show(NoticeRequestModel request, string _userId)
+        {
+            try
+            {
+
+            }
+        }*/
     }
 }

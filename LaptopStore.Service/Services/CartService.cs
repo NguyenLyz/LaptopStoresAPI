@@ -32,9 +32,12 @@ namespace LaptopStore.Service.Services
                 var _cart = _unitOfWork.CartRepository.GetById(_userId, request.ProductId);
                 if(_cart == null)
                 {
-                    var cart = _mapper.Map<CartRequestModel, Cart>(request);
-                    cart.UserId = new Guid(_userId);
-                    cart = await _unitOfWork.CartRepository.AddAsync(cart);
+                    if(_unitOfWork.ProductRepository.GetById(request.ProductId).Available >= request.Quantity)
+                    {
+                        var cart = _mapper.Map<CartRequestModel, Cart>(request);
+                        cart.UserId = new Guid(_userId);
+                        _cart = await _unitOfWork.CartRepository.AddAsync(cart);
+                    }
                 }
                 else
                 {
@@ -80,12 +83,12 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public List<CartResponeModel> GetByUserId(string _userId)
+        /*public List<CartResponseModel> GetByUserId(string _userId)
         {
             try
             {
                 var carts = _unitOfWork.CartRepository.GetByUserId(_userId);
-                var result = _mapper.Map<List<CartResponeModel>>(carts);
+                var result = _mapper.Map<List<CartResponseModel>>(carts);
                 foreach(var cart in result)
                 {
                     cart.Product = _productService.GetById(cart.ProductId);
@@ -96,6 +99,6 @@ namespace LaptopStore.Service.Services
             {
                 throw e;
             }
-        }
+        }*/
     }
 }

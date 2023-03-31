@@ -1,4 +1,5 @@
-﻿using LaptopStore.Data.Context;
+﻿using AutoMapper;
+using LaptopStore.Data.Context;
 using LaptopStore.Service.Repositories;
 using LaptopStore.Service.Repositories.Interfaces;
 using LaptopStore.Service.UnitOfWork.Interfaces;
@@ -15,12 +16,12 @@ namespace LaptopStore.Service.UnitOfWork
     {
         private readonly IConfiguration _configuration;
         private readonly LaptopStoreDbContext _context;
+        private readonly IMapper _mapper;
         private IAdvertisementRepository advertisementRepository;
         private IBrandRepository brandRepository;
         private ICartRepository cartRepository;
         private ICategoryRepository categoryRepository;
         private ICommentRepository commentRepository;
-        private IImageRepository imageRepository;
         private INoticeRepository noticeRepository;
         private IOrderDetailRepository orderDetailRepository;
         private IOrderRepository orderRepository;
@@ -89,17 +90,6 @@ namespace LaptopStore.Service.UnitOfWork
                     this.commentRepository = new CommentRepository(_context);
                 }
                 return this.commentRepository;
-            }
-        }
-        public IImageRepository ImageRepository
-        {
-            get
-            {
-                if (this.imageRepository == null)
-                {
-                    this.imageRepository = new ImageRepository(_context);
-                }
-                return this.imageRepository;
             }
         }
         public INoticeRepository NoticeRepository

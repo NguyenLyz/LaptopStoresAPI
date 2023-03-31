@@ -17,15 +17,15 @@ namespace LaptopStore.Service.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IImageService _imageService;
+        private readonly IUserBehaviorTrackerService _userBehaviorTrackerService;
 
-        public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService)
+        public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IUserBehaviorTrackerService userBehaviorTrackerService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _imageService = imageService;
+            _userBehaviorTrackerService = userBehaviorTrackerService;
         }
-        public async Task<ProductResponeModel> Add(ProductResquestModel request)
+        public async Task<ProductResponseModel> Add(ProductResquestModel request)
         {
             try
             {
@@ -41,11 +41,11 @@ namespace LaptopStore.Service.Services
                     Price = request.Price,
                     Discount = request.Discount,
                     Description = request.Description,
-                    Available = request.Available,
-                    Images = _mapper.Map<List<ImageRequestModel>, List<Image>>(request.Images)
+                    Available = request.Available
                 };
                 product.Slug = helper.GenerateSlug(request.Name) + "-" + Guid.NewGuid().ToString();
                 product.Tags = string.Join(",", request.Tags.ToArray());
+                product.Images = string.Join(",", request.Images.ToArray());
                 await _unitOfWork.ProductRepository.AddAsync(product);
                 //await _unitOfWork.ImageRepository.AddRangeAsync(product.Images);
                 await _unitOfWork.SaveAsync();
@@ -54,7 +54,7 @@ namespace LaptopStore.Service.Services
                 var category = _unitOfWork.CategoryRepository.GetById(product.CategoryId);
                 var series = _unitOfWork.SeriesRepository.GetById(product.SeriesId);
 
-                var result = new ProductResponeModel
+                var result = new ProductResponseModel
                 {
                     Id = product.Id,
                     Name = product.Name,
@@ -68,10 +68,10 @@ namespace LaptopStore.Service.Services
                     Price = product.Price,
                     Discount = product.Discount,
                     Tags = product.Tags.Split(",").ToList(),
+                    Images = product.Images.Split(",").ToList(),
                     Sold = product.Sold,
                     Available = product.Available,
-                    Images = _mapper.Map<List<Image>, List<ImageRequestModel>>(product.Images)
-            };
+                };
                 return result;
             }
             catch(Exception e)
@@ -79,7 +79,7 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task<ProductResponeModel> Update(ProductResquestModel request)
+        public async Task<ProductResponseModel> Update(ProductResquestModel request)
         {
             try
             {
@@ -96,17 +96,17 @@ namespace LaptopStore.Service.Services
                 product.Discount = product1.Discount;
                 product.Description = product1.Description;
                 product.Tags = string.Join(",", request.Tags.ToArray());
+                product.Images = string.Join(",", request.Images.ToArray());
                 product.Available = product1.Available;
                 product.Images = product1.Images;
                 _unitOfWork.ProductRepository.Update(product);
-                //_unitOfWork.ImageRepository.UpdateRange(product1.Images);
                 await _unitOfWork.SaveAsync();
 
                 var brand = _unitOfWork.BrandRepository.GetById(product.BrandId);
                 var category = _unitOfWork.CategoryRepository.GetById(product.CategoryId);
                 var series = _unitOfWork.SeriesRepository.GetById(product.SeriesId);
 
-                var result = new ProductResponeModel
+                var result = new ProductResponseModel
                 {
                     Id = product.Id,
                     Name = product.Name,
@@ -120,9 +120,9 @@ namespace LaptopStore.Service.Services
                     Price = product.Price,
                     Discount = product.Discount,
                     Tags = product.Tags.Split(",").ToList(),
+                    Images = product.Images.Split(",").ToList(),
                     Sold = product.Sold,
                     Available = product.Available,
-                    Images = _mapper.Map<List<Image>, List<ImageRequestModel>>(product.Images),
                 };
                 return result;
             }
@@ -145,7 +145,7 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public ProductResponeModel GetById(int id)
+        public async Task<ProductResponseModel> GetById(int id, string userId)
         {
             try
             {
@@ -153,7 +153,7 @@ namespace LaptopStore.Service.Services
                 var brand = _unitOfWork.BrandRepository.GetById(product.BrandId).Name;
                 var category = _unitOfWork.CategoryRepository.GetById(product.CategoryId).Name;
                 var series = _unitOfWork.SeriesRepository.GetById(product.SeriesId).Name;
-                var result = new ProductResponeModel
+                var result = new ProductResponseModel
                 {
                     Id = product.Id,
                     Name = product.Name,
@@ -170,8 +170,8 @@ namespace LaptopStore.Service.Services
                     Available = product.Available
                 };
                 result.Tags = product.Tags.Split(",").ToList();
-                var image = _unitOfWork.ImageRepository.GetByProductId(result.Id).ToList();
-                result.Images = _mapper.Map<List<Image>, List<ImageRequestModel>>(image);
+                result.Images = product.Images.Split(",").ToList();
+                await _userBehaviorTrackerService.Add(userId, result.BrandId, result.CategoryId, result.SeriesId);
                 return result;
             }
             catch(Exception e)
@@ -185,6 +185,18 @@ namespace LaptopStore.Service.Services
             {
                 var product = _unitOfWork.ProductRepository.GetAll();
                 return _mapper.Map<List<Product>, List<ProductResquestModel>>(product.ToList());
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<FilterRequestModel> Filter(FilterRequestModel request)
+        {
+            try
+            {
+                var products = await _unitOfWork.ProductRepository.Filter(request);
+                return products;
             }
             catch(Exception e)
             {
