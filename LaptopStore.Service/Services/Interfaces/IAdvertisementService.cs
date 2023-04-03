@@ -14,5 +14,6 @@ namespace LaptopStore.Service.Services.Interfaces
         List<AdvertisementRequestModel> GetAll();
         AdvertisementRequestModel GetById(int id);
         Task<AdvertisementRequestModel> Update(AdvertisementRequestModel request);
+        List<AdvertisementRequestModel> Show();
     }
 }

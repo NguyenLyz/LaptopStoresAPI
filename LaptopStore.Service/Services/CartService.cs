@@ -83,22 +83,22 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        /*public List<CartResponseModel> GetByUserId(string _userId)
+        public async Task<List<CartResponseModel>> GetByUserId(string _userId)
         {
             try
             {
                 var carts = _unitOfWork.CartRepository.GetByUserId(_userId);
                 var result = _mapper.Map<List<CartResponseModel>>(carts);
-                foreach(var cart in result)
+                foreach (var cart in result)
                 {
-                    cart.Product = _productService.GetById(cart.ProductId);
+                    cart.Product = await _productService.GetById(cart.ProductId, null);
                 }
                 return result;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
-        }*/
+        }
     }
 }

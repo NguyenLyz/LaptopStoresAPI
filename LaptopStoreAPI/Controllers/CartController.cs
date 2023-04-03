@@ -62,7 +62,7 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to Delete Product");
             }
         }
-        /*[HttpGet]
+        [HttpGet]
         [Route("")]
         public IActionResult GetByUserId()
         {
@@ -76,6 +76,6 @@ namespace LaptopStoreAPI.Controllers
             {
                 return StatusCode(500, "Fail to Get Cart");
             }
-        }*/
+        }
     }
 }

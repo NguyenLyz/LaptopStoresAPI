@@ -16,5 +16,7 @@ namespace LaptopStore.Service.Services.Interfaces
         Task<ProductResponseModel> GetById(int id, string userId);
         Task<ProductResponseModel> Update(ProductResquestModel request);
         Task<FilterRequestModel> Filter(FilterRequestModel request);
+        Task<List<ProductResponseModel>> ShowBestSeller();
+        Task<List<ProductResponseModel>> ShowNewestProduct();
     }
 }

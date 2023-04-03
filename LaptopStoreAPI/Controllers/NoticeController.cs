@@ -2,6 +2,7 @@
 using LaptopStore.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace LaptopStoreAPI.Controllers
 {
@@ -25,7 +26,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Create Notice");
             }
         }
         /*[HttpPut]
@@ -79,6 +80,22 @@ namespace LaptopStoreAPI.Controllers
             catch(Exception e)
             {
                 throw e;
+            }
+        }
+        [HttpGet]
+        [Route("Show")]
+        public IActionResult Show()
+        {
+            try
+            {
+                var claimsIdentity = this.User.Identity as ClaimsIdentity;
+                string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
+                string _roleId = claimsIdentity.FindFirst(ClaimTypes.Role)?.Value;
+                return Ok(_service.Show(_userId, _roleId));
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to Get Notice");
             }
         }
     }

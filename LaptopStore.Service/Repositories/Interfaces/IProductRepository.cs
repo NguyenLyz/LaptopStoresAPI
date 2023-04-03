@@ -1,5 +1,6 @@
 ﻿using LaptopStore.Data.Models;
 using LaptopStore.Service.RequestModels;
+using LaptopStore.Service.ResponeModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,7 @@ namespace LaptopStore.Service.Repositories.Interfaces
         Task SuccessfulProcessing(int orderId);
         Task CancelProcessing(int orderId);
         Task<FilterRequestModel> Filter(FilterRequestModel request);
+        Task<List<ProductResponseModel>> GetBestSeller();
+        Task<List<ProductResponseModel>> GetNewestProduct();
     }
 }

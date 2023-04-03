@@ -88,17 +88,26 @@ namespace LaptopStore.Service.Repositories
             {
                 query = query.Where(x => x.product.SeriesId == request.SeriesId);
             }
-            if(request.Sort == 1)
+            if(request.Sort >= 1 && request.Sort <= 3)
             {
-                query = query.OrderByDescending(x => x.product.Sold);
-            }
-            if(request.Sort == 2)
-            {
-                query = query.OrderBy(x => (x.product.Price - ((x.product.Discount / 100) * x.product.Price)));
-            }
-            if(request.Sort == 3)
-            {
-                query = query.OrderByDescending(x => (x.product.Price - ((x.product.Discount / 100) * x.product.Price)));
+                switch (request.Sort)
+                {
+                    case 1:
+                        {
+                            query = query.OrderByDescending(x => x.product.Sold);
+                            break;
+                        };
+                    case 2:
+                        {
+                            query = query.OrderBy(x => (x.product.Price - ((x.product.Discount / 100) * x.product.Price)));
+                            break;
+                        };
+                    case 3:
+                        {
+                            query = query.OrderByDescending(x => (x.product.Price - ((x.product.Discount / 100) * x.product.Price)));
+                            break;
+                        };
+                };
             }
             else
             {
@@ -142,6 +151,46 @@ namespace LaptopStore.Service.Repositories
             request.TotalRow = totalRow;
             request.Products = result;
             return request;
+        }
+        public async Task<List<ProductResponseModel>> GetBestSeller()
+        {
+            var query = _context.Products.OrderByDescending(x => x.Sold);
+            var data = await query.Take(2).ToListAsync();
+            var result = await query.Take(2).Select(r => new ProductResponseModel
+            {
+                Id = r.Id,
+                Name = r.Name,
+                Slug = r.Slug,
+                Price = r.Price,
+                Discount = r.Discount,
+                Sold = r.Sold,
+                Available = r.Available
+            }).ToListAsync();
+            for(int i = 0; i < data.Count(); i++)
+            {
+                result[i].Images = data[i].Images.Split(",").ToList();
+            }
+            return result;
+        }
+        public async Task<List<ProductResponseModel>> GetNewestProduct()
+        {
+            var query = _context.Products.OrderByDescending(x => x.Id);
+            var data = await query.Take(2).ToListAsync();
+            var result = await query.Take(2).Select(r => new ProductResponseModel
+            {
+                Id = r.Id,
+                Name = r.Name,
+                Slug = r.Slug,
+                Price = r.Price,
+                Discount = r.Discount,
+                Sold = r.Sold,
+                Available = r.Available
+            }).ToListAsync();
+            for (int i = 0; i < data.Count(); i++)
+            {
+                result[i].Images = data[i].Images.Split(",").ToList();
+            }
+            return result;
         }
     }
 }

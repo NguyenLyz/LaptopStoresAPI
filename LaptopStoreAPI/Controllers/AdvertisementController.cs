@@ -25,7 +25,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch (Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Add Advertisement");
             }
         }
         [HttpPut]
@@ -38,7 +38,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch (Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Update Advertisement");
             }
         }
         [HttpDelete]
@@ -52,11 +52,11 @@ namespace LaptopStoreAPI.Controllers
             }
             catch (Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Delete Advertisement");
             }
         }
         [HttpGet]
-        [Route("")]
+        [Route("All")]
         public IActionResult GetAll()
         {
             try
@@ -65,7 +65,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch (Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Get Advertisement");
             }
         }
         [HttpGet]
@@ -78,7 +78,20 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Get Advertisement");
+            }
+        }
+        [HttpGet]
+        [Route("")]
+        public IActionResult Show()
+        {
+            try
+            {
+                return Ok(_service.Show());
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to Get Advertisement");
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using LaptopStore.Data.Context;
 using LaptopStore.Data.Models;
 using LaptopStore.Service.Repositories.Interfaces;
+using LaptopStore.Service.RequestModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

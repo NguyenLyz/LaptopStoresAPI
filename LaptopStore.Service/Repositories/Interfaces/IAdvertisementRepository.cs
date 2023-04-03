@@ -9,5 +9,6 @@ namespace LaptopStore.Service.Repositories.Interfaces
 {
     public interface IAdvertisementRepository : IIntF1GenericRepository<Advertisement>
     {
+        List<Advertisement> Show();
     }
 }

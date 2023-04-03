@@ -14,6 +14,6 @@ namespace LaptopStore.Service.Services.Interfaces
         //List<CartRequestModel> GetAll();
         Task Delete(CartRequestModel request, string _userId);
         Task<CartRequestModel> Update(CartRequestModel request, string _userId);
-        /*List<CartResponseModel> GetByUserId(string _userId);*/
+        Task<List<CartResponseModel>> GetByUserId(string _userId);
     }
 }

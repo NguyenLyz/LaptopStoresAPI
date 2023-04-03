@@ -1,4 +1,5 @@
 ﻿using LaptopStore.Data.Models;
+using LaptopStore.Service.RequestModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace LaptopStore.Service.Repositories.Interfaces
 {
     public interface INoticeRepository : IIntF1GenericRepository<Notice>
     {
+        List<Notice> GetByUserId(string _userId);
+        List<Notice> GetByRoleId(string _userId);
     }
 }

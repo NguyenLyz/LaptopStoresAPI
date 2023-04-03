@@ -25,20 +25,19 @@ namespace LaptopStore.Service.Services
         {
             try
             {
-                var user = new User();
                 var notice = _mapper.Map<NoticeRequestModel, Notice>(request);
-                if (request.Phone != null)
+                var user = _unitOfWork.UserRepository.GetByPhone(request.Phone);
+                if(user != null)
                 {
-                    user = _unitOfWork.UserRepository.GetByPhone(request.Phone);
-                    if(user != null)
-                    {
-                        notice.UserId = user.Id;
-                        notice.RoleId = user.RoleId;
-                    }
+                    notice.UserId = user.Id;
+                    notice.RoleId = Guid.Empty;
                 }
-                if(request.RoleId != new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04") && request.RoleId != new Guid("116e0deb-f72f-45cf-8ef8-423748b8e9b1") && request.RoleId != new Guid("a1d06430-35af-433a-aefb-283f559059fb"))
+                else
                 {
-                    throw new Exception("Fail to Check");
+                    if (request.RoleId != new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04") && request.RoleId != new Guid("116e0deb-f72f-45cf-8ef8-423748b8e9b1") && request.RoleId != new Guid("a1d06430-35af-433a-aefb-283f559059fb"))
+                    {
+                        throw new Exception("Fail to Check");
+                    }
                 }
                 notice = await _unitOfWork.NoticeRepository.AddAsync(notice);
                 await _unitOfWork.SaveAsync();
@@ -86,12 +85,18 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        /*public List<NoticeRequestModel> Show(NoticeRequestModel request, string _userId)
+        public List<NoticeRequestModel> Show(string _userId, string _roleId)
         {
             try
             {
-
+                var notice = _unitOfWork.NoticeRepository.GetByUserId(_userId);
+                notice.AddRange(_unitOfWork.NoticeRepository.GetByRoleId(_roleId.ToString()));
+                return _mapper.Map<List<Notice>, List<NoticeRequestModel>>(notice);
             }
-        }*/
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

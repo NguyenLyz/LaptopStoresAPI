@@ -14,5 +14,6 @@ namespace LaptopStore.Service.Services.Interfaces
         List<NoticeRequestModel> GetAll();
         NoticeRequestModel GetById(int id);
         //Task<NoticeRequestModel> Update(NoticeRequestModel request);
+        List<NoticeRequestModel> Show(string _userId, string _roleId);
     }
 }

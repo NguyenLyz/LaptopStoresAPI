@@ -27,7 +27,7 @@ namespace LaptopStore.Service.Services
         {
             try
             {
-                if(_unitOfWork.UserRepository.GetByPhone != null)
+                if(_unitOfWork.UserRepository.GetByPhone != null && _unitOfWork.UserRepository.GetByEmail != null)
                 {
                     var role = Guid.NewGuid();
                     switch(request.RoleId)
@@ -47,7 +47,7 @@ namespace LaptopStore.Service.Services
                         Password = BCrypt.Net.BCrypt.HashPassword(request.Password),
                         RoleId = role,
                     };
-                    await _unitOfWork.UserRepository.AddAsync(user);
+                    user = await _unitOfWork.UserRepository.AddAsync(user);
                     await _unitOfWork.SaveAsync();
                     return true;
                 }

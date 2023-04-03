@@ -14,5 +14,9 @@ namespace LaptopStore.Service.Repositories
         public AdvertisementRepository(LaptopStoreDbContext context) : base(context)
         {
         }
+        public List<Advertisement> Show()
+        {
+            return _context.Advertisements.OrderByDescending(x => x.Id).Take(5).ToList();
+        }
     }
 }

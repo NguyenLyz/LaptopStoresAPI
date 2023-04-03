@@ -171,7 +171,10 @@ namespace LaptopStore.Service.Services
                 };
                 result.Tags = product.Tags.Split(",").ToList();
                 result.Images = product.Images.Split(",").ToList();
-                await _userBehaviorTrackerService.Add(userId, result.BrandId, result.CategoryId, result.SeriesId);
+                if(userId != null)
+                {
+                    await _userBehaviorTrackerService.Add(userId, result.BrandId, result.CategoryId, result.SeriesId);
+                }
                 return result;
             }
             catch(Exception e)
@@ -199,6 +202,30 @@ namespace LaptopStore.Service.Services
                 return products;
             }
             catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<List<ProductResponseModel>> ShowBestSeller()
+        {
+            try
+            {
+                var product = await _unitOfWork.ProductRepository.GetBestSeller();
+                return product;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<List<ProductResponseModel>> ShowNewestProduct()
+        {
+            try
+            {
+                var product = await _unitOfWork.ProductRepository.GetNewestProduct();
+                return product;
+            }
+            catch (Exception e)
             {
                 throw e;
             }

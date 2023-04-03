@@ -88,5 +88,16 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
+        public List<AdvertisementRequestModel> Show()
+        {
+            try
+            {
+                return _mapper.Map<List<Advertisement>, List<AdvertisementRequestModel>>(_unitOfWork.AdvertisementRepository.Show());
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
