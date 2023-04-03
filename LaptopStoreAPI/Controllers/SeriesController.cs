@@ -25,7 +25,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Create Series");
             }
         }
         [HttpPut]
@@ -38,7 +38,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Update Series");
             }
         }
         [HttpDelete]
@@ -52,7 +52,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Delete Series");
             }
         }
         [HttpGet]
@@ -65,7 +65,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Get Series");
             }
         }
         [HttpGet]
@@ -78,7 +78,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Get Series");
             }
         }
     }

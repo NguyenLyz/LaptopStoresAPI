@@ -29,19 +29,6 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to Create Notice");
             }
         }
-        /*[HttpPut]
-        [Route("")]
-        public async Task<IActionResult> Update(NoticeRequestModel request)
-        {
-            try
-            {
-                return Ok(await _service.Update(request));
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
-        }*/
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> Delete(int id)

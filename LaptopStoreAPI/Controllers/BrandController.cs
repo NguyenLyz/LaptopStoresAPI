@@ -24,8 +24,8 @@ namespace LaptopStoreAPI.Controllers
                 return Ok(await _service.Add(request));
             }
             catch(Exception e)
-            { 
-                throw e;
+            {
+                return StatusCode(500, "Fail to Create Brand");
             }
         }
         [HttpPut]
@@ -38,7 +38,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Update Brand");
             }
         }
         [HttpDelete]
@@ -52,7 +52,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Delete Brand");
             }
         }
         [HttpGet]
@@ -65,7 +65,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Get Brand");
             }
         }
         [HttpGet]
@@ -78,7 +78,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to All Brand");
             }
         }
     }

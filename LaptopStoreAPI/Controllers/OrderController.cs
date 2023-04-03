@@ -32,7 +32,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpGet]
-        [Route("All")]
+        [Route("all")]
         public IActionResult GetAll()
         {
             try
@@ -45,7 +45,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpPut]
-        [Route("Process")]
+        [Route("process")]
         public async Task<IActionResult> ProcessOrder(OrderRequestModel request)
         {
             try
@@ -59,7 +59,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpPut]
-        [Route("Cancel")]
+        [Route("cancel")]
         public async Task<IActionResult> CancelOrder(OrderRequestModel request)
         {
             try

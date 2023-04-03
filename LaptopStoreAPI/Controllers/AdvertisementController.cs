@@ -25,7 +25,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, "Fail to Add Advertisement");
+                return StatusCode(500, "Fail to Create Advertisement");
             }
         }
         [HttpPut]
@@ -56,7 +56,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpGet]
-        [Route("All")]
+        [Route("")]
         public IActionResult GetAll()
         {
             try
@@ -82,7 +82,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpGet]
-        [Route("")]
+        [Route("show")]
         public IActionResult Show()
         {
             try

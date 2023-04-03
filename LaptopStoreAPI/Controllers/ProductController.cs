@@ -56,19 +56,6 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to Delete Product");
             }
         }
-        /*[HttpGet]
-        [Route("")]
-        public IActionResult GetAll()
-        {
-            try
-            {
-                return Ok(_service.GetAll());
-            }
-            catch(Exception e)
-            {
-                return StatusCode(500, "Fail to Get Product");
-            }
-        }*/
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -84,8 +71,8 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to Get Product");
             }
         }
-        [HttpGet]
-        [Route("Filter")]
+        [HttpPost]
+        [Route("filter")]
         public async Task<IActionResult> Filter(FilterRequestModel request)
         {
             try
@@ -98,7 +85,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpGet]
-        [Route("Show")]
+        [Route("show")]
         public async Task<IActionResult> Show()
         {
             try

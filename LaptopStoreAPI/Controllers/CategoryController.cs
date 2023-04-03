@@ -25,7 +25,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Create Category");
             }
         }
         [HttpPut]
@@ -38,7 +38,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Update Catefory");
             }
         }
         [HttpDelete]
@@ -52,7 +52,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Delete Catefory");
             }
         }
         [HttpGet]
@@ -65,7 +65,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Get Catefory");
             }
         }
         [HttpGet]
@@ -78,7 +78,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                return StatusCode(500, "Fail to Get Catefory");
             }
         }
     }
