@@ -21,6 +21,7 @@ namespace LaptopStore.Service.ResponeModels
         public int SeriesId { get; set; }
         public int Price { get; set; }
         public int Discount { get; set; }
+        public string Description { get; set; }
         public List<string> Tags { get; set; }
         public List<string> Images { get; set; }
         public int Sold { get; set; }

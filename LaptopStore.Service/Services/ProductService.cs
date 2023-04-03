@@ -44,8 +44,8 @@ namespace LaptopStore.Service.Services
                     Available = request.Available
                 };
                 product.Slug = helper.GenerateSlug(request.Name) + "-" + Guid.NewGuid().ToString();
-                product.Tags = string.Join(",", request.Tags.ToArray());
-                product.Images = string.Join(",", request.Images.ToArray());
+                product.Tags = string.Join("$", request.Tags.ToArray());
+                product.Images = string.Join("$", request.Images.ToArray());
                 await _unitOfWork.ProductRepository.AddAsync(product);
                 //await _unitOfWork.ImageRepository.AddRangeAsync(product.Images);
                 await _unitOfWork.SaveAsync();
@@ -67,8 +67,9 @@ namespace LaptopStore.Service.Services
                     SeriesId = product.SeriesId,
                     Price = product.Price,
                     Discount = product.Discount,
-                    Tags = product.Tags.Split(",").ToList(),
-                    Images = product.Images.Split(",").ToList(),
+                    Description= product.Description,
+                    Tags = product.Tags.Split("$").ToList(),
+                    Images = product.Images.Split("$").ToList(),
                     Sold = product.Sold,
                     Available = product.Available,
                 };
@@ -95,8 +96,8 @@ namespace LaptopStore.Service.Services
                 product.Price = product1.Price;
                 product.Discount = product1.Discount;
                 product.Description = product1.Description;
-                product.Tags = string.Join(",", request.Tags.ToArray());
-                product.Images = string.Join(",", request.Images.ToArray());
+                product.Tags = string.Join("$", request.Tags.ToArray());
+                product.Images = string.Join("$", request.Images.ToArray());
                 product.Available = product1.Available;
                 product.Images = product1.Images;
                 _unitOfWork.ProductRepository.Update(product);
@@ -119,8 +120,9 @@ namespace LaptopStore.Service.Services
                     SeriesId = product.SeriesId,
                     Price = product.Price,
                     Discount = product.Discount,
-                    Tags = product.Tags.Split(",").ToList(),
-                    Images = product.Images.Split(",").ToList(),
+                    Description = product.Description,
+                    Tags = product.Tags.Split("$").ToList(),
+                    Images = product.Images.Split("$").ToList(),
                     Sold = product.Sold,
                     Available = product.Available,
                 };
@@ -166,11 +168,12 @@ namespace LaptopStore.Service.Services
                     SeriesId = product.SeriesId,
                     Price = product.Price,
                     Discount = product.Discount,
+                    Description = product.Description,
                     Sold = product.Sold,
                     Available = product.Available
                 };
-                result.Tags = product.Tags.Split(",").ToList();
-                result.Images = product.Images.Split(",").ToList();
+                result.Tags = product.Tags.Split("$").ToList();
+                result.Images = product.Images.Split("$").ToList();
                 if(userId != null)
                 {
                     await _userBehaviorTrackerService.Add(userId, result.BrandId, result.CategoryId, result.SeriesId);

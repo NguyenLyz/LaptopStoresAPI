@@ -146,7 +146,7 @@ namespace LaptopStore.Service.Repositories
 
             for(var i = 0; i < data.Count(); i++)
             {
-                result[i].Images = data[i].Images.Split(",").ToList();
+                result[i].Images = data[i].Images.Split("$").ToList();
             }
             request.TotalRow = totalRow;
             request.Products = result;
@@ -168,7 +168,7 @@ namespace LaptopStore.Service.Repositories
             }).ToListAsync();
             for(int i = 0; i < data.Count(); i++)
             {
-                result[i].Images = data[i].Images.Split(",").ToList();
+                result[i].Images = data[i].Images.Split("$").ToList();
             }
             return result;
         }
@@ -188,7 +188,7 @@ namespace LaptopStore.Service.Repositories
             }).ToListAsync();
             for (int i = 0; i < data.Count(); i++)
             {
-                result[i].Images = data[i].Images.Split(",").ToList();
+                result[i].Images = data[i].Images.Split("$").ToList();
             }
             return result;
         }
