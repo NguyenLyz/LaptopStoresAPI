@@ -28,3 +28,18 @@ C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopSt
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopStore.Service\obj\Debug\net6.0\refint\LaptopStore.Service.dll
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.pdb
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopStore.Service\obj\Debug\net6.0\ref\LaptopStore.Service.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\bin\Debug\net6.0\LaptopStore.Service.deps.json
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\bin\Debug\net6.0\LaptopStore.Service.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\bin\Debug\net6.0\LaptopStore.Service.pdb
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\bin\Debug\net6.0\LaptopStore.Data.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\bin\Debug\net6.0\LaptopStore.Data.pdb
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.csproj.AssemblyReference.cache
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.AssemblyInfoInputs.cache
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.AssemblyInfo.cs
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.csproj.CoreCompileInputs.cache
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.csproj.CopyComplete
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\obj\Debug\net6.0\refint\LaptopStore.Service.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.pdb
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Service\obj\Debug\net6.0\ref\LaptopStore.Service.dll

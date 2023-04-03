@@ -26,3 +26,17 @@ C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopSt
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopStore.Data\obj\Debug\net6.0\LaptopStore.Data.pdb
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopStore.Data\obj\Debug\net6.0\LaptopStore.Data.genruntimeconfig.cache
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopStore.Data\obj\Debug\net6.0\ref\LaptopStore.Data.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\bin\Debug\net6.0\LaptopStore.Data.deps.json
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\bin\Debug\net6.0\LaptopStore.Data.runtimeconfig.json
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\bin\Debug\net6.0\LaptopStore.Data.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\bin\Debug\net6.0\LaptopStore.Data.pdb
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\obj\Debug\net6.0\LaptopStore.Data.csproj.AssemblyReference.cache
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\obj\Debug\net6.0\LaptopStore.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\obj\Debug\net6.0\LaptopStore.Data.AssemblyInfoInputs.cache
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\obj\Debug\net6.0\LaptopStore.Data.AssemblyInfo.cs
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\obj\Debug\net6.0\LaptopStore.Data.csproj.CoreCompileInputs.cache
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\obj\Debug\net6.0\LaptopStore.Data.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\obj\Debug\net6.0\refint\LaptopStore.Data.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\obj\Debug\net6.0\LaptopStore.Data.pdb
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\obj\Debug\net6.0\LaptopStore.Data.genruntimeconfig.cache
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LaptopStore.Data\obj\Debug\net6.0\ref\LaptopStore.Data.dll
