@@ -1,5 +1,6 @@
 ﻿using LaptopStore.Service.RequestModels;
 using LaptopStore.Service.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -18,6 +19,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpPost]
         [Route("")]
+        [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> Add(OrderRequestModel request)
         {
             try
@@ -33,6 +35,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("all")]
+        [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetAll()
         {
             try
@@ -46,6 +49,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpPut]
         [Route("process/{id}")]
+        [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> ProcessOrder(int id)
         {
             try
@@ -60,6 +64,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpPut]
         [Route("cancel/{id}")]
+        [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> CancelOrder(int id)
         {
             try
@@ -74,6 +79,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("")]
+        [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetByUserId()
         {
             try
@@ -89,6 +95,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("Detail/{orderId:int}")]
+        [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> GetById(int orderId)
         {
             try
@@ -104,6 +111,7 @@ namespace LaptopStoreAPI.Controllers
 
         [HttpGet]
         [Route("income/{year}")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetIncomeChart(int year)
         {
             try
@@ -118,6 +126,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("sold/{year}")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetSoldChart(int year)
         {
             try
@@ -132,6 +141,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("brandchart/{year}")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetBrandChart(int year)
         {
             try
@@ -146,6 +156,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("brandchart")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetBrandChart(int year = 0, int month = 0)
         {
             try

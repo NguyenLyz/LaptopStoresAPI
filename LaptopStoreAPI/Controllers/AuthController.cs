@@ -19,6 +19,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpPost]
         [Route("log-in")]
+        [AllowAnonymous]
         public IActionResult Login(LoginRequestModel request)
         {
             try
@@ -39,6 +40,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpPost]
         [Route("register")]
+        [AllowAnonymous]
         public IActionResult Register(RegisterRequestModel request)
         {
             try
@@ -59,6 +61,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpPut]
         [Route("change-password")]
+        [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> ChangePassword(ChangePasswordRequestModel request)
         {
             try
@@ -75,6 +78,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("profile")]
+        [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetProfile()
         {
             try

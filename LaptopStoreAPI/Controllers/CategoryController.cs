@@ -1,5 +1,6 @@
 ﻿using LaptopStore.Service.RequestModels;
 using LaptopStore.Service.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace LaptopStoreAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _service;

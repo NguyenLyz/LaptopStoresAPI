@@ -1,5 +1,6 @@
 ﻿using LaptopStore.Service.RequestModels;
 using LaptopStore.Service.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpPost]
         [Route("")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> Add(AdvertisementRequestModel request)
         {
             try
@@ -30,6 +32,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpPut]
         [Route("")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult Update(AdvertisementRequestModel request)
         {
             try
@@ -43,6 +46,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -57,6 +61,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetAll()
         {
             try
@@ -70,7 +75,8 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetByeId(int id)
+        [AllowAnonymous]
+        public IActionResult GetById(int id)
         {
             try
             {
@@ -83,6 +89,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("show")]
+        [AllowAnonymous]
         public IActionResult Show()
         {
             try
