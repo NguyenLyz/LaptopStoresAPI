@@ -12,7 +12,7 @@ namespace LaptopStore.Service.Services.Interfaces
     {
         Task<CartRequestModel> Add(CartRequestModel request, string _userId);
         //List<CartRequestModel> GetAll();
-        Task Delete(CartRequestModel request, string _userId);
+        Task Delete(int _productId, string _userId);
         Task<CartRequestModel> Update(CartRequestModel request, string _userId);
         Task<List<CartResponseModel>> GetByUserId(string _userId);
     }

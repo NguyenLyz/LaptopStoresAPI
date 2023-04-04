@@ -47,14 +47,14 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpDelete]
-        [Route("")]
-        public async Task<IActionResult> Delte(CartRequestModel request)
+        [Route("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
                 var claimsIdentity = this.User.Identity as ClaimsIdentity;
                 string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
-                await _service.Delete(request, _userId);
+                await _service.Delete(id, _userId);
                 return Ok();
             }
             catch(Exception e)

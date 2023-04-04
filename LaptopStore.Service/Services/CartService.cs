@@ -70,11 +70,11 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task Delete(CartRequestModel request, string userId)
+        public async Task Delete(int productId, string userId)
         {
             try
             {
-                var cart = _unitOfWork.CartRepository.GetById(userId, request.ProductId);
+                var cart = _unitOfWork.CartRepository.GetById(userId, productId);
                 _unitOfWork.CartRepository.Delete(cart);
                 await _unitOfWork.SaveAsync();
             }

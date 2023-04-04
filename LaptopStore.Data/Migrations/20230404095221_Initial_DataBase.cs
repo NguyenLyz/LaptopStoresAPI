@@ -331,7 +331,7 @@ namespace LaptopStore.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "Name", "Password", "Phone", "RoleId" },
-                values: new object[] { new Guid("597c8190-753d-4bb4-9253-c23bfe7d192c"), "ly@gmail.com", "Ly", "$2b$10$h6LmIzlm.zW11F8TkHiTyer6itCZjLGd0znNi1M3oDTIpJzqiQeB2", "123456", new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04") });
+                values: new object[] { new Guid("597c8190-753d-4bb4-9253-c23bfe7d192c"), "ly@gmail.com", "Ly", "$2b$10$8uD22AcN5I.N4ldqIgUeiuTeXZmSNgURbKLuJ1.cPMjxjOSr1wU/u", "123456", new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_ProductId",

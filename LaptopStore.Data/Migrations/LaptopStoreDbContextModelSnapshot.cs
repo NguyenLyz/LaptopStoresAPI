@@ -398,7 +398,7 @@ namespace LaptopStore.Data.Migrations
                             Id = new Guid("597c8190-753d-4bb4-9253-c23bfe7d192c"),
                             Email = "ly@gmail.com",
                             Name = "Ly",
-                            Password = "$2b$10$h6LmIzlm.zW11F8TkHiTyer6itCZjLGd0znNi1M3oDTIpJzqiQeB2",
+                            Password = "$2b$10$8uD22AcN5I.N4ldqIgUeiuTeXZmSNgURbKLuJ1.cPMjxjOSr1wU/u",
                             Phone = "123456",
                             RoleId = new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04")
                         });
