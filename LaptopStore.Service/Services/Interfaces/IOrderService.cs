@@ -1,4 +1,5 @@
 ﻿using LaptopStore.Service.RequestModels;
+using LaptopStore.Service.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,8 @@ namespace LaptopStore.Service.Services.Interfaces
         Task CancelOrder(int id);
         Task ProcessOrder(int id);
         List<OrderRequestModel> GetAll();
+        List<ChartResponseModel> GetIncomeChart(int year);
+        List<ChartResponseModel> GetSoldChart(int year);
+        List<ChartResponseModel> GetBrandCircleChart(int year);
     }
 }

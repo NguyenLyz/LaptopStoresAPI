@@ -43,7 +43,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpDelete]
-        [Route("id")]
+        [Route("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try

@@ -99,7 +99,6 @@ namespace LaptopStore.Service.Services
                 product.Tags = string.Join("$", request.Tags.ToArray());
                 product.Images = string.Join("$", request.Images.ToArray());
                 product.Available = product1.Available;
-                product.Images = product1.Images;
                 _unitOfWork.ProductRepository.Update(product);
                 await _unitOfWork.SaveAsync();
 

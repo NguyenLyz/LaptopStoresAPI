@@ -2,6 +2,7 @@
 using LaptopStore.Data.Models;
 using LaptopStore.Service.RequestModels;
 using LaptopStore.Service.ResponeModels;
+using LaptopStore.Service.ResponseModels;
 using LaptopStore.Service.Services.Interfaces;
 using LaptopStore.Service.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -157,5 +158,74 @@ namespace LaptopStore.Service.Services
             }
         }
 
+        public List<ChartResponseModel> GetIncomeChart(int year)
+        {
+            try
+            {
+                var order = _unitOfWork.OrderRepository.GetSuccessByYear(year);
+                var result = new List<ChartResponseModel>();
+                for(int m = 1; m <= 12; m++)
+                {
+                    var data = order.Where(x => x.OrderDate.Month == m).Sum(x => x.OrderValue);
+                    var month = new ChartResponseModel
+                    {
+                        Key = m.ToString(),
+                        Value = data,
+                    };
+                    result.Add(month);
+                }
+                return result;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        public List<ChartResponseModel> GetSoldChart(int year)
+        {
+            try
+            {
+                var result = new List<ChartResponseModel>();
+                for(int m = 1; m <= 12; m++)
+                {
+                    var orderDetail = _unitOfWork.OrderDetailRepository.GetByMonthAndYear(m, year);
+                    var sum = orderDetail.Sum(x => x.Quantity);
+                    var month = new ChartResponseModel
+                    {
+                        Key = m.ToString(),
+                        Value = sum,
+                    };
+                    result.Add(month);
+                }
+                return result;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        public List<ChartResponseModel> GetBrandCircleChart(int year)
+        {
+            try
+            {
+                var result = new List<ChartResponseModel>();
+                var order = _unitOfWork.OrderRepository.GetBrandChart(4, year);
+                foreach(var brand in order)
+                {
+                    var sum = order.Where(x => x.Name == brand.Name).Sum(x => x.Id);
+                    var data = new ChartResponseModel
+                    {
+                        Key = brand.Name,
+                        Value = sum,
+                    };
+                    result.Add(data);
+                }
+                return result;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

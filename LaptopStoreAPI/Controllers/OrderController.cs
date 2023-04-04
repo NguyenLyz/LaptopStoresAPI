@@ -45,12 +45,12 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpPut]
-        [Route("process")]
-        public async Task<IActionResult> ProcessOrder(OrderRequestModel request)
+        [Route("process/{id}")]
+        public async Task<IActionResult> ProcessOrder(int id)
         {
             try
             {
-                await _serivce.ProcessOrder(request.Id);
+                await _serivce.ProcessOrder(id);
                 return Ok();
             }
             catch(Exception e)
@@ -59,12 +59,12 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpPut]
-        [Route("cancel")]
-        public async Task<IActionResult> CancelOrder(OrderRequestModel request)
+        [Route("cancel/{id}")]
+        public async Task<IActionResult> CancelOrder(int id)
         {
             try
             {
-                await _serivce.CancelOrder(request.Id);
+                await _serivce.CancelOrder(id);
                 return Ok();
             }
             catch(Exception e)
@@ -98,7 +98,50 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                return StatusCode(500, " Fail to Get Order");
+                return StatusCode(500, "Fail to Get Order");
+            }
+        }
+
+        [HttpGet]
+        [Route("income/{year}")]
+        public IActionResult GetIncomeChart(int year)
+        {
+            try
+            {
+                var result = _serivce.GetIncomeChart(year);
+                return Ok(result);
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to Get Chart");
+            }
+        }
+        [HttpGet]
+        [Route("sold/{year}")]
+        public IActionResult GetSoldChart(int year)
+        {
+            try
+            {
+                var result = _serivce.GetSoldChart(year);
+                return Ok(result);
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to Get Chart");
+            }
+        }
+        [HttpGet]
+        [Route("brandchart/{year}")]
+        public IActionResult GetBrandChart(int year)
+        {
+            try
+            {
+                var result = _serivce.GetBrandCircleChart(year);
+                return Ok(result);
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to Get Chart");
             }
         }
     }
