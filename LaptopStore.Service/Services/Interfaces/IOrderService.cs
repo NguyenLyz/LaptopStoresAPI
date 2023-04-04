@@ -19,5 +19,6 @@ namespace LaptopStore.Service.Services.Interfaces
         List<ChartResponseModel> GetIncomeChart(int year);
         List<ChartResponseModel> GetSoldChart(int year);
         List<ChartResponseModel> GetBrandCircleChart(int year);
+        List<ChartResponseModel> GetBrandChartFromOrderInfo(int year, int month);
     }
 }

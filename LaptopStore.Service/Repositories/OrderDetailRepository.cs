@@ -16,7 +16,19 @@ namespace LaptopStore.Service.Repositories
         }
         public IQueryable<OrderDetail> GetByOrderId(int id)
         {
-            return _context.OrderDetails.Where(x => x.OrderId == id);
+            /*return _context.OrderDetails.Where(x => x.OrderId == id);*/
+            var query = from orderDetail in _context.OrderDetails
+                        join product in _context.Products on orderDetail.ProductId equals product.Id
+                        where orderDetail.OrderId == id
+                        select new OrderDetail
+                        {
+                            OrderId = orderDetail.OrderId,
+                            ProductId = orderDetail.ProductId,
+                            Amount = orderDetail.Amount,
+                            Quantity = orderDetail.Quantity,
+                            Product = product
+                        };
+            return query;
         }
         public IQueryable<OrderDetail> GetByMonthAndYear(int month, int year)
         {

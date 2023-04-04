@@ -36,5 +36,25 @@ namespace LaptopStore.Service.Repositories
                         };
             return query;
         }
+        public IQueryable<Brand> GetBrandChartFromOrderInfo(int year, int month)
+        {
+            if (month != 0)
+            {
+                var query1 = from order in _context.Orders
+                             join orderDetail in _context.OrderDetails on order.Id equals orderDetail.OrderId
+                             join product in _context.Products on orderDetail.ProductId equals product.Id
+                             join brand in _context.Brands on product.BrandId equals brand.Id
+                             where order.OrderDate.Year == year && order.Status == 3 && order.OrderDate.Month == month
+                             select brand;
+                return query1;
+            }
+            var query = from order in _context.Orders
+                        join orderDetail in _context.OrderDetails on order.Id equals orderDetail.OrderId
+                        join product in _context.Products on orderDetail.ProductId equals product.Id
+                        join brand in _context.Brands on product.BrandId equals brand.Id
+                        where order.OrderDate.Year == year && order.Status == 3
+                        select brand;
+            return query;
+        }
     }
 }

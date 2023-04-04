@@ -227,5 +227,49 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
+
+        public List<ChartResponseModel> GetBrandChartFromOrderInfo(int year = 0, int month = 0)
+        {
+            try
+            {
+                if (year == 0)
+                {
+                    year = DateTime.Now.Year;
+                }
+                var brands = _unitOfWork.OrderRepository.GetBrandChartFromOrderInfo(year, month).ToList();
+                List<int> ids = new List<int>();
+                List<ChartResponseModel> result = new List<ChartResponseModel>();
+                foreach (var brand in brands)
+                {
+                    Console.WriteLine(brand.Name);
+                    var isContinue = false;
+                    foreach (var id in ids)
+                    {
+                        if (brand.Id == id)
+                        {
+                            result[ids.IndexOf(id)].Value += 1;
+                            isContinue = true;
+                            break;
+                        }
+                    }
+                    if (isContinue)
+                    {
+                        continue;
+                    }
+                    ids.Add(brand.Id);
+                    var info = new ChartResponseModel
+                    {
+                        Key = brand.Name,
+                        Value = 1
+                    };
+                    result.Add(info);
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

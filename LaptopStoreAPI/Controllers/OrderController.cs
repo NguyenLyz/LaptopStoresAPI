@@ -144,5 +144,19 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to Get Chart");
             }
         }
+        [HttpGet]
+        [Route("brandchart")]
+        public IActionResult GetBrandChart(int year = 0, int month = 0)
+        {
+            try
+            {
+                var result = _serivce.GetBrandChartFromOrderInfo(year, month);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Fail to Get Chart");
+            }
+        }
     }
 }
