@@ -121,7 +121,11 @@ namespace LaptopStore.Service.Repositories
             {
                 query = query.Where(x => (x.product.Price - ((x.product.Discount / 100) * x.product.Price)) >= request.MinPrice);
             }
-            int totalRow = await query.CountAsync();
+            int totalRow = (await query.CountAsync()) / request.PageSize;
+            if((await query.CountAsync() % request.PageSize) > 0)
+            {
+                totalRow++;
+            }
 
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
                 .Select(d => d.product).ToListAsync();
