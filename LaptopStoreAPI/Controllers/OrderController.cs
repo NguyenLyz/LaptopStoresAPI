@@ -111,7 +111,7 @@ namespace LaptopStoreAPI.Controllers
 
         [HttpGet]
         [Route("income/{year}")]
-        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
+        //[Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetIncomeChart(int year)
         {
             try
@@ -140,13 +140,13 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpGet]
-        [Route("brandchart/{year}")]
-        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
-        public IActionResult GetBrandChart(int year)
+        [Route("brandcirclechart")]
+        //[Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
+        public IActionResult GetBrandChart(int month, int year)
         {
             try
             {
-                var result = _serivce.GetBrandCircleChart(year);
+                var result = _serivce.GetBrandCircleChart(month, year);
                 return Ok(result);
             }
             catch(Exception e)
@@ -155,13 +155,12 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpGet]
-        [Route("brandchart")]
-        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
-        public IActionResult GetBrandChart(int year = 0, int month = 0)
+        [Route("categoycirclechart")]
+        public IActionResult GetCategoryCharts(int month, int year)
         {
             try
             {
-                var result = _serivce.GetBrandChartFromOrderInfo(year, month);
+                var result = _serivce.GetCategoryCircleChart(month, year);
                 return Ok(result);
             }
             catch (Exception e)

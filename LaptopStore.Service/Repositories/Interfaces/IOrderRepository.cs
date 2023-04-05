@@ -1,4 +1,5 @@
 ﻿using LaptopStore.Data.Models;
+using LaptopStore.Service.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace LaptopStore.Service.Repositories.Interfaces
     {
         List<Order> GetByUserId(string _userId);
         IQueryable<Order> GetSuccessByYear(int year);
-        IQueryable<Brand> GetBrandChart(int quarter, int year);
-        IQueryable<Brand> GetBrandChartFromOrderInfo(int year, int month);
+        IQueryable<ChartResponseModel> GetBrandChart(int quarter, int year);
+        IQueryable<ChartResponseModel> GetCategoryChart(int month, int year);
     }
 }

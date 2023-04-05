@@ -162,6 +162,10 @@ namespace LaptopStore.Service.Services
         {
             try
             {
+                if(year == 0)
+                {
+                    year = DateTime.Now.Year;
+                }
                 var order = _unitOfWork.OrderRepository.GetSuccessByYear(year);
                 var result = new List<ChartResponseModel>();
                 for(int m = 1; m <= 12; m++)
@@ -185,6 +189,10 @@ namespace LaptopStore.Service.Services
         {
             try
             {
+                if(year == 0)
+                {
+                    year = DateTime.Now.Year;
+                }
                 var result = new List<ChartResponseModel>();
                 for(int m = 1; m <= 12; m++)
                 {
@@ -204,7 +212,7 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public List<ChartResponseModel> GetBrandCircleChart(int year)
+        /*public List<ChartResponseModel> GetBrandCircleChart(int year)
         {
             try
             {
@@ -226,50 +234,66 @@ namespace LaptopStore.Service.Services
             {
                 throw e;
             }
-        }
-
-        public List<ChartResponseModel> GetBrandChartFromOrderInfo(int year = 0, int month = 0)
+        }*/
+        public List<ChartResponseModel> GetBrandCircleChart(int month, int year)
         {
             try
             {
-                if (year == 0)
+                if(month == 0 || year == 0)
                 {
+                    month = DateTime.Now.Month;
                     year = DateTime.Now.Year;
                 }
-                var brands = _unitOfWork.OrderRepository.GetBrandChartFromOrderInfo(year, month).ToList();
-                List<int> ids = new List<int>();
-                List<ChartResponseModel> result = new List<ChartResponseModel>();
-                foreach (var brand in brands)
+                var brands = _unitOfWork.OrderRepository.GetBrandChart(month, year).ToList();
+                var result = new List<ChartResponseModel>();
+                var loops = brands.GroupBy(x => x.Key).ToList();
+                foreach(var loop in loops)
                 {
-                    Console.WriteLine(brand.Name);
-                    var isContinue = false;
-                    foreach (var id in ids)
+                    var sum = brands.Where(x => x.Key == loop.Key).Sum(x => x.Value);
+                    var data = new ChartResponseModel
                     {
-                        if (brand.Id == id)
-                        {
-                            result[ids.IndexOf(id)].Value += 1;
-                            isContinue = true;
-                            break;
-                        }
-                    }
-                    if (isContinue)
-                    {
-                        continue;
-                    }
-                    ids.Add(brand.Id);
-                    var info = new ChartResponseModel
-                    {
-                        Key = brand.Name,
-                        Value = 1
+                        Key = loop.Key,
+                        Value = sum
                     };
-                    result.Add(info);
+                    result.Add(data);
                 }
                 return result;
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 throw e;
             }
         }
+        public List<ChartResponseModel> GetCategoryCircleChart(int month, int year)
+        {
+            try
+            {
+                if(month == 0 || year == 0)
+                {
+                    month = DateTime.Now.Month;
+                    year = DateTime.Now.Year;
+                }
+                var categories = _unitOfWork.OrderRepository.GetCategoryChart(month, year).ToList();
+                var result = new List<ChartResponseModel>();
+                var loops = categories.GroupBy(x => x.Key).ToList();
+                foreach(var loop in loops)
+                {
+                    var sum = categories.Where(x => x.Key == loop.Key).Sum(x => x.Value);
+                    var data = new ChartResponseModel
+                    {
+                        Key = loop.Key,
+                        Value = sum
+                    };
+                    result.Add(data);
+                }
+                return result;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+
+        
     }
 }

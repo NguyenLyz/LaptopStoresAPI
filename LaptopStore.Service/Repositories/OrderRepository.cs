@@ -1,6 +1,7 @@
 ﻿using LaptopStore.Data.Context;
 using LaptopStore.Data.Models;
 using LaptopStore.Service.Repositories.Interfaces;
+using LaptopStore.Service.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace LaptopStore.Service.Repositories
             var orders = _context.Orders.Where(x => x.OrderDate.Year == year && x.Status == 3);
             return orders;
         }
-        public IQueryable<Brand> GetBrandChart(int quarter, int year)
+        /*public IQueryable<Brand> GetBrandChart(int quarter, int year)
         {
             var query = from order in _context.Orders
                         join orderDetail in _context.OrderDetails on order.Id equals orderDetail.OrderId
@@ -35,25 +36,33 @@ namespace LaptopStore.Service.Repositories
                             Name = brand.Name
                         };
             return query;
-        }
-        public IQueryable<Brand> GetBrandChartFromOrderInfo(int year, int month)
+        }*/
+        public IQueryable<ChartResponseModel> GetBrandChart(int month, int year)
         {
-            if (month != 0)
-            {
-                var query1 = from order in _context.Orders
-                             join orderDetail in _context.OrderDetails on order.Id equals orderDetail.OrderId
-                             join product in _context.Products on orderDetail.ProductId equals product.Id
-                             join brand in _context.Brands on product.BrandId equals brand.Id
-                             where order.OrderDate.Year == year && order.Status == 3 && order.OrderDate.Month == month
-                             select brand;
-                return query1;
-            }
             var query = from order in _context.Orders
                         join orderDetail in _context.OrderDetails on order.Id equals orderDetail.OrderId
                         join product in _context.Products on orderDetail.ProductId equals product.Id
                         join brand in _context.Brands on product.BrandId equals brand.Id
-                        where order.OrderDate.Year == year && order.Status == 3
-                        select brand;
+                        where order.OrderDate.Year == year && order.OrderDate.Month == month && order.Status == 3
+                        select new ChartResponseModel
+                        {
+                            Key = brand.Name,
+                            Value = orderDetail.Quantity,
+                        };
+            return query;
+        }
+        public IQueryable<ChartResponseModel> GetCategoryChart(int month, int year)
+        {
+            var query = from order in _context.Orders
+                        join orderDetail in _context.OrderDetails on order.Id equals orderDetail.OrderId
+                        join product in _context.Products on orderDetail.ProductId equals product.Id
+                        join category in _context.Categories on product.CategoryId equals category.Id
+                        where order.OrderDate.Year == year && order.OrderDate.Month == month && order.Status == 3
+                        select new ChartResponseModel
+                        {
+                            Key = category.Name,
+                            Value = orderDetail.Quantity
+                        };
             return query;
         }
     }
