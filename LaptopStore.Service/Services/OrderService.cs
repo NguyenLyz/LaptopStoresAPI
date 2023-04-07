@@ -256,36 +256,16 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        /*public List<ChartResponseModel> GetBrandCircleChart(int year)
-        {
-            try
-            {
-                var result = new List<ChartResponseModel>();
-                var order = _unitOfWork.OrderRepository.GetBrandChart(4, year);
-                foreach(var brand in order)
-                {
-                    var sum = order.Where(x => x.Name == brand.Name).Sum(x => x.Id);
-                    var data = new ChartResponseModel
-                    {
-                        Key = brand.Name,
-                        Value = sum,
-                    };
-                    result.Add(data);
-                }
-                return result;
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
-        }*/
         public List<ChartResponseModel> GetBrandCircleChart(int month, int year)
         {
             try
             {
-                if(month == 0 || year == 0)
+                if (month == 0)
                 {
                     month = DateTime.Now.Month;
+                }
+                if (year == 0)
+                {
                     year = DateTime.Now.Year;
                 }
                 var brands = _unitOfWork.OrderRepository.GetBrandChart(month, year).ToList();
@@ -312,9 +292,12 @@ namespace LaptopStore.Service.Services
         {
             try
             {
-                if(month == 0 || year == 0)
+                if(month == 0)
                 {
                     month = DateTime.Now.Month;
+                }
+                if (year == 0)
+                {
                     year = DateTime.Now.Year;
                 }
                 var categories = _unitOfWork.OrderRepository.GetCategoryChart(month, year).ToList();
@@ -341,9 +324,12 @@ namespace LaptopStore.Service.Services
         {
             try
             {
-                if (month == 0 || year == 0)
+                if (month == 0)
                 {
                     month = DateTime.Now.Month;
+                }
+                if (year == 0)
+                {
                     year = DateTime.Now.Year;
                 }
                 var series = _unitOfWork.OrderRepository.GetSeriesChart(month, year).ToList();

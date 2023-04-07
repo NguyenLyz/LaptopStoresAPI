@@ -8,7 +8,6 @@ namespace LaptopStoreAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _service;
@@ -19,6 +18,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpPost]
         [Route("")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> Add(CategoryRequestModel request)
         {
             try
@@ -32,6 +32,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpPut]
         [Route("")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> Update(CategoryRequestModel request)
         {
             try
@@ -45,6 +46,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -59,6 +61,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("")]
+        [AllowAnonymous]
         public IActionResult GetAll()
         {
             try
@@ -72,6 +75,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("{id}")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetById(int id)
         {
             try

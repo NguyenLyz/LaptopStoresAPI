@@ -207,7 +207,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpGet]
-        [Route("categoyserieschart")]
+        [Route("seriescirclechart")]
         public IActionResult GetSeriesCharts(int month, int year)
         {
             try
