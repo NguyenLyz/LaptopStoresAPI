@@ -33,7 +33,7 @@ namespace LaptopStore.Service.Repositories
         {
             var query = from order in _context.Orders
                         join orderDetail in _context.OrderDetails on order.Id equals orderDetail.OrderId
-                        where order.OrderDate.Month == month && order.OrderDate.Year == year
+                        where order.OrderDate.Month == month && order.OrderDate.Year == year && order.Status == 3
                         select new OrderDetail
                         {
                             OrderId = orderDetail.OrderId,
