@@ -12,7 +12,8 @@ namespace LaptopStore.Service.Repositories.Interfaces
     {
         List<Order> GetByUserId(string _userId);
         IQueryable<Order> GetSuccessByYear(int year);
-        IQueryable<ChartResponseModel> GetBrandChart(int quarter, int year);
+        IQueryable<ChartResponseModel> GetBrandChart(int month, int year);
         IQueryable<ChartResponseModel> GetCategoryChart(int month, int year);
+        IQueryable<ChartResponseModel> GetSeriesChart(int month, int year);
     }
 }

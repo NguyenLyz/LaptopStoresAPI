@@ -36,8 +36,13 @@ namespace LaptopStore.Service.Services
                     ShipName = request.ShipName,
                     ShipAddress = request.ShipAddress,
                     ShipPhone = request.ShipPhone,
-                    Note = request.Note
+                    Note = request.Note,
+                    ShipMethod = request.ShipMethod,
                 };
+                if(order.ShipMethod == 1)
+                {
+                    order.OrderValue = 100000;
+                }
                 order = await _unitOfWork.OrderRepository.AddAsync(order);
                 await _unitOfWork.SaveAsync();
                 List<CartResponseModel> carts = _unitOfWork.CartRepository.GetByUserId(_userId);
@@ -66,11 +71,41 @@ namespace LaptopStore.Service.Services
                     ShipName = order.ShipName,
                     ShipAddress = order.ShipAddress,
                     ShipPhone = order.ShipPhone,
-                    Note = order.Note
+                    Note = order.Note,
+                    ShipMethod = order.ShipMethod,
                 };
                 return result;
             }
             catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task CancelOrderUser(int id, string _userId)
+        {
+            try
+            {
+                var order = _unitOfWork.OrderRepository.GetById(id);
+                if (order.UserId == new Guid(_userId))
+                {
+                    if(order.Status == 0)
+                    {
+                        order.Status = 5;
+                        _unitOfWork.OrderRepository.Update(order);
+                        await _unitOfWork.SaveAsync();
+                        return;
+                    }
+                    if(order.Status >= 1 && order.Status <= 2)
+                    {
+                        order.Status = 4;
+                        _unitOfWork.OrderRepository.Update(order);
+                        await _unitOfWork.SaveAsync();
+                        return;
+                    }
+                }
+                throw new Exception("Fail to Cancel Order");
+            }
+            catch (Exception e)
             {
                 throw e;
             }
@@ -82,16 +117,17 @@ namespace LaptopStore.Service.Services
                 var order = _unitOfWork.OrderRepository.GetById(id);
                 if(order.Status == 0)
                 {
-                    order.Status = 4;
+                    order.Status = 5;
+                    _unitOfWork.OrderRepository.Update(order);
+                    return;
                 }
                 if(order.Status >= 1 && order.Status <= 2)
                 {
-                    order.Status = 4;
+                    order.Status = 5;
                     await _unitOfWork.ProductRepository.CancelProcessing(id);
+                    _unitOfWork.OrderRepository.Update(order);
+                    return;
                 }
-                _unitOfWork.OrderRepository.Update(order);
-                //await _unitOfWork.SaveAsync();
-                return;
                 throw new Exception("Fail to cancel order");
             }
             catch(Exception e)
@@ -111,6 +147,14 @@ namespace LaptopStore.Service.Services
                     {
                         await _unitOfWork.ProductRepository.SuccessfulProcessing(id);
                     }
+                    _unitOfWork.OrderRepository.Update(order);
+                    await _unitOfWork.SaveAsync();
+                    return;
+                }
+                if(order.Status == 4)
+                {
+                    order.Status++;
+                    await _unitOfWork.ProductRepository.CancelProcessing(id);
                     _unitOfWork.OrderRepository.Update(order);
                     await _unitOfWork.SaveAsync();
                     return;
@@ -293,7 +337,35 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
+        public List<ChartResponseModel> GetSeriesCircleChart(int month, int year)
+        {
+            try
+            {
+                if (month == 0 || year == 0)
+                {
+                    month = DateTime.Now.Month;
+                    year = DateTime.Now.Year;
+                }
+                var series = _unitOfWork.OrderRepository.GetSeriesChart(month, year).ToList();
+                var result = new List<ChartResponseModel>();
+                var loops = series.GroupBy(x => x.Key).ToList();
+                foreach (var loop in loops)
+                {
+                    var sum = series.Where(x => x.Key == loop.Key).Sum(x => x.Value);
+                    var data = new ChartResponseModel
+                    {
+                        Key = loop.Key,
+                        Value = sum
+                    };
+                    result.Add(data);
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
-        
     }
 }

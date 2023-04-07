@@ -76,6 +76,7 @@ namespace LaptopStore.Service.Services
                         Name = _user.Name,
                         Email = _user.Email,
                         Phone = _user.Phone,
+                        Img = _user.Img,
                         Role = role,
                     }
                 };
@@ -186,7 +187,30 @@ namespace LaptopStore.Service.Services
                     Name = user.Name,
                     Email = user.Email,
                     Phone = user.Phone,
+                    Img = user.Img,
                     Role = role
+                };
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<AuthRequestModel> UpdateImg(string img, string userId)
+        {
+            try
+            {
+                var user = _unitOfWork.UserRepository.GetById(userId);
+                if(user == null)
+                {
+                    throw new Exception("User not found");
+                }
+                user.Img = img;
+                await _unitOfWork.UserRepository.AddAsync(user);
+                await _unitOfWork.SaveAsync();
+                return new AuthRequestModel
+                {
+                    Img = user.Img,
                 };
             }
             catch(Exception e)

@@ -13,6 +13,7 @@ namespace LaptopStore.Service.Services.Interfaces
         Task<OrderRequestModel> Add(OrderRequestModel request, string _userId);
         Task<OrderRequestModel> GetById(int id);
         List<OrderRequestModel> GetByUserId(string userId);
+        Task CancelOrderUser(int id, string _userId);
         Task CancelOrder(int id);
         Task ProcessOrder(int id);
         List<OrderRequestModel> GetAll();
@@ -21,5 +22,6 @@ namespace LaptopStore.Service.Services.Interfaces
         //List<ChartResponseModel> GetBrandCircleChart(int year);
         List<ChartResponseModel> GetBrandCircleChart(int month, int year);
         List<ChartResponseModel> GetCategoryCircleChart(int month, int year);
+        List<ChartResponseModel> GetSeriesCircleChart(int month, int year);
     }
 }

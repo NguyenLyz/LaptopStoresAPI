@@ -13,6 +13,7 @@ namespace LaptopStore.Data.Models
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
+        public string Img { get; set; }
         public Guid RoleId { get; set; }
 
         public Role Role { get; set; }

@@ -20,11 +20,11 @@ namespace LaptopStoreAPI.Controllers
         [HttpPost]
         [Route("")]
         [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
-        public async Task<IActionResult> Add(NoticeRequestModel reqeust)
+        public async Task<IActionResult> Add(NoticeRequestModel request)
         {
             try
             {
-                return Ok(await _service.Add(reqeust));
+                return Ok(await _service.Add(request));
             }
             catch(Exception e)
             {

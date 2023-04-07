@@ -1,4 +1,5 @@
 ﻿using LaptopStore.Service.RequestModels;
+using LaptopStore.Service.ResponseModels;
 using LaptopStore.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -60,6 +61,23 @@ namespace LaptopStoreAPI.Controllers
             catch(Exception e)
             {
                 return StatusCode(500, "Fail to Update Order");
+            }
+        }
+        [HttpPut]
+        [Route("{id}")]
+        [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1")]
+        public async Task<IActionResult> CancelOrderUser(int id)
+        {
+            try
+            {
+                var claimsIdentity = this.User.Identity as ClaimsIdentity;
+                string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
+                await _serivce.CancelOrderUser(id, _userId);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to Candel Order");
             }
         }
         [HttpPut]
@@ -126,7 +144,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("sold/{year}")]
-        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
+        //[Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetSoldChart(int year)
         {
             try
@@ -140,8 +158,28 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpGet]
+        [Route("column-chart")]
+        public IActionResult GetColChart(int year)
+        {
+            try
+            {
+                var incomechart = _serivce.GetIncomeChart(year);
+                var soldchart = _serivce.GetSoldChart(year);
+                var result = new List<List<ChartResponseModel>>
+                {
+                    incomechart,
+                    soldchart,
+                };
+                return Ok(result);
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to Get Column Chart");
+            }
+        }
+        [HttpGet]
         [Route("brandcirclechart")]
-        //[Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
+        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetBrandChart(int month, int year)
         {
             try
@@ -166,6 +204,42 @@ namespace LaptopStoreAPI.Controllers
             catch (Exception e)
             {
                 return StatusCode(500, "Fail to Get Chart");
+            }
+        }
+        [HttpGet]
+        [Route("categoyserieschart")]
+        public IActionResult GetSeriesCharts(int month, int year)
+        {
+            try
+            {
+                var result = _serivce.GetSeriesCircleChart(month, year);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Fail to Get Chart");
+            }
+        }
+        [HttpGet]
+        [Route("circle-chart")]
+        public IActionResult GetCirChart(int month, int year)
+        {
+            try
+            {
+                var brandChart = _serivce.GetBrandCircleChart(month, year);
+                var categoryChart = _serivce.GetCategoryCircleChart(month, year);
+                var seriesChart = _serivce.GetSeriesCircleChart(month, year);
+                var result = new List<List<ChartResponseModel>>
+                {
+                    brandChart,
+                    categoryChart,
+                    seriesChart,
+                };
+                return Ok(result);
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to Get Circle Chart");
             }
         }
     }

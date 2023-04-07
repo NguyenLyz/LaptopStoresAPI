@@ -49,7 +49,7 @@ namespace LaptopStore.Data.Context
                 );
 
             modelBuilder.Entity<User>().HasData(
-                new User { Id = new Guid("597C8190-753D-4BB4-9253-C23BFE7D192C"), Name = "Ly", Email = "ly@gmail.com", Phone = "123456", Password = BCrypt.Net.BCrypt.HashPassword("123456789"), RoleId = new Guid("6FD0F97A-1522-475C-ABA1-92F3CE5AEB04") }
+                new User { Id = new Guid("597C8190-753D-4BB4-9253-C23BFE7D192C"), Name = "Ly", Email = "ly@gmail.com", Phone = "123456", Password = BCrypt.Net.BCrypt.HashPassword("123456789"), Img = "", RoleId = new Guid("6FD0F97A-1522-475C-ABA1-92F3CE5AEB04") }
                 );
         }
 

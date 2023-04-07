@@ -159,8 +159,8 @@ namespace LaptopStore.Service.Repositories
         public async Task<List<ProductResponseModel>> GetBestSeller()
         {
             var query = _context.Products.OrderByDescending(x => x.Sold);
-            var data = await query.Take(2).ToListAsync();
-            var result = await query.Take(2).Select(r => new ProductResponseModel
+            var data = await query.Take(10).ToListAsync();
+            var result = await query.Take(10).Select(r => new ProductResponseModel
             {
                 Id = r.Id,
                 Name = r.Name,
@@ -179,8 +179,8 @@ namespace LaptopStore.Service.Repositories
         public async Task<List<ProductResponseModel>> GetNewestProduct()
         {
             var query = _context.Products.OrderByDescending(x => x.Id);
-            var data = await query.Take(2).ToListAsync();
-            var result = await query.Take(2).Select(r => new ProductResponseModel
+            var data = await query.Take(10).ToListAsync();
+            var result = await query.Take(10).Select(r => new ProductResponseModel
             {
                 Id = r.Id,
                 Name = r.Name,

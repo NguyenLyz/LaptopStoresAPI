@@ -20,6 +20,7 @@ namespace LaptopStore.Data.Configurations
             builder.Property(x => x.Phone).HasMaxLength(12);
             builder.HasIndex(x => x.Email).IsUnique();
             builder.HasIndex(x => x.Phone).IsUnique();
+            builder.Property(x => x.Img).IsRequired(false);
         }
     }
 }

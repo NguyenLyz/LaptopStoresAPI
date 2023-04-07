@@ -74,6 +74,7 @@ namespace LaptopStore.Service.Services
                 user.Email = request.Email;
                 user.Phone = request.Phone;
                 user.Password = request.Password;
+                user.Img = request.Img;
                 switch(request.RoleId)
                 {
                     case 1:

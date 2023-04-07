@@ -24,19 +24,6 @@ namespace LaptopStore.Service.Repositories
             var orders = _context.Orders.Where(x => x.OrderDate.Year == year && x.Status == 3);
             return orders;
         }
-        /*public IQueryable<Brand> GetBrandChart(int quarter, int year)
-        {
-            var query = from order in _context.Orders
-                        join orderDetail in _context.OrderDetails on order.Id equals orderDetail.OrderId
-                        join product in _context.Products on orderDetail.ProductId equals product.Id
-                        join brand in _context.Brands on product.BrandId equals brand.Id
-                        select new Brand
-                        {
-                            Id = orderDetail.Quantity,
-                            Name = brand.Name
-                        };
-            return query;
-        }*/
         public IQueryable<ChartResponseModel> GetBrandChart(int month, int year)
         {
             var query = from order in _context.Orders
@@ -61,6 +48,20 @@ namespace LaptopStore.Service.Repositories
                         select new ChartResponseModel
                         {
                             Key = category.Name,
+                            Value = orderDetail.Quantity
+                        };
+            return query;
+        }
+        public IQueryable<ChartResponseModel> GetSeriesChart(int month, int year)
+        {
+            var query = from order in _context.Orders
+                        join orderDetail in _context.OrderDetails on order.Id equals orderDetail.OrderId
+                        join product in _context.Products on orderDetail.ProductId equals product.Id
+                        join series in _context.Series on product.SeriesId equals series.Id
+                        where order.OrderDate.Year == year && order.OrderDate.Month == month && order.Status == 3
+                        select new ChartResponseModel
+                        {
+                            Key = series.Name,
                             Value = orderDetail.Quantity
                         };
             return query;

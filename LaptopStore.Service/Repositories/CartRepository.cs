@@ -21,18 +21,18 @@ namespace LaptopStore.Service.Repositories
         {
             _configuration = configuration;
         }
-        public Cart GetById(string userId, int productId)
+        public Cart GetById(string _userId, int productId)
         {
             var query = from cart in _context.Carts
-                        where cart.UserId == new Guid(userId) && cart.ProductId == productId
+                        where cart.UserId == new Guid(_userId) && cart.ProductId == productId
                         select cart;
             return query.FirstOrDefault();
         }
-        public List<CartResponseModel> GetByUserId(string userId)
+        public List<CartResponseModel> GetByUserId(string _userId)
         {
             var query = from cart in _context.Carts
                         join product in _context.Products on cart.ProductId equals product.Id
-                        where cart.UserId == new Guid(userId)
+                        where cart.UserId == new Guid(_userId)
                         select new CartResponseModel
                         {
                             ProductId = product.Id,
@@ -40,13 +40,13 @@ namespace LaptopStore.Service.Repositories
                         };
             return query.ToList();
         }
-        public void DeleteByUserId(string userId)
+        public void DeleteByUserId(string _userId)
         {
             var connection = _configuration.GetConnectionString("DefaultConnection");
             SqlConnection conn = new SqlConnection(connection);
             using (var query = new SqlCommand("DELETE FROM Carts WHERE userId = @UserId", conn))
             {
-                query.Parameters.Add("@UserId", SqlDbType.NVarChar).Value = userId;
+                query.Parameters.Add("@UserId", SqlDbType.NVarChar).Value = _userId;
                 conn.Open();
                 query.ExecuteNonQuery();
                 conn.Close();

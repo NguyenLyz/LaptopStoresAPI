@@ -32,11 +32,11 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpPut]
         [Route("")]
-        public IActionResult Update(SeriesRequestModel request)
+        public async Task<IActionResult> Update(SeriesRequestModel request)
         {
             try
             {
-                return Ok(_service.Update(request));
+                return Ok(await _service.Update(request));
             }
             catch(Exception e)
             {

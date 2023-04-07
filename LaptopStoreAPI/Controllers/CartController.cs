@@ -66,13 +66,13 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("")]
-        public IActionResult GetByUserId()
+        public async Task<IActionResult> GetByUserId()
         {
             try
             {
                 var claimsIdentity = this.User.Identity as ClaimsIdentity;
                 string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
-                return Ok(_service.GetByUserId(_userId));
+                return Ok(await _service.GetByUserId(_userId));
             }
             catch(Exception e)
             {

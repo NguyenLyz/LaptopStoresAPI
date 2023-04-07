@@ -175,6 +175,9 @@ namespace LaptopStore.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ShipMethod")
+                        .HasColumnType("int");
+
                     b.Property<string>("ShipName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -363,6 +366,9 @@ namespace LaptopStore.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Img")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -397,8 +403,9 @@ namespace LaptopStore.Data.Migrations
                         {
                             Id = new Guid("597c8190-753d-4bb4-9253-c23bfe7d192c"),
                             Email = "ly@gmail.com",
+                            Img = "",
                             Name = "Ly",
-                            Password = "$2b$10$8uD22AcN5I.N4ldqIgUeiuTeXZmSNgURbKLuJ1.cPMjxjOSr1wU/u",
+                            Password = "$2b$10$KF3/gFF3xa3bPBBp7ceQkOJmoDTtXkYc.BJT2HXwBGuk7iilI2gHa",
                             Phone = "123456",
                             RoleId = new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04")
                         });

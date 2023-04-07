@@ -33,11 +33,11 @@ namespace LaptopStoreAPI.Controllers
         [HttpPut]
         [Route("")]
         [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
-        public IActionResult Update(AdvertisementRequestModel request)
+        public async Task<IActionResult> Update(AdvertisementRequestModel request)
         {
             try
             {
-                return Ok(_service.Update(request));
+                return Ok(await _service.Update(request));
             }
             catch (Exception e)
             {

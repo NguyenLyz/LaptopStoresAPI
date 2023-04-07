@@ -17,6 +17,7 @@ namespace LaptopStore.Data.Models
         public string ShipPhone { get; set; } = string.Empty;
         public string ShipAddress { get; set; } = string.Empty;
         public string Note { get; set; } = string.Empty;
+        public int ShipMethod { get; set; }
 
         public User User { get; set; }
         public Transaction Transaction { get; set; }

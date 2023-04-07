@@ -17,6 +17,7 @@ namespace LaptopStore.Service.RequestModels
         public string ShipPhone { get; set; }
         public string ShipAddress { get; set; }
         public string Note { get; set; }
+        public int ShipMethod { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
     }
 }

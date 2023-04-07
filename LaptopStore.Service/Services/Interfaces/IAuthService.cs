@@ -14,5 +14,6 @@ namespace LaptopStore.Service.Services.Interfaces
         JwTToken Login(LoginRequestModel request);
         JwTToken Register(RegisterRequestModel request);
         AuthRequestModel GetProfile(string userId);
+        Task<AuthRequestModel> UpdateImg(string img, string userId);
     }
 }
