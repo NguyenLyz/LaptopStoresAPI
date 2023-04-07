@@ -62,7 +62,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("{id}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetById(int id)
         {
             try
@@ -76,7 +76,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("Show")]
-        [AllowAnonymous]
+        [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult Show()
         {
             try
