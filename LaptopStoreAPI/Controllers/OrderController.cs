@@ -48,7 +48,7 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to Get Order");
             }
         }
-        [HttpPut]
+        [HttpPost]
         [Route("process/{id}")]
         [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> ProcessOrder(int id)
@@ -63,7 +63,7 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to Update Order");
             }
         }
-        [HttpPut]
+        [HttpPost]
         [Route("{id}")]
         [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1")]
         public async Task<IActionResult> CancelOrderUser(int id)
@@ -80,7 +80,7 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to Candel Order");
             }
         }
-        [HttpPut]
+        [HttpPost]
         [Route("cancel/{id}")]
         [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> CancelOrder(int id)
