@@ -1,4 +1,5 @@
 ﻿using LaptopStore.Service.RequestModels;
+using LaptopStore.Service.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace LaptopStore.Service.Services.Interfaces
 {
     public interface INoticeService
     {
-        Task<NoticeRequestModel> Add(NoticeRequestModel request);
+        Task Add(NoticeRequestModel request);
         Task Delete(int id);
-        List<NoticeRequestModel> GetAll();
-        NoticeRequestModel GetById(int id);
+        List<NoticeResponseModel> GetAll();
+        NoticeResponseModel GetById(int id);
         //Task<NoticeRequestModel> Update(NoticeRequestModel request);
-        List<NoticeRequestModel> Show(string _userId, string _roleId);
+        List<NoticeResponseModel> Show(string _userId, string _roleId);
     }
 }

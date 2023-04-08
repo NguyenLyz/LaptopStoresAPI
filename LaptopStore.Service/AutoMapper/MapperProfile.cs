@@ -2,6 +2,7 @@
 using LaptopStore.Data.Models;
 using LaptopStore.Service.RequestModels;
 using LaptopStore.Service.ResponeModels;
+using LaptopStore.Service.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace LaptopStore.Service.AutoMapper
             CreateMap<AuthRequestModel, User>().ReverseMap();
 
             CreateMap<ProductResponseModel, Product>().ReverseMap();
+            CreateMap<NoticeResponseModel, Notice>().ReverseMap();
         }
     }
 }

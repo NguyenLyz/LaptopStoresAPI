@@ -10,7 +10,7 @@ namespace LaptopStore.Service.RequestModels
     {
         public int Id { get; set; }
         public string Phone { get; set; }
-        public Guid RoleId { get; set; } = Guid.Empty;
+        public int RoleId { get; set; }
         public string Message { get; set; }
     }
 }

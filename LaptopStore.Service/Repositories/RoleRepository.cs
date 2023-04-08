@@ -14,5 +14,9 @@ namespace LaptopStore.Service.Repositories
         public RoleRepository(LaptopStoreDbContext context) : base(context)
         {
         }
+        public Role GetById(string id)
+        {
+            return _context.Roles.Where(x => x.Id == new Guid(id)).FirstOrDefault();
+        }
     }
 }

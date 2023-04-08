@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LaptopStore.Data.Models;
 using LaptopStore.Service.RequestModels;
+using LaptopStore.Service.ResponseModels;
 using LaptopStore.Service.Services.Interfaces;
 using LaptopStore.Service.UnitOfWork.Interfaces;
 using System;
@@ -21,11 +22,14 @@ namespace LaptopStore.Service.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<NoticeRequestModel> Add(NoticeRequestModel request)
+        public async Task Add(NoticeRequestModel request)
         {
             try
             {
-                var notice = _mapper.Map<NoticeRequestModel, Notice>(request);
+                var notice = new Notice
+                {
+                    Message = request.Message,
+                };
                 var user = _unitOfWork.UserRepository.GetByPhone(request.Phone);
                 if(user != null)
                 {
@@ -34,14 +38,32 @@ namespace LaptopStore.Service.Services
                 }
                 else
                 {
-                    if (request.RoleId != new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04") && request.RoleId != new Guid("116e0deb-f72f-45cf-8ef8-423748b8e9b1") && request.RoleId != new Guid("a1d06430-35af-433a-aefb-283f559059fb"))
+                    switch(request.RoleId)
                     {
-                        throw new Exception("Fail to Check");
+                        case 1:
+                            {
+                                notice.RoleId = new Guid("116E0DEB-F72F-45CF-8EF8-423748B8E9B1");
+                                break;
+                            }
+                        case 2:
+                            {
+                                notice.RoleId = new Guid("A1D06430-35AF-433A-AEFB-283F559059FB");
+                                break;
+                            }
+                        case 3:
+                            {
+                                notice.RoleId = new Guid("6FD0F97A-1522-475C-ABA1-92F3CE5AEB04");
+                                break;
+                            }
+                        default:
+                            {
+                                throw new Exception("Not Found Role");
+                            }
                     }
                 }
                 notice = await _unitOfWork.NoticeRepository.AddAsync(notice);
                 await _unitOfWork.SaveAsync();
-                return _mapper.Map<Notice, NoticeRequestModel>(notice);
+                return;
             }
             catch(Exception e)
             {
@@ -61,37 +83,56 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public NoticeRequestModel GetById(int id)
+        public NoticeResponseModel GetById(int id)
         {
             try
             {
                 var notice = _unitOfWork.NoticeRepository.GetById(id);
-                return _mapper.Map<Notice, NoticeRequestModel>(notice);
+                var user = new User();
+                var role = new Role();
+                if (notice.UserId != Guid.Empty)
+                {
+                    user = _unitOfWork.UserRepository.GetById(notice.UserId.ToString());
+                    role = _unitOfWork.RoleRepository.GetById(user.RoleId.ToString());
+                }
+                else
+                {
+                    user.Phone = null;
+                    role = _unitOfWork.RoleRepository.GetById(notice.RoleId.ToString());
+                }
+                return new NoticeResponseModel
+                {
+                    Id = notice.Id,
+                    Phone = user.Phone,
+                    Role = role.Name,
+                    Message = notice.Message
+                };
             }
             catch(Exception e)
             {
                 throw e;
             }
         }
-        public List<NoticeRequestModel> GetAll()
+        public List<NoticeResponseModel> GetAll()
         {
             try
             {
-                var notice = _unitOfWork.NoticeRepository.GetAll();
-                return _mapper.Map<List<Notice>, List<NoticeRequestModel>>(notice.ToList());
+                var notice = _unitOfWork.NoticeRepository.GetAllUserId().ToList();
+                notice.AddRange(_unitOfWork.NoticeRepository.GetAllRoleId().ToList());
+                return notice;
             }
             catch(Exception e)
             {
                 throw e;
             }
         }
-        public List<NoticeRequestModel> Show(string _userId, string _roleId)
+        public List<NoticeResponseModel> Show(string _userId, string _roleId)
         {
             try
             {
                 var notice = _unitOfWork.NoticeRepository.GetByUserId(_userId);
                 notice.AddRange(_unitOfWork.NoticeRepository.GetByRoleId(_roleId.ToString()));
-                return _mapper.Map<List<Notice>, List<NoticeRequestModel>>(notice);
+                return _mapper.Map<List<Notice>, List<NoticeResponseModel>>(notice);
             }
             catch(Exception e)
             {

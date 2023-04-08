@@ -9,5 +9,6 @@ namespace LaptopStore.Service.Repositories.Interfaces
 {
     public interface IRoleRepository : IF0GenericRepository<Role>
     {
+        Role GetById(string id);
     }
 }

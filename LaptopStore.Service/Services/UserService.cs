@@ -66,15 +66,10 @@ namespace LaptopStore.Service.Services
             try
             {
                 var user = _unitOfWork.UserRepository.GetById(request.Id);
-                if(user == null)
+                if(user == null || user.RoleId == new Guid("116E0DEB-F72F-45CF-8EF8-423748B8E9B1"))
                 {
                     return false;
                 }
-                user.Name = request.Name;
-                user.Email = request.Email;
-                user.Phone = request.Phone;
-                user.Password = request.Password;
-                user.Img = request.Img;
                 switch(request.RoleId)
                 {
                     case 1:
