@@ -16,6 +16,6 @@ namespace LaptopStore.Service.Services.Interfaces
         User GetByEmail(string email);
         User GetById(string id);
         User GetByPhone(string phone);
-        Task<bool> Update(UserRequestModel request);
+        Task<bool> UpdateRole(UserRequestModel request);
     }
 }

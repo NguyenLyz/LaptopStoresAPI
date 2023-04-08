@@ -36,11 +36,11 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpPut]
         [Route("")]
-        public async Task<IActionResult> Update(UserRequestModel request)
+        public async Task<IActionResult> UpdateRole(UserRequestModel request)
         {
             try
             {
-                if(await _service.Update(request))
+                if(await _service.UpdateRole(request))
                 {
                     return Ok();
                 }

@@ -61,7 +61,7 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task<bool> Update(UserRequestModel request)
+        public async Task<bool> UpdateRole(UserRequestModel request)
         {
             try
             {
