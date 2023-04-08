@@ -218,5 +218,39 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
+        public async Task GetPhoneToChange(string phone)
+        {
+            try
+            {
+                if(_unitOfWork.UserRepository.GetByPhone(phone) == null)
+                {
+                    throw new Exception("User not found");
+                }
+                return;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task GetPassword(GetPasswordRequestModel request)
+        {
+            try
+            {
+                if (request.Otp != "000000")
+                {
+                    throw new Exception("Incorrect Otp");
+                }
+                var user = _unitOfWork.UserRepository.GetByPhone(request.Phone);
+                user.Password = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
+                _context.Update(user);
+                await _context.SaveChangesAsync();
+                return;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

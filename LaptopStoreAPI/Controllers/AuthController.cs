@@ -110,5 +110,35 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to Update Image");
             }
         }
+        [HttpPost]
+        [Route("get-password")]
+        [AllowAnonymous]
+        public IActionResult GetPhoneToChange(string phone)
+        {
+            try
+            {
+                _service.GetPhoneToChange(phone);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "User not Found");
+            }
+        }
+        [HttpPut]
+        [Route("get-password")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetPassword(GetPasswordRequestModel request)
+        {
+            try
+            {
+                await _service.GetPassword(request);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "fail to Get Password");
+            }
+        }
     }
 }
