@@ -94,7 +94,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpPost]
-        [Route("")]
+        [Route("update-image")]
         [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult UpdateImg(string img)
         {
@@ -111,13 +111,13 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpPost]
-        [Route("get-password")]
+        [Route("check-user")]
         [AllowAnonymous]
-        public IActionResult GetPhoneToChange(string phone)
+        public IActionResult CheckUser(string phone)
         {
             try
             {
-                _service.GetPhoneToChange(phone);
+                _service.CheckUser(phone);
                 return Ok();
             }
             catch(Exception e)

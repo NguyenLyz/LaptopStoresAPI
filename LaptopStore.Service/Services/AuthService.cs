@@ -218,7 +218,7 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task GetPhoneToChange(string phone)
+        public async Task CheckUser(string phone)
         {
             try
             {
