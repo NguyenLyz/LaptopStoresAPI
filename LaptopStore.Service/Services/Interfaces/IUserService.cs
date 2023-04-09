@@ -11,11 +11,11 @@ namespace LaptopStore.Service.Services.Interfaces
     public interface IUserService
     {
         Task<bool> Add(UserRequestModel request);
-        Task<bool> Delete(string id);
+        Task<bool> Delete(UserRequestModel request, string _userId);
         List<AuthRequestModel> GetAll();
         User GetByEmail(string email);
         User GetById(string id);
         User GetByPhone(string phone);
-        Task<bool> UpdateRole(UserRequestModel request);
+        Task<bool> UpdateRole(UserRequestModel request, string _userId);
     }
 }

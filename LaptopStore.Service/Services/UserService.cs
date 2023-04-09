@@ -61,23 +61,25 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task<bool> UpdateRole(UserRequestModel request)
+        public async Task<bool> UpdateRole(UserRequestModel request, string _userId)
         {
             try
             {
-                var user = _unitOfWork.UserRepository.GetById(request.Id);
-                if(user == null || user.RoleId == new Guid("116E0DEB-F72F-45CF-8EF8-423748B8E9B1"))
+                var user = _unitOfWork.UserRepository.GetByPhone(request.Phone);
+                if(user == null || user.RoleId == new Guid("116E0DEB-F72F-45CF-8EF8-423748B8E9B1") || user.Phone == "123456" || user.Id == new Guid(_userId))
                 {
                     return false;
                 }
                 switch(request.RoleId)
                 {
                     case 1:
-                        user.RoleId = new Guid("A1D06430-35AF-433A-AEFB-283F559059FB");
+                        user.RoleId = new Guid("a1d06430-35af-433a-aefb-283f559059fb");
                         break;
                     case 2:
-                        user.RoleId = new Guid("6FD0F97A-1522-475C-ABA1-92F3CE5AEB04");
+                        user.RoleId = new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04");
                         break;
+                    default:
+                        return false;
                 }
                 _unitOfWork.UserRepository.Update(user);
                 await _unitOfWork.SaveAsync();
@@ -88,12 +90,12 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task<bool> Delete(string id)
+        public async Task<bool> Delete(UserRequestModel request, string _userId)
         {
             try
             {
-                var user = _unitOfWork.UserRepository.GetById(id);
-                if(user == null)
+                var user = _unitOfWork.UserRepository.GetByPhone(request.Phone);
+                if(user == null || user.Phone == "123456" || user.Id == new Guid(_userId))
                 {
                     return false;
                 }

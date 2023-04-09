@@ -49,7 +49,7 @@ namespace LaptopStore.Service.Services
                         new Claim(ClaimTypes.MobilePhone, _user.Phone.ToString()),
                         new Claim(ClaimTypes.Role, _user.RoleId.ToString())
                     }),
-                    Expires = DateTime.UtcNow.AddHours(5),
+                    Expires = DateTime.UtcNow.AddMinutes(20),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -115,7 +115,7 @@ namespace LaptopStore.Service.Services
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
                     new Claim(ClaimTypes.Role, user.RoleId.ToString())
                     }),
-                    Expires = DateTime.UtcNow.AddHours(5),
+                    Expires = DateTime.UtcNow.AddMinutes(20),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -249,5 +249,6 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
+        
     }
 }

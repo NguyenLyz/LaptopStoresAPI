@@ -3,6 +3,7 @@ using LaptopStore.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace LaptopStoreAPI.Controllers
 {
@@ -40,7 +41,9 @@ namespace LaptopStoreAPI.Controllers
         {
             try
             {
-                if(await _service.UpdateRole(request))
+                var claimsIdentity = this.User.Identity as ClaimsIdentity;
+                string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
+                if (await _service.UpdateRole(request, _userId))
                 {
                     return Ok();
                 }
@@ -57,7 +60,9 @@ namespace LaptopStoreAPI.Controllers
         {
             try
             {
-                if(await _service.Delete(request.Id))
+                var claimsIdentity = this.User.Identity as ClaimsIdentity;
+                string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
+                if (await _service.Delete(request, _userId))
                 {
                     return Ok();
                 }
