@@ -28,6 +28,7 @@ namespace LaptopStore.Service.Services
             {
                 var notice = new Notice
                 {
+                    Title = request.Title,
                     Message = request.Message,
                 };
                 var user = _unitOfWork.UserRepository.GetByPhone(request.Phone);
@@ -105,6 +106,7 @@ namespace LaptopStore.Service.Services
                     Id = notice.Id,
                     Phone = user.Phone,
                     Role = role.Name,
+                    Title = notice.Title,
                     Message = notice.Message
                 };
             }

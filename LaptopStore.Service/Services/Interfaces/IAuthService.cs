@@ -19,5 +19,6 @@ namespace LaptopStore.Service.Services.Interfaces
         Task UpdateImg(UpdateImageRequest request, string userId);
         Task<bool> CheckUser(CheckUserRequestModel request);
         Task GetPassword(GetPasswordRequestModel request);
+        JwTToken RefreshToken(JwTToken request);
     }
 }

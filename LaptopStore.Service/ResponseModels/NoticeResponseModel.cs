@@ -11,6 +11,7 @@ namespace LaptopStore.Service.ResponseModels
         public int Id { get; set; }
         public string Phone { get; set; } = string.Empty;
         public string Role { get; set; }
+        public string Title { get; set; }
         public string Message { get; set; }
     }
 }

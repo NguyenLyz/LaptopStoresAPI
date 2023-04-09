@@ -11,6 +11,7 @@ namespace LaptopStore.Service.RequestModels
         public int Id { get; set; }
         public string Phone { get; set; }
         public int RoleId { get; set; }
+        public string Title { get; set; }
         public string Message { get; set; }
     }
 }

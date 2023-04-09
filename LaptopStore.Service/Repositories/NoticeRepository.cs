@@ -34,6 +34,7 @@ namespace LaptopStore.Service.Repositories
                             Id = notice.Id,
                             Phone = user.Phone,
                             Role = role.Name,
+                            Title = notice.Title,
                             Message = notice.Message
                         };
             return query;
@@ -47,6 +48,7 @@ namespace LaptopStore.Service.Repositories
                             Id = notice.Id,
                             Phone = null,
                             Role = role.Name,
+                            Title = notice.Title,
                             Message = notice.Message
                         };
             return query;

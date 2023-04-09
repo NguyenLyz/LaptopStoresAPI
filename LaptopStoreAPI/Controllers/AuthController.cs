@@ -1,9 +1,12 @@
-﻿using LaptopStore.Service.RequestModels;
+﻿using LaptopStore.Data.Models;
+using LaptopStore.Service.RequestModels;
+using LaptopStore.Service.ResponeModels;
 using LaptopStore.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using JwTToken = LaptopStore.Service.ResponeModels.JwTToken;
 
 namespace LaptopStoreAPI.Controllers
 {
@@ -139,6 +142,38 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "fail to Get Password");
             }
         }
-        
+        [HttpPost]
+        [Route("refreshtoken")]
+        [AllowAnonymous]
+        public IActionResult RefreshToken(JwTToken request)
+        {
+            try
+            {
+                return Ok(_service.RefreshToken(request));
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to refresh");
+            }
+        }
+        [HttpGet]
+        [Route("test")]
+        public IActionResult Test()
+        {
+            try
+            {
+                var claimsIdentity = this.User.Identity as ClaimsIdentity;
+                string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
+                return Ok(new
+                {
+                    claimsIdentity,
+                    _userId
+                });
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to refresh");
+            }
+        }
     }
 }

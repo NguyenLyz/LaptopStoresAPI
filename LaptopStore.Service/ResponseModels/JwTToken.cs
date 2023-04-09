@@ -10,6 +10,7 @@ namespace LaptopStore.Service.ResponeModels
     public class JwTToken
     {
         public string AccessToken { get; set; }
+        public string RefreshToken { get; set; }
         public AuthRequestModel User { get; set; }
     }
 }
