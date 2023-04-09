@@ -93,17 +93,17 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to GetProfile");
             }
         }
-        [HttpPost]
+        [HttpPut]
         [Route("update-image")]
         [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
-        public IActionResult UpdateImg(string img)
+        public async Task<IActionResult> UpdateImg(UpdateImageRequest request)
         {
             try
             {
                 var claimsIdentity = this.User.Identity as ClaimsIdentity;
                 string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
-                var user = _service.UpdateImg(img, _userId);
-                return Ok(user);
+                await _service.UpdateImg(request, _userId);
+                return Ok();
             }
             catch(Exception e)
             {
@@ -113,12 +113,11 @@ namespace LaptopStoreAPI.Controllers
         [HttpPost]
         [Route("check-user")]
         [AllowAnonymous]
-        public IActionResult CheckUser(string phone)
+        public async Task<IActionResult> CheckUser(CheckUserRequestModel request)
         {
             try
             {
-                _service.CheckUser(phone);
-                return Ok();
+                return Ok(await _service.CheckUser(request));
             }
             catch(Exception e)
             {

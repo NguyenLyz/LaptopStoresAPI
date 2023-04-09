@@ -196,7 +196,7 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task<AuthRequestModel> UpdateImg(string img, string userId)
+        public async Task UpdateImg(UpdateImageRequest request, string userId)
         {
             try
             {
@@ -205,28 +205,25 @@ namespace LaptopStore.Service.Services
                 {
                     throw new Exception("User not found");
                 }
-                user.Img = img;
-                await _unitOfWork.UserRepository.AddAsync(user);
+                user.Img = request.Image;
+                _unitOfWork.UserRepository.Update(user);
                 await _unitOfWork.SaveAsync();
-                return new AuthRequestModel
-                {
-                    Img = user.Img,
-                };
+                return;
             }
             catch(Exception e)
             {
                 throw e;
             }
         }
-        public async Task CheckUser(string phone)
+        public async Task<bool> CheckUser(CheckUserRequestModel request)
         {
             try
             {
-                if(_unitOfWork.UserRepository.GetByPhone(phone) == null)
+                if(_unitOfWork.UserRepository.GetByPhone(request.Phone) == null)
                 {
-                    throw new Exception("User not found");
+                    return false;
                 }
-                return;
+                return true;
             }
             catch(Exception e)
             {
