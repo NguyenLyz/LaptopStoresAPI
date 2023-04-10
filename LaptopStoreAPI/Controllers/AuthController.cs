@@ -156,20 +156,5 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to refresh");
             }
         }
-        [HttpGet]
-        [Route("test/{request}")]
-        [AllowAnonymous]
-        public IActionResult Test(string request)
-        {
-            try
-            {
-                var claimsIdentity = this.User.Identity as ClaimsIdentity;
-                return Ok(claimsIdentity);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, "Fail to refresh");
-            }
-           }
     }
 }

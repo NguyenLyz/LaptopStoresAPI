@@ -50,7 +50,7 @@ namespace LaptopStore.Service.Services
                         new Claim(ClaimTypes.MobilePhone, _user.Phone.ToString()),
                         new Claim(ClaimTypes.Role, _user.RoleId.ToString())
                     }),
-                    Expires = DateTime.Now.AddMinutes(1),
+                    Expires = DateTime.Now.AddMinutes(20),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -139,7 +139,7 @@ namespace LaptopStore.Service.Services
                         new Claim(ClaimTypes.MobilePhone, user.Phone.ToString()),
                         new Claim(ClaimTypes.Role, user.RoleId.ToString())
                     }),
-                    Expires = DateTime.Now.AddMinutes(1),
+                    Expires = DateTime.Now.AddMinutes(20),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -311,7 +311,7 @@ namespace LaptopStore.Service.Services
                         new Claim(ClaimTypes.MobilePhone, _user.Phone.ToString()),
                         new Claim(ClaimTypes.Role, _user.RoleId.ToString())
                     }),
-                Expires = DateTime.Now.AddMinutes(1),
+                Expires = DateTime.Now.AddMinutes(20),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(newAccessToken);
