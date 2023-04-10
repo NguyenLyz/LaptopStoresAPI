@@ -17,7 +17,6 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using JwTToken = LaptopStore.Service.ResponeModels.JwTToken;
 
 namespace LaptopStore.Service.Services
 {
@@ -32,7 +31,7 @@ namespace LaptopStore.Service.Services
             _iconfiguration = iconfiguration;
             _context = context;
         }
-        public JwTToken Login(LoginRequestModel request)
+        public async Task<JwTTokenResponseModel> Login(LoginRequestModel request)
         {
             try
             {
@@ -51,11 +50,32 @@ namespace LaptopStore.Service.Services
                         new Claim(ClaimTypes.MobilePhone, _user.Phone.ToString()),
                         new Claim(ClaimTypes.Role, _user.RoleId.ToString())
                     }),
-                    Expires = DateTime.UtcNow.AddMinutes(1),
+                    Expires = DateTime.Now.AddMinutes(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
-                var refreshToken = GenerateRefreshToken();  
+                var refreshToken = _unitOfWork.JWTTokenRepository.GenerateRefreshToken();
+                var tokenData = _unitOfWork.JWTTokenRepository.GetByUserId(_user.Id.ToString());
+                if (tokenData == null)
+                {
+                    var newToken = new JwTToken
+                    {
+                        UserId = _user.Id,
+                        AccessToken = tokenHandler.WriteToken(token),
+                        RefreshToken = refreshToken,
+                        RefreshTokenExpiryTime = DateTime.Now.AddDays(2),
+                    };
+                    await _unitOfWork.JWTTokenRepository.AddAsync(newToken);
+                }
+                else
+                {
+                    tokenData.AccessToken = tokenHandler.WriteToken(token);
+                    tokenData.RefreshToken = refreshToken;
+                    tokenData.RefreshTokenExpiryTime = DateTime.Now.AddDays(2);
+                    _unitOfWork.JWTTokenRepository.Update(tokenData);
+                }
+               //dự tính thêm table token save //check tiep refreshtoken
+                await _unitOfWork.SaveAsync();
                 string role = "";
                 string roleId = _user.RoleId.ToString();
                 switch (roleId)
@@ -70,7 +90,7 @@ namespace LaptopStore.Service.Services
                         role = "employee";
                         break;
                 }
-                return new JwTToken
+                return new JwTTokenResponseModel
                 {
                     AccessToken = tokenHandler.WriteToken(token),
                     RefreshToken = refreshToken,
@@ -89,7 +109,7 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public JwTToken Register(RegisterRequestModel request)
+        public async Task<JwTTokenResponseModel> Register(RegisterRequestModel request)
         {
             try
             {
@@ -115,22 +135,33 @@ namespace LaptopStore.Service.Services
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                    new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, user.RoleId.ToString())
+                        new Claim(ClaimTypes.Name, user.Id.ToString()),
+                        new Claim(ClaimTypes.MobilePhone, user.Phone.ToString()),
+                        new Claim(ClaimTypes.Role, user.RoleId.ToString())
                     }),
-                    Expires = DateTime.UtcNow.AddMinutes(20),
+                    Expires = DateTime.Now.AddMinutes(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
-                _context.SaveChanges();
+                var refreshToken = _unitOfWork.JWTTokenRepository.GenerateRefreshToken();
+                var newToken = new JwTToken
+                {
+                    UserId = user.Id,
+                    AccessToken = tokenHandler.WriteToken(token),
+                    RefreshToken = refreshToken,
+                    RefreshTokenExpiryTime = DateTime.Now.AddDays(2),
+                };
+                await _unitOfWork.JWTTokenRepository.AddAsync(newToken);
+                await _unitOfWork.SaveAsync();
                 string role = "";
                 if (user.RoleId.ToString() == "116e0deb-f72f-45cf-8ef8-423748b8e9b1")
                 {
                     role = "customer";
                 }
-                return new JwTToken
+                return new JwTTokenResponseModel
                 {
                     AccessToken = tokenHandler.WriteToken(token),
+                    RefreshToken = refreshToken,
                     User = new AuthRequestModel
                     {
                         Name = user.Name,
@@ -252,22 +283,21 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public JwTToken RefreshToken(JwTToken request)
+        public async Task<JwTTokenResponseModel> RefreshToken(RefreshRequestModel request)
         {
             if(request == null)
             {
                 throw new Exception("");
             }
-            string accessToken = request.AccessToken;
-            string refreshToken = request.RefreshToken;
-            var principal = GetPrincipalFromExpiredToken(accessToken);
-            if(principal == null)
+            var principal = _unitOfWork.JWTTokenRepository.GetPrincipalFromExpiredToken(request.AccessToken);
+            if (principal == null)
             {
                 throw new Exception("");
             }
             string userName = principal.Identity.Name;
-            var user = _unitOfWork.UserRepository.GetById(userName);
-            if(user == null)
+            var _user = _unitOfWork.UserRepository.GetById(userName);
+            var tokenData = _unitOfWork.JWTTokenRepository.GetByUserId(userName);
+            if (_user == null || tokenData == null || tokenData.AccessToken != request.AccessToken || tokenData.RefreshToken != request.RefreshToken || tokenData.RefreshTokenExpiryTime <= DateTime.Now)
             {
                 throw new Exception("");
             }
@@ -277,44 +307,58 @@ namespace LaptopStore.Service.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                     {
-                        new Claim(ClaimTypes.Name, user.Id.ToString()),
-                        new Claim(ClaimTypes.MobilePhone, user.Phone.ToString()),
-                        new Claim(ClaimTypes.Role, user.RoleId.ToString())
+                        new Claim(ClaimTypes.Name, _user.Id.ToString()),
+                        new Claim(ClaimTypes.MobilePhone, _user.Phone.ToString()),
+                        new Claim(ClaimTypes.Role, _user.RoleId.ToString())
                     }),
-                Expires = DateTime.UtcNow.AddMinutes(1),
+                Expires = DateTime.Now.AddMinutes(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(newAccessToken);
-            return new JwTToken
+            var refreshToken = _unitOfWork.JWTTokenRepository.GenerateRefreshToken();
+            tokenData.AccessToken = tokenHandler.WriteToken(token);
+            tokenData.RefreshToken = refreshToken;
+            _unitOfWork.JWTTokenRepository.Update(tokenData);
+            await _unitOfWork.SaveAsync();
+            string role = "";
+            string roleId = _user.RoleId.ToString();
+            switch (roleId)
+            {
+                case "116e0deb-f72f-45cf-8ef8-423748b8e9b1":
+                    role = "customer";
+                    break;
+                case "6fd0f97a-1522-475c-aba1-92f3ce5aeb04":
+                    role = "admin";
+                    break;
+                case "a1d06430-35af-433a-aefb-283f559059fb":
+                    role = "employee";
+                    break;
+            }
+            return new JwTTokenResponseModel
             {
                 AccessToken = tokenHandler.WriteToken(token),
-                RefreshToken = refreshToken
+                RefreshToken = refreshToken,
+                User = new AuthRequestModel
+                {
+                    Name = _user.Name,
+                    Email = _user.Email,
+                    Phone = _user.Phone,
+                    Img = _user.Img,
+                    Role = role,
+                }
             };
-        }
-        private static string GenerateRefreshToken()
+        }/*
+        public ClaimsPrincipal Test(string token)
         {
-            var randomNumber = new Byte[64];
-            using var rng = RandomNumberGenerator.Create();
-            rng.GetBytes(randomNumber);
-            return Convert.ToBase64String(randomNumber);
-        }
-        private ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token)
-        {
-            var Key = Encoding.UTF8.GetBytes(_iconfiguration["JWT:Key"]);
-            var tokenValidationParameters = new TokenValidationParameters
+            try
             {
-                ValidateAudience = false,
-                ValidateIssuer = false,
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Key),
-                ValidateLifetime = false
-            };
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
-            if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-                throw new SecurityTokenException("Invalid token");
-
-            return principal;
-        }
+                var principal =  ;
+                return principal;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }*/
     }
 }

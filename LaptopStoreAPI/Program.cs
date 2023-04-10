@@ -36,6 +36,7 @@ builder.Services.AddScoped<ISeriesRepository, SeriesRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<IUserBehaviorTrackerRepository, UserBehaviorTrackerRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IJWTTokenRepository, JWTTokenRepository>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

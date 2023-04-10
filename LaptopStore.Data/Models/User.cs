@@ -17,6 +17,7 @@ namespace LaptopStore.Data.Models
         public Guid RoleId { get; set; }
 
         public Role Role { get; set; }
+        public JwTToken JwTToken { get; set; }
 
         public List<UserBehaviorTracker> UserBehaviorTrackers { get; set; }
         public List<Cart> Carts { get; set; }

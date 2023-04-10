@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LaptopStore.Service.Repositories.Interfaces
 {
-    public interface IStringF1GenericRepository<T> where T : class
+    public interface IStringF1GenericRepository<T> : IF0GenericRepository<T> where T : class
     {
         T GetById(string id);
     }

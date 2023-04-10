@@ -130,6 +130,27 @@ namespace LaptopStore.Data.Migrations
                     b.ToTable("Comments", (string)null);
                 });
 
+            modelBuilder.Entity("LaptopStore.Data.Models.JwTToken", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AccessToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("JWTToken", (string)null);
+                });
+
             modelBuilder.Entity("LaptopStore.Data.Models.Notice", b =>
                 {
                     b.Property<int>("Id")
@@ -409,7 +430,7 @@ namespace LaptopStore.Data.Migrations
                             Email = "ly@gmail.com",
                             Img = "",
                             Name = "Ly",
-                            Password = "$2b$10$I8mHTQso/6WZ7v4wtoyI3.0bx3r6SheIkMC0FkdzCyNx/xIB0X2lW",
+                            Password = "$2b$10$9kE1dzrS/yXX3QdBFQvcxew9.cPAQVUyDBQeY0Ag0MxJAos9meiGi",
                             Phone = "123456",
                             RoleId = new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04")
                         });
@@ -471,6 +492,17 @@ namespace LaptopStore.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("LaptopStore.Data.Models.JwTToken", b =>
+                {
+                    b.HasOne("LaptopStore.Data.Models.User", "User")
+                        .WithOne("JwTToken")
+                        .HasForeignKey("LaptopStore.Data.Models.JwTToken", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("LaptopStore.Data.Models.Order", b =>
@@ -633,6 +665,9 @@ namespace LaptopStore.Data.Migrations
             modelBuilder.Entity("LaptopStore.Data.Models.User", b =>
                 {
                     b.Navigation("Carts");
+
+                    b.Navigation("JwTToken")
+                        .IsRequired();
 
                     b.Navigation("Orders");
 

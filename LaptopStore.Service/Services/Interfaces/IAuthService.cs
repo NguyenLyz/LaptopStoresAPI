@@ -13,12 +13,12 @@ namespace LaptopStore.Service.Services.Interfaces
     public interface IAuthService
     {
         Task ChangePassword(ChangePasswordRequestModel request, string userId);
-        JwTToken Login(LoginRequestModel request);
-        JwTToken Register(RegisterRequestModel request);
+        Task<JwTTokenResponseModel> Login(LoginRequestModel request);
+        Task<JwTTokenResponseModel> Register(RegisterRequestModel request);
         AuthRequestModel GetProfile(string userId);
         Task UpdateImg(UpdateImageRequest request, string userId);
         Task<bool> CheckUser(CheckUserRequestModel request);
         Task GetPassword(GetPasswordRequestModel request);
-        JwTToken RefreshToken(JwTToken request);
+        Task<JwTTokenResponseModel> RefreshToken(RefreshRequestModel request);
     }
 }

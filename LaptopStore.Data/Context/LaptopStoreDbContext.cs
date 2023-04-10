@@ -41,6 +41,7 @@ namespace LaptopStore.Data.Context
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
             modelBuilder.ApplyConfiguration(new UserBehaviorTrackerConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new JWTTokenConfiguration());
 
             modelBuilder.Entity<Role>().HasData(
                 new Role { Id = new Guid("6FD0F97A-1522-475C-ABA1-92F3CE5AEB04"), Name = "Admin" },
@@ -67,5 +68,6 @@ namespace LaptopStore.Data.Context
         public DbSet<Transaction> Transactions => Set<Transaction>();
         public DbSet<UserBehaviorTracker> UserBehaviorTrackers => Set<UserBehaviorTracker>();
         public DbSet<User> Users => Set<User>();
+        public DbSet<JwTToken> jwTTokens => Set<JwTToken>();
     }
 }
