@@ -1,10 +1,14 @@
 ﻿using LaptopStore.Service.RequestModels;
 using LaptopStore.Service.ResponseModels;
+using LaptopStore.Service.Services;
 using LaptopStore.Service.Services.Interfaces;
+using LatopStore.MoMo.Models;
+using LatopStore.MoMo.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Web;
 
 namespace LaptopStoreAPI.Controllers
 {
@@ -13,10 +17,11 @@ namespace LaptopStoreAPI.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _serivce;
-
-        public OrderController(IOrderService serivce)
+        private readonly IMoMoSerivce _momoSerivce;
+        public OrderController(IOrderService serivce, IMoMoSerivce momoserivce)
         {
             _serivce = serivce;
+            _momoSerivce = momoserivce;
         }
         [HttpPost]
         [Route("")]
@@ -51,7 +56,7 @@ namespace LaptopStoreAPI.Controllers
         [HttpPost]
         [Route("process/{id}")]
         [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
-        public async Task<IActionResult> ProcessOrder(int id)
+        public async Task<IActionResult> ProcessOrder(string id)
         {
             try
             {
@@ -66,7 +71,7 @@ namespace LaptopStoreAPI.Controllers
         [HttpPost]
         [Route("{id}")]
         [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1")]
-        public async Task<IActionResult> CancelOrderUser(int id)
+        public async Task<IActionResult> CancelOrderUser(string id)
         {
             try
             {
@@ -77,13 +82,13 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                return StatusCode(500, "Fail to Candel Order");
+                return StatusCode(500, "Fail to Cancel Order");
             }
         }
         [HttpPost]
         [Route("cancel/{id}")]
         [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
-        public async Task<IActionResult> CancelOrder(int id)
+        public async Task<IActionResult> CancelOrder(string id)
         {
             try
             {
@@ -112,9 +117,9 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpGet]
-        [Route("Detail/{orderId:int}")]
+        [Route("Detail/{orderId}")]
         [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
-        public async Task<IActionResult> GetById(int orderId)
+        public async Task<IActionResult> GetById(string orderId)
         {
             try
             {
@@ -178,7 +183,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpGet]
-        [Route("brandcirclechart")]
+        [Route("brandcircle-chart")]
         [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetBrandChart(int month, int year)
         {
@@ -193,7 +198,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpGet]
-        [Route("categoycirclechart")]
+        [Route("categoycircle-chart")]
         public IActionResult GetCategoryCharts(int month, int year)
         {
             try
@@ -207,7 +212,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpGet]
-        [Route("seriescirclechart")]
+        [Route("seriescircle-chart")]
         public IActionResult GetSeriesCharts(int month, int year)
         {
             try
@@ -240,6 +245,63 @@ namespace LaptopStoreAPI.Controllers
             catch(Exception e)
             {
                 return StatusCode(500, "Fail to Get Circle Chart");
+            }
+        }
+
+        [HttpGet]
+        [Route("quick-pay/{id}")]
+        public async Task<IActionResult> QuickPay(string id)
+        {
+            try
+            {
+                var claimsIdentity = this.User.Identity as ClaimsIdentity;
+                string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
+                return Ok(await _momoSerivce.QuickPay(id, _userId));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Fail to quickpay");
+            }
+        }
+        [HttpGet]
+        [Route("confirm")]
+        public async Task<IActionResult> Confirm()
+        {
+            try
+            {
+                var param = Request.QueryString.ToString().Substring(0, Request.QueryString.ToString().IndexOf("signature") - 1);
+                param = HttpUtility.UrlDecode(param);
+                if (param == null) throw new Exception("");/*
+                string secretKey = "K951B6PE1waDMi640xX08PD3vg6EkVlz";
+                string signature = _momoSerivce.getSignature(param, secretKey);*/
+                string status = "";
+                var sign = Request.Query["signature"].ToString();
+                MoMoRequest momoRequest = new MoMoRequest
+                {
+                    partnerCode = Request.Query["partnerCode"],
+                    requestId = Request.Query["requestId"],
+                    orderId = Request.Query["orderId"],
+                    amount = Convert.ToInt64(Request.Query["amount"]),
+                    responseTime = Convert.ToInt64(Request.Query["responseTime"]),
+                    message = Request.Query["message"],
+                    resultCode = Convert.ToInt32(Request.Query["resultCode"]),
+                    orderInfo = Request.Query["orderInfo"],
+                    orderType = Request.Query["orderType"],
+                    transId = Convert.ToInt64(Request.Query["transId"]),
+                    payType = Request.Query["payType"],
+                    extraData = Request.Query["extraData"]
+                };
+                await _momoSerivce.ConfirmResponse(momoRequest);/*
+                if (signature == sign)
+                {
+                    status = "Signature correct";
+                }*/
+                status = momoRequest.message;
+                return Ok(status);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Fail to Confirm");
             }
         }
     }

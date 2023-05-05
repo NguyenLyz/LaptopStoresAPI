@@ -40,6 +40,10 @@ namespace LaptopStore.Service.Services
             try
             {
                 var brand = _unitOfWork.BrandRepository.GetById(request.Id);
+                if(brand == null)
+                {
+                    throw new Exception("Brand not Found");
+                }
                 brand.Name = request.Name;
                 brand.Logo = request.Logo;
                 brand.Description = request.Description;

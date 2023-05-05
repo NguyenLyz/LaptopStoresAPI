@@ -18,7 +18,7 @@ namespace LaptopStore.Service.Repositories
         public ProductRepository(LaptopStoreDbContext context) : base(context)
         {
         }
-        public async Task SuccessfulProcessing(int orderId)
+        public async Task SuccessfulProcessing(string orderId)
         {
             var query = from orderDetail in _context.OrderDetails
                         where orderDetail.OrderId == orderId
@@ -41,7 +41,7 @@ namespace LaptopStore.Service.Repositories
             _context.Products.UpdateRange(result2);
             await _context.SaveChangesAsync();
         }
-        public async Task CancelProcessing(int orderId)
+        public async Task CancelProcessing(string orderId)
         {
             var query = from orderDetail in _context.OrderDetails
                         where orderDetail.OrderId == orderId

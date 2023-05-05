@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\LaptopStore.Data\LaptopStore.Data.csproj" />
     <ProjectReference Include="..\LaptopStore.Service\LaptopStore.Service.csproj" />
+    <ProjectReference Include="..\LatopStore.MoMo\LaptopStore.MoMo.csproj" />
   </ItemGroup>
 
 </Project>

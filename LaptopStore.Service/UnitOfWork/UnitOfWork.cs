@@ -22,7 +22,7 @@ namespace LaptopStore.Service.UnitOfWork
         private ICartRepository cartRepository;
         private ICategoryRepository categoryRepository;
         private ICommentRepository commentRepository;
-        private INoticeRepository noticeRepository;
+        private INotiFyRepository notifyRepository;
         private IOrderDetailRepository orderDetailRepository;
         private IOrderRepository orderRepository;
         private IProductRepository productRepository;
@@ -93,15 +93,15 @@ namespace LaptopStore.Service.UnitOfWork
                 return this.commentRepository;
             }
         }
-        public INoticeRepository NoticeRepository
+        public INotiFyRepository NotifyRepository
         {
             get
             {
-                if (this.noticeRepository == null)
+                if (this.notifyRepository == null)
                 {
-                    this.noticeRepository = new NoticeRepository(_context);
+                    this.notifyRepository = new NotifyRepository(_context);
                 }
-                return this.noticeRepository;
+                return this.notifyRepository;
             }
         }
         public IOrderDetailRepository OrderDetailRepository

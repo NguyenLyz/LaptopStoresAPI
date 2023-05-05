@@ -30,7 +30,6 @@ namespace LaptopStore.Service.Services
             try
             {
                 SlugHelper helper = new SlugHelper();
-                //var product = _mapper.Map<ProductResquestModel, Product>(request);
                 var product = new Product
                 {
                     Id = request.Id,
@@ -47,7 +46,6 @@ namespace LaptopStore.Service.Services
                 product.Tags = string.Join("$", request.Tags.ToArray());
                 product.Images = string.Join("$", request.Images.ToArray());
                 await _unitOfWork.ProductRepository.AddAsync(product);
-                //await _unitOfWork.ImageRepository.AddRangeAsync(product.Images);
                 await _unitOfWork.SaveAsync();
 
                 var brand = _unitOfWork.BrandRepository.GetById(product.BrandId);

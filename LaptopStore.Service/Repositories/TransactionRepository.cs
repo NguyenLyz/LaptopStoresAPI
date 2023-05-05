@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LaptopStore.Service.Repositories
 {
-    public class TransactionRepository : F0GenericRepository<Transaction>, ITransactionRepository
+    public class TransactionRepository : StringF1GenericRepository<Transaction>, ITransactionRepository
     {
         public TransactionRepository(LaptopStoreDbContext context) : base(context)
         {

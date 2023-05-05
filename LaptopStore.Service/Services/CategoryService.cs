@@ -40,6 +40,10 @@ namespace LaptopStore.Service.Services
             try
             {
                 var category = _unitOfWork.CategoryRepository.GetById(request.Id);
+                if (category == null)
+                {
+                    throw new Exception("Category not Found");
+                }
                 category.Name = request.Name;
                 category.Description = request.Description;
                 category = _unitOfWork.CategoryRepository.Update(category);

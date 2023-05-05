@@ -20,5 +20,6 @@ namespace LaptopStore.Service.Services.Interfaces
         Task<bool> CheckUser(CheckUserRequestModel request);
         Task GetPassword(GetPasswordRequestModel request);
         Task<JwTTokenResponseModel> RefreshToken(RefreshRequestModel request);
+        Task UpdateName(AuthRequestModel request, string _userId);
     }
 }

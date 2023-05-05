@@ -14,7 +14,7 @@ namespace LaptopStore.Service.Repositories
         public OrderDetailRepository(LaptopStoreDbContext context) : base(context)
         {
         }
-        public IQueryable<OrderDetail> GetByOrderId(int id)
+        public IQueryable<OrderDetail> GetByOrderId(string id)
         {
             var query = from orderDetail in _context.OrderDetails
                         join product in _context.Products on orderDetail.ProductId equals product.Id

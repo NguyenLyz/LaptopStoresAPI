@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LaptopStore.Service.Repositories
 {
-    public class OrderRepository : IntF1GenericRepository<Order>, IOrderRepository
+    public class OrderRepository : StringF1GenericRepository<Order>, IOrderRepository
     {
         public OrderRepository(LaptopStoreDbContext context) : base(context)
         {

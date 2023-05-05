@@ -36,21 +36,7 @@ namespace LaptopStore.Service.Services
             {
                 throw e;
             }
-        }/*
-        public async Task<CommentRequestModel> Update(CommentRequestModel request, string userId)
-        {
-            try
-            {
-                var comment = _mapper.Map<CommentRequestModel, Comment>(request);
-                comment = _unitOfWork.CommentRepository.Update(comment);
-                await _unitOfWork.SaveAsync();
-                return _mapper.Map<Comment, CommentRequestModel>(comment);
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
-        }*/
+        }
         public async Task Delete(int id, string userId)
         {
             try

@@ -14,7 +14,7 @@ namespace LaptopStore.Service.UnitOfWork.Interfaces
         ICartRepository CartRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         ICommentRepository CommentRepository { get; }
-        INoticeRepository NoticeRepository { get; }
+        INotiFyRepository NotifyRepository { get; }
         IOrderDetailRepository OrderDetailRepository { get; }
         IOrderRepository OrderRepository { get; }
         IProductRepository ProductRepository { get; }

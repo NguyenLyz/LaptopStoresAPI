@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LaptopStore.Service.Repositories.Interfaces
 {
-    public interface ITransactionRepository : IF0GenericRepository<Transaction>
+    public interface ITransactionRepository : IStringF1GenericRepository<Transaction>
     {
     }
 }
