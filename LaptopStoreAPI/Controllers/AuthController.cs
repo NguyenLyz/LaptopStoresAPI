@@ -156,5 +156,21 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to refresh");
             }
         }
+        [HttpPut]
+        [Route("update-name")]
+        public async Task<IActionResult> UpdateName(AuthRequestModel request)
+        {
+            try
+            {
+                var claimsIdentity = this.User.Identity as ClaimsIdentity;
+                string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
+                await _service.UpdateName(request, _userId);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to Update Name");
+            }
+        }
     }
 }

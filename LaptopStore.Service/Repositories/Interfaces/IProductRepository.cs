@@ -11,8 +11,8 @@ namespace LaptopStore.Service.Repositories.Interfaces
 {
     public interface IProductRepository : IIntF1GenericRepository<Product>
     {
-        Task SuccessfulProcessing(int orderId);
-        Task CancelProcessing(int orderId);
+        Task SuccessfulProcessing(string orderId);
+        Task CancelProcessing(string orderId);
         Task<FilterRequestModel> Filter(FilterRequestModel request);
         Task<List<ProductResponseModel>> GetBestSeller();
         Task<List<ProductResponseModel>> GetNewestProduct();

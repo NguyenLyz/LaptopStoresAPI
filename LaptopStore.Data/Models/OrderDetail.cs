@@ -8,7 +8,7 @@ namespace LaptopStore.Data.Models
 {
     public class OrderDetail
     {
-        public int OrderId { get; set; }
+        public string OrderId { get; set; }
         public int ProductId { get; set; }
         public int Amount { get; set; }
         public int Quantity { get; set; }

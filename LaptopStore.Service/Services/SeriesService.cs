@@ -40,6 +40,10 @@ namespace LaptopStore.Service.Services
             try
             {
                 var series = _unitOfWork.SeriesRepository.GetById(request.Id);
+                if (series == null)
+                {
+                    throw new Exception("Series not Found");
+                }
                 series.Name = request.Name;
                 series.Description = request.Description;
                 series = _unitOfWork.SeriesRepository.Update(series);

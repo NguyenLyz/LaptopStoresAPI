@@ -151,7 +151,7 @@ namespace LaptopStore.Data.Migrations
                     b.ToTable("JWTToken", (string)null);
                 });
 
-            modelBuilder.Entity("LaptopStore.Data.Models.Notice", b =>
+            modelBuilder.Entity("LaptopStore.Data.Models.Notify", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -175,16 +175,13 @@ namespace LaptopStore.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Notices", (string)null);
+                    b.ToTable("Notify", (string)null);
                 });
 
             modelBuilder.Entity("LaptopStore.Data.Models.Order", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Note")
                         .IsRequired()
@@ -226,8 +223,8 @@ namespace LaptopStore.Data.Migrations
 
             modelBuilder.Entity("LaptopStore.Data.Models.OrderDetail", b =>
                 {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -362,11 +359,14 @@ namespace LaptopStore.Data.Migrations
 
             modelBuilder.Entity("LaptopStore.Data.Models.Transaction", b =>
                 {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsPay")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -430,7 +430,7 @@ namespace LaptopStore.Data.Migrations
                             Email = "ly@gmail.com",
                             Img = "",
                             Name = "Ly",
-                            Password = "$2b$10$9kE1dzrS/yXX3QdBFQvcxew9.cPAQVUyDBQeY0Ag0MxJAos9meiGi",
+                            Password = "$2b$10$Ed3a1lsDYt2bC4fm0WhPru1YslYDmp0huVjIu9cRuB2HEkfOVZ3aq",
                             Phone = "123456",
                             RoleId = new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04")
                         });

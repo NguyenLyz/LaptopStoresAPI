@@ -15,7 +15,6 @@ namespace LaptopStore.Data.Configurations
         {
             builder.ToTable("Orders");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).UseIdentityColumn();
         }
     }
 }

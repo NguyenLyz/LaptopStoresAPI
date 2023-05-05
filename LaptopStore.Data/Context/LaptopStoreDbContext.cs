@@ -32,7 +32,7 @@ namespace LaptopStore.Data.Context
             modelBuilder.ApplyConfiguration(new CartConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new CommentConfiguration());
-            modelBuilder.ApplyConfiguration(new NoticeConfiguration());
+            modelBuilder.ApplyConfiguration(new NotifyConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
@@ -59,7 +59,7 @@ namespace LaptopStore.Data.Context
         public DbSet<Cart> Carts => Set<Cart>();
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<Comment> Comments => Set<Comment>();
-        public DbSet<Notice> Notices => Set<Notice>();
+        public DbSet<Notify> Notices => Set<Notify>();
         public DbSet<Order> Orders => Set<Order>();
         public DbSet<OrderDetail> OrderDetails => Set<OrderDetail>();
         public DbSet<Product> Products => Set<Product>();

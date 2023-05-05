@@ -347,18 +347,25 @@ namespace LaptopStore.Service.Services
                     Role = role,
                 }
             };
-        }/*
-        public ClaimsPrincipal Test(string token)
+        }
+        public async Task UpdateName(AuthRequestModel request, string _userId)
         {
             try
             {
-                var principal =  ;
-                return principal;
+                var user = _unitOfWork.UserRepository.GetById(_userId);
+                if (user == null)
+                {
+                    throw new Exception("User not Found");
+                }
+                user.Name = request.Name;
+                _unitOfWork.UserRepository.Update(user);
+                await _unitOfWork.SaveAsync();
+                return;
             }
             catch(Exception e)
             {
                 throw e;
             }
-        }*/
+        }
     }
 }

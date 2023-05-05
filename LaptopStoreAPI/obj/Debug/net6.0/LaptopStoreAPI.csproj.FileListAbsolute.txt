@@ -192,3 +192,5 @@ C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopSt
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopStoreAPI\obj\Debug\net6.0\LaptopStoreAPI.pdb
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopStoreAPI\obj\Debug\net6.0\LaptopStoreAPI.genruntimeconfig.cache
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopStoreAPI\obj\Debug\net6.0\ref\LaptopStoreAPI.dll
+C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopStoreAPI\bin\Debug\net6.0\LaptopStore.MoMo.dll
+C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\LaptopStoreAPI\LaptopStoreAPI\bin\Debug\net6.0\LaptopStore.MoMo.pdb

@@ -40,7 +40,7 @@ namespace LaptopStore.Service.Services
             try
             {
                 var advertisement = _unitOfWork.AdvertisementRepository.GetById(request.Id);
-                advertisement.Image = request.Img;
+                advertisement.Image = request.Image;
                 advertisement.Link = request.Link;
                 advertisement = _unitOfWork.AdvertisementRepository.Update(advertisement);
                 await _unitOfWork.SaveAsync();

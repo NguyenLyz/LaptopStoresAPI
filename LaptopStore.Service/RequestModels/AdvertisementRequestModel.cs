@@ -10,6 +10,6 @@ namespace LaptopStore.Service.RequestModels
     {
         public int Id { get; set; }
         public string Link { get; set; }
-        public string Img { get; set; }
+        public string Image { get; set; }
     }
 }

@@ -1447,6 +1447,19 @@
           "bin/placeholder/LaptopStore.Data.dll": {}
         }
       },
+      "LaptopStore.MoMo/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "LaptopStore.Service": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/LaptopStore.MoMo.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LaptopStore.MoMo.dll": {}
+        }
+      },
       "LaptopStore.Service/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -4157,6 +4170,11 @@
       "path": "../LaptopStore.Data/LaptopStore.Data.csproj",
       "msbuildProject": "../LaptopStore.Data/LaptopStore.Data.csproj"
     },
+    "LaptopStore.MoMo/1.0.0": {
+      "type": "project",
+      "path": "../LatopStore.MoMo/LaptopStore.MoMo.csproj",
+      "msbuildProject": "../LatopStore.MoMo/LaptopStore.MoMo.csproj"
+    },
     "LaptopStore.Service/1.0.0": {
       "type": "project",
       "path": "../LaptopStore.Service/LaptopStore.Service.csproj",
@@ -4166,6 +4184,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "LaptopStore.Data >= 1.0.0",
+      "LaptopStore.MoMo >= 1.0.0",
       "LaptopStore.Service >= 1.0.0",
       "Microsoft.AspNet.Cors >= 5.2.9",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.15",
@@ -4204,6 +4223,9 @@
             },
             "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\LaptopStoreAPI\\LaptopStore.Service\\LaptopStore.Service.csproj": {
               "projectPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\LaptopStoreAPI\\LaptopStore.Service\\LaptopStore.Service.csproj"
+            },
+            "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\LaptopStoreAPI\\LatopStore.MoMo\\LaptopStore.MoMo.csproj": {
+              "projectPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\LaptopStoreAPI\\LatopStore.MoMo\\LaptopStore.MoMo.csproj"
             }
           }
         }

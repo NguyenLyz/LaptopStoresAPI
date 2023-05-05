@@ -11,11 +11,11 @@ namespace LaptopStore.Service.Services.Interfaces
     public interface IOrderService
     {
         Task<OrderRequestModel> Add(OrderRequestModel request, string _userId);
-        Task<OrderRequestModel> GetById(int id);
+        Task<OrderRequestModel> GetById(string id);
         List<OrderRequestModel> GetByUserId(string userId);
-        Task CancelOrderUser(int id, string _userId);
-        Task CancelOrder(int id);
-        Task ProcessOrder(int id);
+        Task CancelOrderUser(string id, string _userId);
+        Task CancelOrder(string id);
+        Task ProcessOrder(string id);
         List<OrderRequestModel> GetAll();
         List<ChartResponseModel> GetIncomeChart(int year);
         List<ChartResponseModel> GetSoldChart(int year);

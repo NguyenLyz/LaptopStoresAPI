@@ -28,11 +28,14 @@ namespace LaptopStore.Service.Services
         {
             try
             {
+                var Time = DateTime.Now;
+                var idMiddle = Guid.NewGuid();
                 var order = new Order
                 {
+                    Id = Time.ToString("hhdd" + idMiddle + "MMyyyyss"),
                     UserId = new Guid(_userId),
                     Status = 0,
-                    OrderDate = DateTime.Now,
+                    OrderDate = Time,
                     ShipName = request.ShipName,
                     ShipAddress = request.ShipAddress,
                     ShipPhone = request.ShipPhone,
@@ -62,12 +65,22 @@ namespace LaptopStore.Service.Services
                 }
                 _unitOfWork.CartRepository.DeleteByUserId(_userId);
                 _unitOfWork.OrderRepository.Update(order);
+                var trans = new Transaction
+                {
+                    OrderId = order.Id,
+                    Status = 1,
+                    IsPay = false,
+                    Amount = order.OrderValue,
+                    Message = "Chưa thanh toán"
+                };
+                await _unitOfWork.TransactionRepository.AddAsync(trans);
                 await _unitOfWork.SaveAsync();
                 var result = new OrderRequestModel
                 {
                     Id = order.Id,
                     OrderValue = order.OrderValue,
                     Status = order.Status,
+                    OrderDate = order.OrderDate,
                     ShipName = order.ShipName,
                     ShipAddress = order.ShipAddress,
                     ShipPhone = order.ShipPhone,
@@ -81,12 +94,13 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task CancelOrderUser(int id, string _userId)
+        public async Task CancelOrderUser(string id, string _userId)
         {
             try
             {
                 var order = _unitOfWork.OrderRepository.GetById(id);
-                if (order.UserId == new Guid(_userId))
+                var trans = _unitOfWork.TransactionRepository.GetById(order.Id);
+                if (order.UserId == new Guid(_userId) && trans.IsPay == false)
                 {
                     if(order.Status == 0)
                     {
@@ -110,7 +124,7 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task CancelOrder(int id)
+        public async Task CancelOrder(string id)
         {
             try
             {
@@ -135,7 +149,7 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task ProcessOrder(int id)
+        public async Task ProcessOrder(string id)
         {
             try
             {
@@ -147,7 +161,17 @@ namespace LaptopStore.Service.Services
                     {
                         await _unitOfWork.ProductRepository.SuccessfulProcessing(id);
                     }
-                    _unitOfWork.OrderRepository.Update(order);
+                    if(order.Status == 3)
+                    {
+                        var trans = _unitOfWork.TransactionRepository.GetById(order.Id);
+                        if(trans.Status == 1)
+                        {
+                            trans.IsPay = true;
+                            trans.Message = "Thành Công.";
+                            _unitOfWork.OrderRepository.Update(order);
+                            _unitOfWork.TransactionRepository.Update(trans);
+                        }
+                    }
                     await _unitOfWork.SaveAsync();
                     return;
                 }
@@ -166,7 +190,7 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task<OrderRequestModel> GetById(int id)
+        public async Task<OrderRequestModel> GetById(string id)
         {
             try
             {
