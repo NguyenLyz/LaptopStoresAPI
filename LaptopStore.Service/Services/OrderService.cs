@@ -122,6 +122,7 @@ namespace LaptopStore.Service.Services
                 {
                     order.Status = 5;
                     _unitOfWork.OrderRepository.Update(order);
+                    await _unitOfWork.SaveAsync();
                     return;
                 }
                 if(order.Status >= 1 && order.Status <= 2)
@@ -129,6 +130,7 @@ namespace LaptopStore.Service.Services
                     order.Status = 5;
                     await _unitOfWork.ProductRepository.CancelProcessing(id);
                     _unitOfWork.OrderRepository.Update(order);
+                    await _unitOfWork.SaveAsync();
                     return;
                 }
                 throw new Exception("Fail to cancel order");
