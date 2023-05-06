@@ -24,6 +24,7 @@ namespace LaptopStore.Service.Repositories
         {
             var query = from order in _context.Orders
                         join user in _context.Users on order.UserId equals user.Id
+                        join trans in _context.Transactions on order.Id equals trans.OrderId
                         select new OrderRequestModel
                         {
                             Id = order.Id,
@@ -36,6 +37,7 @@ namespace LaptopStore.Service.Repositories
                             ShipAddress = order.ShipAddress,
                             Note = order.Note,
                             ShipMethod = order.ShipMethod,
+                            IsPay = trans.IsPay,
                             OrderDetails = order.OrderDetails
                         };
             return query.OrderBy(x => x.Status).ToList();
