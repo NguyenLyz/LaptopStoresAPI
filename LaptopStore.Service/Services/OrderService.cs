@@ -189,6 +189,7 @@ namespace LaptopStore.Service.Services
                 order.OrderDetails = await _unitOfWork.OrderDetailRepository.GetByOrderId(order.Id).ToListAsync();
                 var result = _mapper.Map<Order, OrderRequestModel>(order);
                 result.Orderer = _unitOfWork.UserRepository.GetById(order.UserId.ToString()).Name;
+                result.IsPay = _unitOfWork.TransactionRepository.GetById(order.Id).IsPay;
                 return result;
             }
             catch(Exception e)

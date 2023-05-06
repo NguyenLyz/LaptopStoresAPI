@@ -36,7 +36,11 @@ namespace LaptopStoreAPI.Controllers
                 {
                     return Ok(await _momoSerivce.QuickPay(await _serivce.Add(request, _userId), _userId));
                 }
-                return Ok();
+                else
+                {
+                    await _serivce.Add(request, _userId);
+                    return Ok();
+                }
             }
             catch(Exception e)
             {
