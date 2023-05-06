@@ -186,10 +186,12 @@ namespace LaptopStore.Service.Services
             try
             {
                 var order = _unitOfWork.OrderRepository.GetById(id);
+                var trans = _unitOfWork.TransactionRepository.GetById(order.Id);
                 order.OrderDetails = await _unitOfWork.OrderDetailRepository.GetByOrderId(order.Id).ToListAsync();
                 var result = _mapper.Map<Order, OrderRequestModel>(order);
                 result.Orderer = _unitOfWork.UserRepository.GetById(order.UserId.ToString()).Name;
-                result.IsPay = _unitOfWork.TransactionRepository.GetById(order.Id).IsPay;
+                result.TransMethod = trans.Status;
+                result.IsPay = trans.IsPay;
                 return result;
             }
             catch(Exception e)
