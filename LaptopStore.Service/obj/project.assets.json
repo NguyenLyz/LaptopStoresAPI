@@ -3925,7 +3925,7 @@
       "projectName": "LaptopStore.Service",
       "projectPath": "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LaptopStore.Service\\LaptopStore.Service.csproj",
       "packagesPath": "C:\\Users\\quocd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\quocd\\Source\\Repos\\LaptopStoresAPI\\LaptopStore.Service\\obj\\",
+      "outputPath": "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LaptopStore.Service\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\quocd\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3999,7 +3999,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

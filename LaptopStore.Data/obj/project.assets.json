@@ -3840,11 +3840,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\quocd\\Source\\Repos\\LaptopStoresAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
+      "projectUniqueName": "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
       "projectName": "LaptopStore.Data",
-      "projectPath": "C:\\Users\\quocd\\Source\\Repos\\LaptopStoresAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
+      "projectPath": "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
       "packagesPath": "C:\\Users\\quocd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\quocd\\Source\\Repos\\LaptopStoresAPI\\LaptopStore.Data\\obj\\",
+      "outputPath": "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LaptopStore.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\quocd\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3916,7 +3916,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
