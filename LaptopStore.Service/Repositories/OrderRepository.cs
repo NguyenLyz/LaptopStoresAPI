@@ -1,6 +1,7 @@
 ﻿using LaptopStore.Data.Context;
 using LaptopStore.Data.Models;
 using LaptopStore.Service.Repositories.Interfaces;
+using LaptopStore.Service.RequestModels;
 using LaptopStore.Service.ResponseModels;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,26 @@ namespace LaptopStore.Service.Repositories
         public List<Order> GetByUserId(string _userId)
         {
             return _context.Orders.Where(x => x.UserId == new Guid(_userId)).ToList();
+        }
+        public List<OrderRequestModel> GetAll()
+        {
+            var query = from order in _context.Orders
+                        join user in _context.Users on order.UserId equals user.Id
+                        select new OrderRequestModel
+                        {
+                            Id = order.Id,
+                            OrderDate = order.OrderDate,
+                            OrderValue = order.OrderValue,
+                            Orderer = user.Name,
+                            Status = order.Status,
+                            ShipName = order.ShipName,
+                            ShipPhone = order.ShipPhone,
+                            ShipAddress = order.ShipAddress,
+                            Note = order.Note,
+                            ShipMethod = order.ShipMethod,
+                            OrderDetails = order.OrderDetails
+                        };
+            return query.OrderBy(x => x.Status).ToList();
         }
         public IQueryable<Order> GetSuccessByYear(int year)
         {

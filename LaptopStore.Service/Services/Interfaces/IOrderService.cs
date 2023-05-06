@@ -10,7 +10,7 @@ namespace LaptopStore.Service.Services.Interfaces
 {
     public interface IOrderService
     {
-        Task<OrderRequestModel> Add(OrderRequestModel request, string _userId);
+        Task<string> Add(OrderRequestModel request, string _userId);
         Task<OrderRequestModel> GetById(string id);
         List<OrderRequestModel> GetByUserId(string userId);
         Task CancelOrderUser(string id, string _userId);

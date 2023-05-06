@@ -24,7 +24,7 @@ namespace LaptopStore.Service.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<OrderRequestModel> Add(OrderRequestModel request, string _userId)
+        public async Task<string> Add(OrderRequestModel request, string _userId)
         {
             try
             {
@@ -75,18 +75,7 @@ namespace LaptopStore.Service.Services
                 };
                 await _unitOfWork.TransactionRepository.AddAsync(trans);
                 await _unitOfWork.SaveAsync();
-                var result = new OrderRequestModel
-                {
-                    Id = order.Id,
-                    OrderValue = order.OrderValue,
-                    Status = order.Status,
-                    OrderDate = order.OrderDate,
-                    ShipName = order.ShipName,
-                    ShipAddress = order.ShipAddress,
-                    ShipPhone = order.ShipPhone,
-                    Note = order.Note,
-                    ShipMethod = order.ShipMethod,
-                };
+                var result = order.Id;
                 return result;
             }
             catch(Exception e)
@@ -196,7 +185,9 @@ namespace LaptopStore.Service.Services
             {
                 var order = _unitOfWork.OrderRepository.GetById(id);
                 order.OrderDetails = await _unitOfWork.OrderDetailRepository.GetByOrderId(order.Id).ToListAsync();
-                return _mapper.Map<Order, OrderRequestModel>(order);
+                var result = _mapper.Map<Order, OrderRequestModel>(order);
+                result.Orderer = _unitOfWork.UserRepository.GetById(order.UserId.ToString()).Name;
+                return result;
             }
             catch(Exception e)
             {
@@ -218,7 +209,8 @@ namespace LaptopStore.Service.Services
         {
             try
             {
-                return _mapper.Map<List<Order>, List<OrderRequestModel>>(_unitOfWork.OrderRepository.GetAll().OrderBy(x => x.Status).ToList());
+                /*return _mapper.Map<List<Order>, List<OrderRequestModel>>(_unitOfWork.OrderRepository.GetAll().OrderBy(x => x.Status).ToList());*/
+                return _unitOfWork.OrderRepository.GetAll();
             }
             catch (Exception e)
             {

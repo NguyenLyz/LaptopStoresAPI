@@ -32,7 +32,11 @@ namespace LaptopStoreAPI.Controllers
             {
                 var claimsIdentity = this.User.Identity as ClaimsIdentity;
                 string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
-                return Ok(await _serivce.Add(request, _userId));
+                if(request.TransMethod == 2)
+                {
+                    return Ok(await _momoSerivce.QuickPay(await _serivce.Add(request, _userId), _userId));
+                }
+                return Ok();
             }
             catch(Exception e)
             {
@@ -245,22 +249,6 @@ namespace LaptopStoreAPI.Controllers
             catch(Exception e)
             {
                 return StatusCode(500, "Fail to Get Circle Chart");
-            }
-        }
-
-        [HttpGet]
-        [Route("quick-pay/{id}")]
-        public async Task<IActionResult> QuickPay(string id)
-        {
-            try
-            {
-                var claimsIdentity = this.User.Identity as ClaimsIdentity;
-                string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
-                return Ok(await _momoSerivce.QuickPay(id, _userId));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, "Fail to quickpay");
             }
         }
         [HttpGet]
