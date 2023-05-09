@@ -430,8 +430,8 @@ namespace LaptopStore.Data.Migrations
                             Email = "ly@gmail.com",
                             Img = "",
                             Name = "Ly",
-                            Password = "$2b$10$Ed3a1lsDYt2bC4fm0WhPru1YslYDmp0huVjIu9cRuB2HEkfOVZ3aq",
-                            Phone = "123456",
+                            Password = "$2b$10$pOviqcdwVuFaVcqYPyreYexhBCaI8ctyqqJElBc0JfddSoYPIm6M.",
+                            Phone = "0775678910",
                             RoleId = new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04")
                         });
                 });

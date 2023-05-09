@@ -14,7 +14,7 @@ namespace LaptopStore.MoMo.MoMoSettings
         public const string ORDER_INFO = "pay with MoMo";
         public const string PARTNER_CODE = "MOMO";
         public const string IPN_URL = "https://localhost:7296/api/Order/confirm/";
-        public const string REDIRECT_URL = "https://localhost:7296/api/Order/confirm/";
+        public const string REDIRECT_URL = "http://localhost:3000/order";
         public const string REQUEST_TYPE = "captureWallet";
         public const string PARTNER_NAME = "MoMo Payment";
         public const string STORE_ID = "BookStore";
