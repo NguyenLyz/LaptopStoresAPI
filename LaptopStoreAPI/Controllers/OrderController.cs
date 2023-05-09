@@ -288,8 +288,9 @@ namespace LaptopStoreAPI.Controllers
                 {
                     status = "Signature correct";
                 }*/
-                status = momoRequest.message;
-                return Ok(status);
+                var result = "http://localhost:3000/order/";
+                result = string.Concat(result, momoRequest.resultCode);
+                return Redirect(result);
             }
             catch (Exception e)
             {

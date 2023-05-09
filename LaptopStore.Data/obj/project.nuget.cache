@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lSYtC99HUgwVYk7EW/LJzjBCct+viVL6cKHcENPTQFzOfbM7LNJzhRyNxN7hLz6KQIod11lU0s/dTtTCDMzeOQ==",
+  "dgSpecHash": "N9EPi0w+facEOwmhRIOlZn8mg1LQCxFzomRY75krJT/x3rD+Ice5CRaRSjK0fhUhfs6sL01CcYqf+ZCdfeo/Ew==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
+  "projectFilePath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
