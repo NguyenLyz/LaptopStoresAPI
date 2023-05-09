@@ -32,3 +32,20 @@ C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\Final\LaptopStoreAPI\La
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\Final\LaptopStoreAPI\LatopStore.MoMo\obj\Debug\net6.0\refint\LaptopStore.MoMo.dll
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\Final\LaptopStoreAPI\LatopStore.MoMo\obj\Debug\net6.0\LaptopStore.MoMo.pdb
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\Final\LaptopStoreAPI\LatopStore.MoMo\obj\Debug\net6.0\ref\LaptopStore.MoMo.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\bin\Debug\net6.0\LaptopStore.MoMo.deps.json
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\bin\Debug\net6.0\LaptopStore.MoMo.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\bin\Debug\net6.0\LaptopStore.MoMo.pdb
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\bin\Debug\net6.0\LaptopStore.Data.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\bin\Debug\net6.0\LaptopStore.Service.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\bin\Debug\net6.0\LaptopStore.Service.pdb
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\bin\Debug\net6.0\LaptopStore.Data.pdb
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\obj\Debug\net6.0\LaptopStore.MoMo.csproj.AssemblyReference.cache
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\obj\Debug\net6.0\LaptopStore.MoMo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\obj\Debug\net6.0\LaptopStore.MoMo.AssemblyInfoInputs.cache
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\obj\Debug\net6.0\LaptopStore.MoMo.AssemblyInfo.cs
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\obj\Debug\net6.0\LaptopStore.MoMo.csproj.CoreCompileInputs.cache
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\obj\Debug\net6.0\LaptopStore.MoMo.csproj.CopyComplete
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\obj\Debug\net6.0\LaptopStore.MoMo.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\obj\Debug\net6.0\refint\LaptopStore.MoMo.dll
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\obj\Debug\net6.0\LaptopStore.MoMo.pdb
+C:\Users\quocd\Source\Repos\LaptopStoresAPI\LatopStore.MoMo\obj\Debug\net6.0\ref\LaptopStore.MoMo.dll

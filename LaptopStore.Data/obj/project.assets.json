@@ -3835,19 +3835,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ACER\\.nuget\\packages\\": {}
+    "C:\\Users\\quocd\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
+      "projectUniqueName": "C:\\Users\\quocd\\Source\\Repos\\LaptopStoresAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
       "projectName": "LaptopStore.Data",
-      "projectPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
-      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStore.Data\\obj\\",
+      "projectPath": "C:\\Users\\quocd\\Source\\Repos\\LaptopStoresAPI\\LaptopStore.Data\\LaptopStore.Data.csproj",
+      "packagesPath": "C:\\Users\\quocd\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\quocd\\Source\\Repos\\LaptopStoresAPI\\LaptopStore.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\quocd\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3916,7 +3916,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

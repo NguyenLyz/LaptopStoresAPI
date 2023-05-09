@@ -4192,19 +4192,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ACER\\.nuget\\packages\\": {}
+    "C:\\Users\\quocd\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStoreAPI\\LaptopStoreAPI.csproj",
+      "projectUniqueName": "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LaptopStoreAPI\\LaptopStoreAPI.csproj",
       "projectName": "LaptopStoreAPI",
-      "projectPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStoreAPI\\LaptopStoreAPI.csproj",
-      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStoreAPI\\obj\\",
+      "projectPath": "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LaptopStoreAPI\\LaptopStoreAPI.csproj",
+      "packagesPath": "C:\\Users\\quocd\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LaptopStoreAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\quocd\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4218,14 +4218,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj": {
-              "projectPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStore.Data\\LaptopStore.Data.csproj"
+            "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LaptopStore.Data\\LaptopStore.Data.csproj": {
+              "projectPath": "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LaptopStore.Data\\LaptopStore.Data.csproj"
             },
-            "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStore.Service\\LaptopStore.Service.csproj": {
-              "projectPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStore.Service\\LaptopStore.Service.csproj"
+            "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LaptopStore.Service\\LaptopStore.Service.csproj": {
+              "projectPath": "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LaptopStore.Service\\LaptopStore.Service.csproj"
             },
-            "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LatopStore.MoMo\\LaptopStore.MoMo.csproj": {
-              "projectPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LatopStore.MoMo\\LaptopStore.MoMo.csproj"
+            "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LatopStore.MoMo\\LaptopStore.MoMo.csproj": {
+              "projectPath": "C:\\Users\\quocd\\source\\Repos\\LaptopStoresAPI\\LatopStore.MoMo\\LaptopStore.MoMo.csproj"
             }
           }
         }
@@ -4272,7 +4272,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   },
