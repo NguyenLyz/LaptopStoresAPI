@@ -16,9 +16,20 @@ namespace LaptopStore.Service.Repositories
         public OrderRepository(LaptopStoreDbContext context) : base(context)
         {
         }
-        public List<Order> GetByUserId(string _userId)
+        public List<OrderRequestModel> GetByUserId(string _userId)
         {
-            return _context.Orders.Where(x => x.UserId == new Guid(_userId)).ToList();
+            var query = from order in _context.Orders
+                        join trans in _context.Transactions on order.Id equals trans.OrderId
+                        where order.UserId == new Guid(_userId)
+                        select new OrderRequestModel
+                        {
+                            Id = order.Id,
+                            OrderDate = order.OrderDate,
+                            OrderValue = order.OrderValue,
+                            Status = order.Status,
+                            IsPay = trans.IsPay,
+                        };
+            return query.ToList();
         }
         public List<OrderRequestModel> GetAll()
         {

@@ -203,7 +203,7 @@ namespace LaptopStore.Service.Services
         {
             try
             {
-                return _mapper.Map<List<Order>, List<OrderRequestModel>>(_unitOfWork.OrderRepository.GetByUserId(userId));
+                return _unitOfWork.OrderRepository.GetByUserId(userId);
             }
             catch(Exception e)
             {
