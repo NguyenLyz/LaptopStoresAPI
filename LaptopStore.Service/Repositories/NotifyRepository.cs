@@ -32,8 +32,10 @@ namespace LaptopStore.Service.Repositories
                         select new NotifyResponseModel
                         {
                             Id = notify.Id,
+                            Name = user.Name,
                             Phone = user.Phone,
                             Role = role.Name,
+                            Img = user.Img,
                             Title = notify.Title,
                             Message = notify.Message
                         };

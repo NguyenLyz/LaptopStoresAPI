@@ -102,14 +102,18 @@ namespace LaptopStore.Service.Services
                 }
                 else
                 {
+                    user.Name = null;
                     user.Phone = null;
+                    user.Img = null;
                     role = _unitOfWork.RoleRepository.GetById(notify.RoleId.ToString());
                 }
                 return new NotifyResponseModel
                 {
                     Id = notify.Id,
+                    Name = user.Name,
                     Phone = user.Phone,
                     Role = role.Name,
+                    Img = user.Img,
                     Title = notify.Title,
                     Message = notify.Message
                 };
