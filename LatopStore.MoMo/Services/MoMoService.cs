@@ -118,7 +118,7 @@ namespace LatopStore.MoMo.Services
                 order.Status = 1;
                 _unitOfWork.TransactionRepository.Update(trans);
                 _unitOfWork.OrderRepository.Update(order);
-                _unitOfWork.ProductRepository.SuccessfulProcessing(request.orderId);
+                await _unitOfWork.ProductRepository.SuccessfulProcessing(request.orderId);
                 await _unitOfWork.SaveAsync();
             }
             else

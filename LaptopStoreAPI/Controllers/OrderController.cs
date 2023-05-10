@@ -110,7 +110,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("")]
-        [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
+        [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetByUserId()
         {
             try
@@ -126,7 +126,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("Detail/{orderId}")]
-        [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
+        [Authorize(Roles = "116e0deb-f72f-45cf-8ef8-423748b8e9b1, a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public async Task<IActionResult> GetById(string orderId)
         {
             try
@@ -142,7 +142,7 @@ namespace LaptopStoreAPI.Controllers
 
         [HttpGet]
         [Route("income/{year}")]
-        //[Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
+        [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetIncomeChart(int year)
         {
             try
@@ -157,7 +157,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("sold/{year}")]
-        //[Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
+        [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetSoldChart(int year)
         {
             try
@@ -172,6 +172,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("column-chart")]
+        [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetColChart(int year)
         {
             try
@@ -192,7 +193,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("brandcircle-chart")]
-        [Authorize(Roles = "6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
+        [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetBrandChart(int month, int year)
         {
             try
@@ -207,6 +208,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("categoycircle-chart")]
+        [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetCategoryCharts(int month, int year)
         {
             try
@@ -221,6 +223,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("seriescircle-chart")]
+        [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetSeriesCharts(int month, int year)
         {
             try
@@ -235,6 +238,7 @@ namespace LaptopStoreAPI.Controllers
         }
         [HttpGet]
         [Route("circle-chart")]
+        [Authorize(Roles = "a1d06430-35af-433a-aefb-283f559059fb, 6fd0f97a-1522-475c-aba1-92f3ce5aeb04")]
         public IActionResult GetCirChart(int month, int year)
         {
             try
