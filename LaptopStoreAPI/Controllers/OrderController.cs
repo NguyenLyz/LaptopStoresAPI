@@ -39,7 +39,8 @@ namespace LaptopStoreAPI.Controllers
                 else
                 {
                     await _serivce.Add(request, _userId);
-                    return Ok();
+                    var result = "http://localhost:3000/order";
+                    return Redirect(result);
                 }
             }
             catch(Exception e)
@@ -263,6 +264,7 @@ namespace LaptopStoreAPI.Controllers
         [Route("confirm")]
         public async Task<IActionResult> Confirm()
         {
+            var result = "";
             try
             {
                 var param = Request.QueryString.ToString().Substring(0, Request.QueryString.ToString().IndexOf("signature") - 1);
@@ -287,18 +289,18 @@ namespace LaptopStoreAPI.Controllers
                     payType = Request.Query["payType"],
                     extraData = Request.Query["extraData"]
                 };
+                result = "http://localhost:3000/order?resultCode=";
+                result = string.Concat(result, momoRequest.resultCode);
                 await _momoSerivce.ConfirmResponse(momoRequest);/*
                 if (signature == sign)
                 {
                     status = "Signature correct";
                 }*/
-                var result = "http://localhost:3000/order?resultCode=";
-                result = string.Concat(result, momoRequest.resultCode);
                 return Redirect(result);
             }
             catch (Exception e)
             {
-                return StatusCode(500, "Fail to Confirm");
+                return Redirect(result);
             }
         }
     }

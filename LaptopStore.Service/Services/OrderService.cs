@@ -56,7 +56,7 @@ namespace LaptopStore.Service.Services
                     {
                         OrderId = order.Id,
                         ProductId = cart.ProductId,
-                        Amount = (product.Price - ((product.Discount / 100) * product.Price)) * cart.Quantity,
+                        Amount = Convert.ToInt32((product.Price - ((product.Discount / 100d) * product.Price)) * cart.Quantity),
                         Quantity = cart.Quantity
                     };
                     order.OrderValue = order.OrderValue + orderDetail.Amount;
