@@ -89,7 +89,9 @@ namespace LaptopStore.Service.Services
             {
                 var order = _unitOfWork.OrderRepository.GetById(id);
                 var trans = _unitOfWork.TransactionRepository.GetById(order.Id);
-                if (order.UserId == new Guid(_userId) && trans.IsPay == false)
+                var date = DateTime.Now;
+                var date_temp = order.OrderDate.AddDays(3);
+                if (order.UserId == new Guid(_userId) && trans.Status == 1)
                 {
                     if(order.Status == 0)
                     {
@@ -98,7 +100,7 @@ namespace LaptopStore.Service.Services
                         await _unitOfWork.SaveAsync();
                         return;
                     }
-                    if(order.Status >= 1 && order.Status <= 2)
+                    if(order.Status >= 1 && order.Status <= 2 || order.Status == 3 && date_temp >= date)
                     {
                         order.Status = 4;
                         _unitOfWork.OrderRepository.Update(order);
