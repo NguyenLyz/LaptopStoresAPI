@@ -182,6 +182,44 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
+        public async Task<ProductResponseModel> GetBySlug(string slug, string userId)
+        {
+            try
+            {
+                var product = _unitOfWork.ProductRepository.GetBySlug(slug);
+                var brand = _unitOfWork.BrandRepository.GetById(product.BrandId).Name;
+                var category = _unitOfWork.CategoryRepository.GetById(product.CategoryId).Name;
+                var series = _unitOfWork.SeriesRepository.GetById(product.SeriesId).Name;
+                var result = new ProductResponseModel
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Slug = product.Slug,
+                    Brand = brand,
+                    BrandId = product.BrandId,
+                    Category = category,
+                    CategoryId = product.CategoryId,
+                    Series = series,
+                    SeriesId = product.SeriesId,
+                    Price = product.Price,
+                    Discount = product.Discount,
+                    Description = product.Description,
+                    Sold = product.Sold,
+                    Available = product.Available
+                };
+                result.Tags = product.Tags.Split("$").ToList();
+                result.Images = product.Images.Split("$").ToList();
+                if (userId != null)
+                {
+                    await _userBehaviorTrackerService.Add(userId, result.BrandId, result.CategoryId, result.SeriesId);
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public List<ProductResquestModel> GetAll()
         {
             try

@@ -39,8 +39,7 @@ namespace LaptopStoreAPI.Controllers
                 else
                 {
                     await _serivce.Add(request, _userId);
-                    var result = "http://localhost:3000/order";
-                    return Redirect(result);
+                    return Ok();
                 }
             }
             catch(Exception e)

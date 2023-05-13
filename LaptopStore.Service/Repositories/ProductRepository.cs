@@ -18,6 +18,11 @@ namespace LaptopStore.Service.Repositories
         public ProductRepository(LaptopStoreDbContext context) : base(context)
         {
         }
+        public Product GetBySlug(string slug)
+        {
+            var result = _context.Products.Where(x => x.Slug == slug).FirstOrDefault();
+            return result;
+        }
         public async Task SuccessfulProcessing(string orderId)
         {
             var query = from orderDetail in _context.OrderDetails

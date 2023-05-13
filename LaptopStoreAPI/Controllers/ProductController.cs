@@ -76,6 +76,22 @@ namespace LaptopStoreAPI.Controllers
                 return StatusCode(500, "Fail to Get Product");
             }
         }
+        [HttpGet]
+        [Route("slug/{slug}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetBySlug(string slug)
+        {
+            try
+            {
+                var claimsIdentity = this.User.Identity as ClaimsIdentity;
+                string _userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
+                return Ok(await _service.GetBySlug(slug, _userId));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Fail to Get Product");
+            }
+        }
         [HttpPost]
         [Route("filter")]
         [AllowAnonymous]

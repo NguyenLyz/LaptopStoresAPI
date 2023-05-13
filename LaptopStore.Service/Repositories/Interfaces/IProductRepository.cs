@@ -11,6 +11,7 @@ namespace LaptopStore.Service.Repositories.Interfaces
 {
     public interface IProductRepository : IIntF1GenericRepository<Product>
     {
+        Product GetBySlug(string slug);
         Task SuccessfulProcessing(string orderId);
         Task CancelProcessing(string orderId);
         Task<FilterRequestModel> Filter(FilterRequestModel request);
