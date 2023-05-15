@@ -1,4 +1,5 @@
-﻿using LaptopStore.Service.RequestModels;
+﻿using LaptopStore.Data.Models;
+using LaptopStore.Service.RequestModels;
 using LaptopStore.Service.ResponeModels;
 using LaptopStore.Service.ResponseModels;
 using System;

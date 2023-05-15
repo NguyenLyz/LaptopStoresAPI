@@ -127,8 +127,11 @@ namespace LaptopStore.Service.Services
 
                 if (otpData.Otpcode != otp)
                     throw new Exception("Otp incorrect");
-                if (timenow.Subtract(otpData.TimeStamp) >= TimeSpan.FromSeconds(30))
-                    throw new Exception("Otp invalid");
+                if (timenow.Subtract(otpData.TimeStamp) >= TimeSpan.FromMinutes(30))
+                    throw new Exception("Otp time out");
+                
+                if (request.Name != otpData.Name || request.Email != otpData.Email || request.Phone != otpData.Phone || !BCrypt.Net.BCrypt.Verify(request.Password, otpData.Password))
+                    throw new Exception("User not correct");
 
                 var user = new User
                 {
@@ -138,9 +141,6 @@ namespace LaptopStore.Service.Services
                     Password = BCrypt.Net.BCrypt.HashPassword(request.Password),
                     RoleId = new Guid("116e0deb-f72f-45cf-8ef8-423748b8e9b1"),
                 };
-                
-                if (user.Name != otpData.Name || user.Email != otpData.Email || user.Phone != otpData.Phone || user.Password != otpData.Password)
-                    throw new Exception("User not correct");
                 _context.Users.Add(user);
 
                 var tokenHandler = new JwtSecurityTokenHandler();
@@ -462,6 +462,19 @@ namespace LaptopStore.Service.Services
 
                 if (_unitOfWork.UserRepository.GetByEmail(request.Email) != null)
                     throw new Exception("Email is exsist");
+
+                if (_unitOfWork.OTPRepository.GetByPhone(request.Phone) != null)
+                {
+                    _unitOfWork.OTPRepository.Delete(_unitOfWork.OTPRepository.GetByPhone(request.Phone));
+                    await _unitOfWork.SaveAsync();
+                }
+
+                if (_unitOfWork.OTPRepository.GetByEmail(request.Email) != null)
+                {
+                    _unitOfWork.OTPRepository.Delete(_unitOfWork.OTPRepository.GetByEmail(request.Email));
+                    await _unitOfWork.SaveAsync();
+                }
+
                 Random random = new Random();
                 var random_otp = random.Next(100000, 999999);
                 var login_otp = random_otp.ToString();

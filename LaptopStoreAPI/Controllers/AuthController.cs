@@ -42,7 +42,7 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpPost]
-        [Route("register/{otp}")]
+        [Route("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register(string otp, RegisterRequestModel request)
         {
@@ -59,7 +59,7 @@ namespace LaptopStoreAPI.Controllers
             }
             catch(Exception e)
             {
-                return StatusCode(500, "Fail to Register");
+                return StatusCode(500, e.Message);
             }
         }
         [HttpPut]
@@ -179,7 +179,7 @@ namespace LaptopStoreAPI.Controllers
             try
             {
                 await _service.SendOTPwithemail(request);
-                return Ok();
+                return StatusCode(200, "Login OTP sent succcessfully");
             }
             catch(Exception e)
             {

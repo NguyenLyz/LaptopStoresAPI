@@ -18,5 +18,13 @@ namespace LaptopStore.Service.Repositories
         {
             return _context.OTPs.Where(x => x.Otpcode == otp).FirstOrDefault();
         }
+        public OTP GetByPhone(string phone)
+        {
+            return _context.OTPs.Where(x => x.Phone == phone).FirstOrDefault();
+        }
+        public OTP GetByEmail(string email)
+        {
+            return _context.OTPs.Where(x => x.Email == email).FirstOrDefault();
+        }
     }
 }

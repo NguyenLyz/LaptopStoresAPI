@@ -16,7 +16,6 @@ namespace LaptopStore.Service.UnitOfWork
     {
         private readonly IConfiguration _configuration;
         private readonly LaptopStoreDbContext _context;
-        private readonly IMapper _mapper;
         private IAdvertisementRepository advertisementRepository;
         private IBrandRepository brandRepository;
         private ICartRepository cartRepository;
@@ -208,11 +207,11 @@ namespace LaptopStore.Service.UnitOfWork
         {
             get
             {
-                if (this.oTPRepository == null)
+                if(this.oTPRepository == null)
                 {
                     this.oTPRepository = new OTPRepository(_context);
                 }
-                return this.OTPRepository;
+                return this.oTPRepository;
             }
         }
 

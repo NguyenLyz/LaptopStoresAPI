@@ -10,5 +10,7 @@ namespace LaptopStore.Service.Repositories.Interfaces
     public interface IOTPRepository : IF0GenericRepository<OTP>
     {
         OTP GetByOTP(string otp);
+        OTP GetByPhone(string phone);
+        OTP GetByEmail(string email);
     }
 }
