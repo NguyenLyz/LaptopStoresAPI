@@ -14,6 +14,7 @@ namespace LaptopStore.Data.Models
         public string Phone { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string Img { get; set; }
+        public string Address { get; set; }
         public Guid RoleId { get; set; }
 
         public Role Role { get; set; }

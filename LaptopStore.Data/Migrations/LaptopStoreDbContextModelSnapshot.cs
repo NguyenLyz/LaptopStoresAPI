@@ -178,6 +178,35 @@ namespace LaptopStore.Data.Migrations
                     b.ToTable("Notify", (string)null);
                 });
 
+            modelBuilder.Entity("LaptopStore.Data.Models.OTP", b =>
+                {
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Otpcode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Phone");
+
+                    b.ToTable("OTP", (string)null);
+                });
+
             modelBuilder.Entity("LaptopStore.Data.Models.Order", b =>
                 {
                     b.Property<string>("Id")
@@ -386,6 +415,9 @@ namespace LaptopStore.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -430,7 +462,7 @@ namespace LaptopStore.Data.Migrations
                             Email = "ly@gmail.com",
                             Img = "",
                             Name = "Ly",
-                            Password = "$2b$10$pOviqcdwVuFaVcqYPyreYexhBCaI8ctyqqJElBc0JfddSoYPIm6M.",
+                            Password = "$2b$10$Nox4QAzndCruBCaHGVO4DefndzpZa1jxfj35UE3eEft0ajmmuMtBK",
                             Phone = "0775678910",
                             RoleId = new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04")
                         });

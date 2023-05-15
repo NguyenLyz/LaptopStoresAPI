@@ -4,11 +4,13 @@ using LaptopStore.Service.RequestModels;
 using LaptopStore.Service.ResponeModels;
 using LaptopStore.Service.ResponseModels;
 using LaptopStore.Service.Services.Interfaces;
+using LaptopStore.Service.ServiceSetting;
 using LaptopStore.Service.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,10 +32,11 @@ namespace LaptopStore.Service.Services
             {
                 var Time = DateTime.Now;
                 var idMiddle = Guid.NewGuid();
+                var user = _unitOfWork.UserRepository.GetById(_userId);
                 var order = new Order
                 {
                     Id = Time.ToString("hhdd" + idMiddle + "MMyyyyss"),
-                    UserId = new Guid(_userId),
+                    UserId = user.Id,
                     Status = 0,
                     OrderDate = Time,
                     ShipName = request.ShipName,
@@ -47,6 +50,8 @@ namespace LaptopStore.Service.Services
                     order.OrderValue = 100000;
                 }
                 order = await _unitOfWork.OrderRepository.AddAsync(order);
+                user.Address = order.ShipAddress;
+                _unitOfWork.UserRepository.Update(user);
                 await _unitOfWork.SaveAsync();
                 List<CartResponseModel> carts = _unitOfWork.CartRepository.GetByUserId(_userId);
                 foreach (var cart in carts)
@@ -161,6 +166,7 @@ namespace LaptopStore.Service.Services
                             trans.Message = "Thành Công.";
                             _unitOfWork.OrderRepository.Update(order);
                             _unitOfWork.TransactionRepository.Update(trans);
+                            await SendEmailOrderSuccess(order);
                         }
                     }
                     await _unitOfWork.SaveAsync();
@@ -369,6 +375,37 @@ namespace LaptopStore.Service.Services
                 return result;
             }
             catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        private async Task SendEmailOrderSuccess(Order order)
+        {
+            try
+            {
+                var user = _unitOfWork.UserRepository.GetById(order.UserId.ToString());
+                MailMessage mail = new MailMessage();
+                mail.To.Add(user.Email);
+                mail.From = new MailAddress("shirokynx@gmail.com");
+                mail.Subject = "Đơn hàng " + order.Id + " đã được giao thành công";
+
+                string email_body = "";
+                email_body = "<h1>Xin chào " + user.Name + ",</h1>";
+                email_body += "<p>Đơn hàng " + order.Id + " của bạn đã được giao thành công ngày " + DateTime.Now + ".</p>";
+
+                mail.Body = email_body;
+                mail.IsBodyHtml = true;
+
+                SmtpClient smtp = new SmtpClient();
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("shirokynx@gmail.com", ServiceSettings.ACCESS_PASSEMAIL);
+                smtp.EnableSsl = true;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Send(mail);
+                return;
+            }
+            catch(Exception e)
             {
                 throw e;
             }

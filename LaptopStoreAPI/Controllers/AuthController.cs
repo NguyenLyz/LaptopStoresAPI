@@ -42,13 +42,13 @@ namespace LaptopStoreAPI.Controllers
             }
         }
         [HttpPost]
-        [Route("register")]
+        [Route("register/{otp}")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterRequestModel request)
+        public async Task<IActionResult> Register(string otp, RegisterRequestModel request)
         {
             try
             {
-                var token = await _service.Register(request);
+                var token = await _service.Register(otp, request);
 
                 if( token == null)
                 {
@@ -170,6 +170,20 @@ namespace LaptopStoreAPI.Controllers
             catch(Exception e)
             {
                 return StatusCode(500, "Fail to Update Name");
+            }
+        }
+        [HttpPost]
+        [Route("sendotp")]
+        public async Task<IActionResult> SendOTP(RegisterRequestModel request)
+        {
+            try
+            {
+                await _service.SendOTPwithemail(request);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Fail to Send email");
             }
         }
     }

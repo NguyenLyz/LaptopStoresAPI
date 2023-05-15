@@ -32,6 +32,7 @@ namespace LaptopStore.Service.UnitOfWork
         private IUserBehaviorTrackerRepository userBehaviorTrackerRepository;
         private IUserRepository userRepository;
         private IJWTTokenRepository jwttokenRepository;
+        private IOTPRepository oTPRepository;
 
         public UnitOfWork(LaptopStoreDbContext context, IConfiguration configuration)
         {
@@ -201,6 +202,17 @@ namespace LaptopStore.Service.UnitOfWork
                     this.jwttokenRepository = new JWTTokenRepository(_context, _configuration);
                 }
                 return this.jwttokenRepository;
+            }
+        }
+        public IOTPRepository OTPRepository
+        {
+            get
+            {
+                if (this.oTPRepository == null)
+                {
+                    this.oTPRepository = new OTPRepository(_context);
+                }
+                return this.OTPRepository;
             }
         }
 

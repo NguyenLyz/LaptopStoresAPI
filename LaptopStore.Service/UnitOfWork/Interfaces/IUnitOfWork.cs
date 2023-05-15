@@ -24,6 +24,7 @@ namespace LaptopStore.Service.UnitOfWork.Interfaces
         IUserBehaviorTrackerRepository UserBehaviorTrackerRepository { get; }
         IUserRepository UserRepository { get; }
         IJWTTokenRepository JWTTokenRepository { get; }
+        IOTPRepository OTPRepository { get; }
 
         void Dispose();
         Task SaveAsync();
