@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Mail;
+using System.Numerics;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -283,14 +284,22 @@ namespace LaptopStore.Service.Services
                     Body = "<p>OTP renew password : ",
                 };
                 var otpCode = SendOTP(otpRequest);
-                var otpData = new OTP
+                var otpData = new OTP();
+                var otp = _unitOfWork.OTPRepository.GetByEmail(user.Email);
+                if (otp != null)
                 {
-                    Name = user.Name,
-                    Email = user.Email,
-                    Phone = "",
-                    Password = "",
-                    Otpcode = otpCode,
-                    TimeStamp = DateTime.Now,
+                    otpData = otp;
+                    otpData.Otpcode = otpCode;
+                    otpData.TimeStamp = DateTime.Now;
+                }
+                else
+                {
+                    otpData.Name = user.Name;
+                    otpData.Email = user.Email;
+                    otpData.Phone = user.Phone;
+                    otpData.Password = "";
+                    otpData.Otpcode = otpCode;
+                    otpData.TimeStamp = DateTime.Now;
                 };
                 await _unitOfWork.OTPRepository.AddAsync(otpData);
                 await _unitOfWork.SaveAsync();
