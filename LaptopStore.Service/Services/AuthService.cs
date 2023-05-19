@@ -291,6 +291,7 @@ namespace LaptopStore.Service.Services
                     otpData = otp;
                     otpData.Otpcode = otpCode;
                     otpData.TimeStamp = DateTime.Now;
+                    _unitOfWork.OTPRepository.Update(otpData);
                 }
                 else
                 {
@@ -300,8 +301,8 @@ namespace LaptopStore.Service.Services
                     otpData.Password = "";
                     otpData.Otpcode = otpCode;
                     otpData.TimeStamp = DateTime.Now;
+                    await _unitOfWork.OTPRepository.AddAsync(otpData);
                 };
-                await _unitOfWork.OTPRepository.AddAsync(otpData);
                 await _unitOfWork.SaveAsync();
                 return true;
             }
