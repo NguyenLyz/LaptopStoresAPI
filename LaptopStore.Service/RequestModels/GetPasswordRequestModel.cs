@@ -8,7 +8,7 @@ namespace LaptopStore.Service.RequestModels
 {
     public class GetPasswordRequestModel
     {
-        public string Phone { get; set; }
+        public string Email { get; set; }
         public string NewPassword { get; set; }
         public string Otp { get; set; }
     }

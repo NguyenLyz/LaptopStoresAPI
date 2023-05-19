@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using LaptopStore.Data.Context;
 using LaptopStore.Data.Models;
 using LaptopStore.Service.RequestModels;
@@ -127,7 +128,7 @@ namespace LaptopStore.Service.Services
 
                 if (otpData.Otpcode != otp)
                     throw new Exception("Otp incorrect");
-                if (timenow.Subtract(otpData.TimeStamp) >= TimeSpan.FromMinutes(30))
+                if (timenow.Subtract(otpData.TimeStamp) >= TimeSpan.FromSeconds(30))
                     throw new Exception("Otp time out");
                 
                 if (request.Name != otpData.Name || request.Email != otpData.Email || request.Phone != otpData.Phone || !BCrypt.Net.BCrypt.Verify(request.Password, otpData.Password))
@@ -191,76 +192,6 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        /*public async Task<JwTTokenResponseModel> Register(string otp)
-        {
-            try
-            {
-                var otpData = _unitOfWork.OTPRepository.GetByOTP(otp);
-                var time = DateTime.Now;
-                if (time.Subtract(otpData.TimeStamp) >= TimeSpan.FromMinutes(3))
-                    throw new Exception("OTP no correct");
-                var user = new User
-                {
-                    Name = otpData.Name,
-                    Email = otpData.Email,
-                    Phone = otpData.Phone,
-                    Password = otpData.Password,
-                    RoleId = new Guid("116e0deb-f72f-45cf-8ef8-423748b8e9b1"),
-                };
-                if (_unitOfWork.UserRepository.GetByPhone(otpData.Phone) != null)
-                    throw new Exception("Phone number is exsist");
-
-                if (_unitOfWork.UserRepository.GetByEmail(otpData.Email) != null)
-                    throw new Exception("Email is exsist");
-                _context.Users.Add(user);
-
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var tokenKey = Encoding.UTF8.GetBytes(_iconfiguration["JWT:Key"]);
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim(ClaimTypes.Name, user.Id.ToString()),
-                        new Claim(ClaimTypes.MobilePhone, user.Phone.ToString()),
-                        new Claim(ClaimTypes.Role, user.RoleId.ToString())
-                    }),
-                    Expires = DateTime.Now.AddMinutes(20),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
-                };
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                var refreshToken = _unitOfWork.JWTTokenRepository.GenerateRefreshToken();
-                var newToken = new JwTToken
-                {
-                    UserId = user.Id,
-                    AccessToken = tokenHandler.WriteToken(token),
-                    RefreshToken = refreshToken,
-                    RefreshTokenExpiryTime = DateTime.Now.AddDays(2),
-                };
-                await _unitOfWork.JWTTokenRepository.AddAsync(newToken);
-                await _unitOfWork.SaveAsync();
-                string role = "";
-                if (user.RoleId.ToString() == "116e0deb-f72f-45cf-8ef8-423748b8e9b1")
-                {
-                    role = "customer";
-                }
-                return new JwTTokenResponseModel
-                {
-                    AccessToken = tokenHandler.WriteToken(token),
-                    RefreshToken = refreshToken,
-                    User = new AuthRequestModel
-                    {
-                        Name = user.Name,
-                        Email = user.Email,
-                        Phone = user.Phone,
-                        Role = role
-                    }
-                };
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }*/
         public async Task ChangePassword(ChangePasswordRequestModel request, string userId)
         {
             try
@@ -339,10 +270,30 @@ namespace LaptopStore.Service.Services
         {
             try
             {
-                if(_unitOfWork.UserRepository.GetByPhone(request.Phone) == null)
+                var user = _unitOfWork.UserRepository.GetByEmail(request.Email);
+                if(user == null)
                 {
                     return false;
                 }
+                var otpRequest = new OTPRequestModel
+                {
+                    Email = user.Email,
+                    Name = user.Name,
+                    Subject = "OTP Renew Password",
+                    Body = "<p>OTP renew password : ",
+                };
+                var otpCode = SendOTP(otpRequest);
+                var otpData = new OTP
+                {
+                    Name = user.Name,
+                    Email = user.Email,
+                    Phone = "",
+                    Password = "",
+                    Otpcode = otpCode,
+                    TimeStamp = DateTime.Now,
+                };
+                await _unitOfWork.OTPRepository.AddAsync(otpData);
+                await _unitOfWork.SaveAsync();
                 return true;
             }
             catch(Exception e)
@@ -354,13 +305,22 @@ namespace LaptopStore.Service.Services
         {
             try
             {
-                if (request.Otp != "000000")
-                {
+                var timenow = DateTime.Now;
+                var otpData = _unitOfWork.OTPRepository.GetByOTP(request.Otp);
+
+                if(otpData.Email != request.Email)
+                    throw new Exception("Incorrect Email");
+
+                if (otpData.Otpcode != request.Otp)
                     throw new Exception("Incorrect Otp");
-                }
-                var user = _unitOfWork.UserRepository.GetByPhone(request.Phone);
+
+                if(timenow.Subtract(otpData.TimeStamp) >= TimeSpan.FromSeconds(30))
+                    throw new Exception("Otp time out");
+
+                var user = _unitOfWork.UserRepository.GetByEmail(request.Email);
                 user.Password = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
                 _context.Update(user);
+                _unitOfWork.OTPRepository.Delete(otpData);
                 await _context.SaveChangesAsync();
                 return;
             }
@@ -474,7 +434,37 @@ namespace LaptopStore.Service.Services
                     _unitOfWork.OTPRepository.Delete(_unitOfWork.OTPRepository.GetByEmail(request.Email));
                     await _unitOfWork.SaveAsync();
                 }
+                var otpRequest = new OTPRequestModel
+                {
+                    Email = request.Email,
+                    Name = request.Name,
+                    Subject = "OTP Login",
+                    Body = "<p>OTP login : ",
+                };
+                var otpCode = SendOTP(otpRequest);
+                var otpData = new OTP
+                {
+                    Name = request.Name,
+                    Email = request.Email,
+                    Phone = request.Phone,
+                    Password = BCrypt.Net.BCrypt.HashPassword(request.Password),
+                    Otpcode = otpCode,
+                    TimeStamp = DateTime.Now,
+                };
+                await _unitOfWork.OTPRepository.AddAsync(otpData);
+                await _unitOfWork.SaveAsync();
+                return;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
 
+        private string SendOTP(OTPRequestModel request)
+        {
+            try
+            {
                 Random random = new Random();
                 var random_otp = random.Next(100000, 999999);
                 var login_otp = random_otp.ToString();
@@ -482,11 +472,11 @@ namespace LaptopStore.Service.Services
                 MailMessage mail = new MailMessage();
                 mail.To.Add(request.Email);
                 mail.From = new MailAddress("shirokynx@gmail.com");
-                mail.Subject = "OTP Login";
+                mail.Subject = request.Subject;
 
                 string email_body = "";
                 email_body = "<h1>Xin chào " + request.Name + ",</h1>";
-                email_body += "<p>OTP login : " + login_otp + "</p>";
+                email_body += request.Body + login_otp + "</p>";
 
                 mail.Body = email_body;
                 mail.IsBodyHtml = true;
@@ -498,19 +488,7 @@ namespace LaptopStore.Service.Services
                 smtp.EnableSsl = true;
                 smtp.Host = "smtp.gmail.com";
                 smtp.Send(mail);
-
-                var otpData = new OTP
-                {
-                    Name = request.Name,
-                    Email = request.Email,
-                    Phone = request.Phone,
-                    Password = BCrypt.Net.BCrypt.HashPassword(request.Password),
-                    Otpcode = login_otp,
-                    TimeStamp = DateTime.Now,
-                };
-                await _unitOfWork.OTPRepository.AddAsync(otpData);
-                await _unitOfWork.SaveAsync();
-                return;
+                return login_otp;
             }
             catch(Exception e)
             {

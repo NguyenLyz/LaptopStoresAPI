@@ -8,6 +8,6 @@ namespace LaptopStore.Service.RequestModels
 {
     public class CheckUserRequestModel
     {
-        public string Phone { get; set; }
+        public string Email { get; set; }
     }
 }
