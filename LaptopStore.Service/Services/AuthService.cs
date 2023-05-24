@@ -79,7 +79,6 @@ namespace LaptopStore.Service.Services
                     tokenData.RefreshTokenExpiryTime = DateTime.Now.AddDays(2);
                     _unitOfWork.JWTTokenRepository.Update(tokenData);
                 }
-               //dự tính thêm table token save //check tiep refreshtoken
                 await _unitOfWork.SaveAsync();
                 string role = "";
                 string roleId = _user.RoleId.ToString();
@@ -324,7 +323,7 @@ namespace LaptopStore.Service.Services
                 if (otpData.Otpcode != request.Otp)
                     throw new Exception("Incorrect Otp");
 
-                if(timenow.Subtract(otpData.TimeStamp) >= TimeSpan.FromSeconds(30))
+                if(timenow.Subtract(otpData.TimeStamp) >= TimeSpan.FromMinutes(3))
                     throw new Exception("Otp time out");
 
                 var user = _unitOfWork.UserRepository.GetByEmail(request.Email);
@@ -448,8 +447,8 @@ namespace LaptopStore.Service.Services
                 {
                     Email = request.Email,
                     Name = request.Name,
-                    Subject = "OTP Login",
-                    Body = "<p>OTP login : ",
+                    Subject = "Đăng ký tài khoản người dùng",
+                    Body = "<p>Mã kích hoạt : ",
                 };
                 var otpCode = SendOTP(otpRequest);
                 var otpData = new OTP
