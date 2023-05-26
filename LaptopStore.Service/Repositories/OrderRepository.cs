@@ -42,8 +42,11 @@ namespace LaptopStore.Service.Repositories
                         {
                             Id = order.Id,
                             OrderDate = order.OrderDate,
+                            ShipName = order.ShipName,
+                            ShipPhone = order.ShipPhone,
                             OrderValue = order.OrderValue,
                             Status = order.Status,
+                            TransMethod = trans.Status,
                             IsPay = trans.IsPay,
                         };
             return query.ToList();

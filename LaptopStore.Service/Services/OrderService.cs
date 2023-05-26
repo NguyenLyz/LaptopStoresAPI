@@ -204,8 +204,13 @@ namespace LaptopStore.Service.Services
                 result.Orderer = _unitOfWork.UserRepository.GetById(order.UserId.ToString()).Name;
                 result.TransMethod = trans.Status;
                 result.IsPay = trans.IsPay;
-                if(shipper != null)
-                    result.Shipper = _unitOfWork.UserRepository.GetById(shipper.UserId.ToString()).Name;
+                var shipperInfo = _unitOfWork.UserRepository.GetById(shipper.UserId.ToString());
+                if (shipper != null)
+                {
+                    result.User.Name = shipperInfo.Name;
+                    result.User.Phone = shipperInfo.Phone;
+                    result.User.Img = shipperInfo.Img;
+                }
                 return result;
             }
             catch(Exception e)

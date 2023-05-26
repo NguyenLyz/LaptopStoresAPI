@@ -21,7 +21,7 @@ namespace LaptopStore.Service.ResponseModels
         public int ShipMethod { get; set; }
         public int TransMethod { get; set; }
         public bool IsPay { get; set; }
-        public string Shipper { get; set; }
+        public User User { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
     }
 }
