@@ -204,9 +204,9 @@ namespace LaptopStore.Service.Services
                 result.Orderer = _unitOfWork.UserRepository.GetById(order.UserId.ToString()).Name;
                 result.TransMethod = trans.Status;
                 result.IsPay = trans.IsPay;
-                var shipperInfo = _unitOfWork.UserRepository.GetById(shipper.UserId.ToString());
                 if (shipper != null)
                 {
+                    var shipperInfo = _unitOfWork.UserRepository.GetById(shipper.UserId.ToString());
                     result.User.Name = shipperInfo.Name;
                     result.User.Phone = shipperInfo.Phone;
                     result.User.Img = shipperInfo.Img;
