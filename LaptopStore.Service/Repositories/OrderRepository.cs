@@ -119,16 +119,6 @@ namespace LaptopStore.Service.Repositories
         }
         public void AssignOrderToShipper(string orderId)
         {
-            //var employee = _context.Users.Where(x => x.RoleId == new Guid("a1d06430-35af-433a-aefb-283f559059fb"));
-
-            /*var employee_free = from user in _context.Users
-                                join shipperOrder in _context.ShipperOrders on user.Id equals shipperOrder.UserId
-                                where user.RoleId == new Guid("a1d06430 - 35af - 433a - aefb - 283f559059fb")
-                                && shipperOrder.Id == null
-                                select user;
-            var result = employee_free.First();
-            string employee_free_data = employee_free.First().ToString();*/
-
             var employees = _context.Users.Where(x => x.RoleId == new Guid("a1d06430-35af-433a-aefb-283f559059fb") 
             &&!_context.ShipperOrders.Any(y => y.UserId == x.Id)).ToArray();
 
@@ -153,12 +143,7 @@ namespace LaptopStore.Service.Repositories
                     .FirstOrDefault().userId;
                 shipper.OrderId = orderId;
                 shipper.UserId = userId;
-            }/*
-            shipper = new ShipperOrder()
-            {
-                OrderId = orderId,
-                UserId = userId,
-            };*/
+            }
             _context.ShipperOrders.Add(shipper);
         }
     }
