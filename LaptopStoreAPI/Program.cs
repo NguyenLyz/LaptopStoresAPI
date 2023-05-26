@@ -40,6 +40,7 @@ builder.Services.AddScoped<IUserBehaviorTrackerRepository, UserBehaviorTrackerRe
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJWTTokenRepository, JWTTokenRepository>();
 builder.Services.AddScoped<IOTPRepository, OTPRepository>();
+builder.Services.AddScoped<IShipperOrderRepository, ShipperOrderRepository>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

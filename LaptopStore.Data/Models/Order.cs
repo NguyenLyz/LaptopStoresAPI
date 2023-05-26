@@ -18,11 +18,10 @@ namespace LaptopStore.Data.Models
         public string ShipAddress { get; set; } = string.Empty;
         public string Note { get; set; } = string.Empty;
         public int ShipMethod { get; set; }
-        public Guid ShipperId { get; set; }
 
         public User User { get; set; }
-        public User Shipper { get; set; }
         public Transaction Transaction { get; set; }
+        public ShipperOrder ShipperOrder { get; set; }
 
         public List<OrderDetail> OrderDetails { get; set; }
     }

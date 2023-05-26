@@ -386,6 +386,31 @@ namespace LaptopStore.Data.Migrations
                     b.ToTable("Series", (string)null);
                 });
 
+            modelBuilder.Entity("LaptopStore.Data.Models.ShipperOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("OrderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ShipperOrders", (string)null);
+                });
+
             modelBuilder.Entity("LaptopStore.Data.Models.Transaction", b =>
                 {
                     b.Property<string>("OrderId")
@@ -462,7 +487,7 @@ namespace LaptopStore.Data.Migrations
                             Email = "ly@gmail.com",
                             Img = "",
                             Name = "Ly",
-                            Password = "$2b$10$Nox4QAzndCruBCaHGVO4DefndzpZa1jxfj35UE3eEft0ajmmuMtBK",
+                            Password = "$2b$10$qiX5aJ6Z3Piuzo1vvYL31ePh66Em7I9O0qAohpUAk3kZ8HqJN/j6u",
                             Phone = "0775678910",
                             RoleId = new Guid("6fd0f97a-1522-475c-aba1-92f3ce5aeb04")
                         });
@@ -594,6 +619,25 @@ namespace LaptopStore.Data.Migrations
                     b.Navigation("Series");
                 });
 
+            modelBuilder.Entity("LaptopStore.Data.Models.ShipperOrder", b =>
+                {
+                    b.HasOne("LaptopStore.Data.Models.Order", "Order")
+                        .WithOne("ShipperOrder")
+                        .HasForeignKey("LaptopStore.Data.Models.ShipperOrder", "OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LaptopStore.Data.Models.User", "User")
+                        .WithMany("ShipperOrders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("LaptopStore.Data.Models.Transaction", b =>
                 {
                     b.HasOne("LaptopStore.Data.Models.Order", "Order")
@@ -669,6 +713,9 @@ namespace LaptopStore.Data.Migrations
                 {
                     b.Navigation("OrderDetails");
 
+                    b.Navigation("ShipperOrder")
+                        .IsRequired();
+
                     b.Navigation("Transaction")
                         .IsRequired();
                 });
@@ -702,6 +749,8 @@ namespace LaptopStore.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Orders");
+
+                    b.Navigation("ShipperOrders");
 
                     b.Navigation("UserBehaviorTrackers");
                 });

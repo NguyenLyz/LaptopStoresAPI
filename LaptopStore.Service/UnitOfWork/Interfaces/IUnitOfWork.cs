@@ -25,6 +25,7 @@ namespace LaptopStore.Service.UnitOfWork.Interfaces
         IUserRepository UserRepository { get; }
         IJWTTokenRepository JWTTokenRepository { get; }
         IOTPRepository OTPRepository { get; }
+        IShipperOrderRepository ShipperOrderRepository { get; }
 
         void Dispose();
         Task SaveAsync();

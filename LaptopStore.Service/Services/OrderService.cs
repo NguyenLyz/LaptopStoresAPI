@@ -5,6 +5,7 @@ using LaptopStore.Service.ResponeModels;
 using LaptopStore.Service.ResponseModels;
 using LaptopStore.Service.Services.Interfaces;
 using LaptopStore.Service.ServiceSetting;
+using LaptopStore.Service.UnitOfWork;
 using LaptopStore.Service.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -157,6 +158,10 @@ namespace LaptopStore.Service.Services
                     {
                         await _unitOfWork.ProductRepository.SuccessfulProcessing(id);
                     }
+                    if(order.Status == 2)
+                    {
+                        _unitOfWork.OrderRepository.AssignOrderToShipper(order.Id);
+                    }
                     if(order.Status == 3)
                     {
                         var trans = _unitOfWork.TransactionRepository.GetById(order.Id);
@@ -187,17 +192,20 @@ namespace LaptopStore.Service.Services
                 throw e;
             }
         }
-        public async Task<OrderRequestModel> GetById(string id)
+        public async Task<OrderResponseModel> GetById(string id)
         {
             try
             {
                 var order = _unitOfWork.OrderRepository.GetById(id);
+                var shipper = _unitOfWork.ShipperOrderRepository.GetByOrderId(order.Id);
                 var trans = _unitOfWork.TransactionRepository.GetById(order.Id);
                 order.OrderDetails = await _unitOfWork.OrderDetailRepository.GetByOrderId(order.Id).ToListAsync();
-                var result = _mapper.Map<Order, OrderRequestModel>(order);
+                var result = _mapper.Map<Order, OrderResponseModel>(order);
                 result.Orderer = _unitOfWork.UserRepository.GetById(order.UserId.ToString()).Name;
                 result.TransMethod = trans.Status;
                 result.IsPay = trans.IsPay;
+                if(shipper != null)
+                    result.Shipper = _unitOfWork.UserRepository.GetById(shipper.UserId.ToString()).Name;
                 return result;
             }
             catch(Exception e)
@@ -210,6 +218,17 @@ namespace LaptopStore.Service.Services
             try
             {
                 return _unitOfWork.OrderRepository.GetByUserId(userId);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        public List<OrderRequestModel> GetByShipperId(string shipperId)
+        {
+            try
+            {
+                return _unitOfWork.OrderRepository.GetbyShipperId(shipperId);
             }
             catch(Exception e)
             {

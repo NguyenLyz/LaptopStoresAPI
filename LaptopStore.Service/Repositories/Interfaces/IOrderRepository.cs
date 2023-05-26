@@ -12,10 +12,12 @@ namespace LaptopStore.Service.Repositories.Interfaces
     public interface IOrderRepository : IStringF1GenericRepository<Order>
     {
         List<OrderRequestModel> GetByUserId(string _userId);
+        List<OrderRequestModel> GetbyShipperId(string _shipperId);
         List<OrderRequestModel> GetAll();
         IQueryable<Order> GetSuccessByYear(int year);
         IQueryable<ChartResponseModel> GetBrandChart(int month, int year);
         IQueryable<ChartResponseModel> GetCategoryChart(int month, int year);
         IQueryable<ChartResponseModel> GetSeriesChart(int month, int year);
+        void AssignOrderToShipper(string orderId);
     }
 }

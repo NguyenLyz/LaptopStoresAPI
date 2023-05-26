@@ -32,6 +32,7 @@ namespace LaptopStore.Service.UnitOfWork
         private IUserRepository userRepository;
         private IJWTTokenRepository jwttokenRepository;
         private IOTPRepository oTPRepository;
+        private IShipperOrderRepository shipperOrderRepository;
 
         public UnitOfWork(LaptopStoreDbContext context, IConfiguration configuration)
         {
@@ -212,6 +213,17 @@ namespace LaptopStore.Service.UnitOfWork
                     this.oTPRepository = new OTPRepository(_context);
                 }
                 return this.oTPRepository;
+            }
+        }
+        public IShipperOrderRepository ShipperOrderRepository
+        {
+            get
+            {
+                if (this.shipperOrderRepository == null)
+                {
+                    this.shipperOrderRepository = new ShipperOrderRepository(_context);
+                }
+                return this.shipperOrderRepository;
             }
         }
 

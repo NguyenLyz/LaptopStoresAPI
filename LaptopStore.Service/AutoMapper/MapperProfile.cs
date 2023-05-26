@@ -29,6 +29,7 @@ namespace LaptopStore.Service.AutoMapper
 
             CreateMap<ProductResponseModel, Product>().ReverseMap();
             CreateMap<NotifyResponseModel, Notify>().ReverseMap();
+            CreateMap<OrderResponseModel, Order>().ReverseMap();
         }
     }
 }

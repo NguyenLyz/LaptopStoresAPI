@@ -3,6 +3,7 @@ using LaptopStore.Data.Models;
 using LaptopStore.Service.Repositories.Interfaces;
 using LaptopStore.Service.RequestModels;
 using LaptopStore.Service.ResponseModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,22 @@ namespace LaptopStore.Service.Repositories
             var query = from order in _context.Orders
                         join trans in _context.Transactions on order.Id equals trans.OrderId
                         where order.UserId == new Guid(_userId)
+                        select new OrderRequestModel
+                        {
+                            Id = order.Id,
+                            OrderDate = order.OrderDate,
+                            OrderValue = order.OrderValue,
+                            Status = order.Status,
+                            IsPay = trans.IsPay,
+                        };
+            return query.ToList();
+        }
+        public List<OrderRequestModel> GetbyShipperId(string _shipperId)
+        {
+            var query = from shipperOrder in _context.ShipperOrders
+                        join order in _context.Orders on shipperOrder.OrderId equals order.Id
+                        join trans in _context.Transactions on order.Id equals trans.OrderId
+                        where shipperOrder.UserId == new Guid(_shipperId)
                         select new OrderRequestModel
                         {
                             Id = order.Id,
@@ -99,6 +116,50 @@ namespace LaptopStore.Service.Repositories
                             Value = orderDetail.Quantity
                         };
             return query;
+        }
+        public void AssignOrderToShipper(string orderId)
+        {
+            //var employee = _context.Users.Where(x => x.RoleId == new Guid("a1d06430-35af-433a-aefb-283f559059fb"));
+
+            /*var employee_free = from user in _context.Users
+                                join shipperOrder in _context.ShipperOrders on user.Id equals shipperOrder.UserId
+                                where user.RoleId == new Guid("a1d06430 - 35af - 433a - aefb - 283f559059fb")
+                                && shipperOrder.Id == null
+                                select user;
+            var result = employee_free.First();
+            string employee_free_data = employee_free.First().ToString();*/
+
+            var employees = _context.Users.Where(x => x.RoleId == new Guid("a1d06430-35af-433a-aefb-283f559059fb") 
+            &&!_context.ShipperOrders.Any(y => y.UserId == x.Id)).ToArray();
+
+            var shipper = new ShipperOrder();
+            if(employees.Count() != 0)
+            {
+                shipper.OrderId = orderId;
+                shipper.UserId = employees.FirstOrDefault().Id;
+            }
+            else
+            {
+                var userId = _context.ShipperOrders
+                    .Include(x => x.Order)
+                    .Where(x => x.Order.Status == 2)
+                    .GroupBy(x => x.UserId)
+                    .Select(x => new
+                    {
+                        userId = x.Key,
+                        count = x.Count()
+                    })
+                    .OrderBy(x => x.count)
+                    .FirstOrDefault().userId;
+                shipper.OrderId = orderId;
+                shipper.UserId = userId;
+            }/*
+            shipper = new ShipperOrder()
+            {
+                OrderId = orderId,
+                UserId = userId,
+            };*/
+            _context.ShipperOrders.Add(shipper);
         }
     }
 }

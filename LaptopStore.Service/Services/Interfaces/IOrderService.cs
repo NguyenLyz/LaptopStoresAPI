@@ -11,8 +11,9 @@ namespace LaptopStore.Service.Services.Interfaces
     public interface IOrderService
     {
         Task<string> Add(OrderRequestModel request, string _userId);
-        Task<OrderRequestModel> GetById(string id);
+        Task<OrderResponseModel> GetById(string id);
         List<OrderRequestModel> GetByUserId(string userId);
+        List<OrderRequestModel> GetByShipperId(string shipperId);
         Task CancelOrderUser(string id, string _userId);
         Task CancelOrder(string id);
         Task ProcessOrder(string id);

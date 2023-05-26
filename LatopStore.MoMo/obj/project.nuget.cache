@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7XsHibf51DjO40Ex74OJs60e9LeqcdUWVzhy7koqFZnql1fpRaQMPHdLgsWvfE2h3Aiq8MsnyfPeJUeBHZUatw==",
+  "dgSpecHash": "Z9VAys5gdWzPIPUGtuJvu7SrMuzyJl4HxFuv3iaBn6O3YTZPQ5V1G+oJvesV69e3nMiu/JmWXy9ZgO50RhZu/g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LatopStore.MoMo\\LaptopStore.MoMo.csproj",
+  "projectFilePath": "C:\\Users\\ACER\\Downloads\\API\\LatopStore.MoMo\\LaptopStore.MoMo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

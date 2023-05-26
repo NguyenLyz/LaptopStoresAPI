@@ -43,3 +43,18 @@ C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\Final\LaptopStoreAPI\La
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\Final\LaptopStoreAPI\LaptopStore.Service\obj\Debug\net6.0\refint\LaptopStore.Service.dll
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\Final\LaptopStoreAPI\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.pdb
 C:\Users\ACER\OneDrive\Máy tính\web C# ASP.NET\Gittest\Final\LaptopStoreAPI\LaptopStore.Service\obj\Debug\net6.0\ref\LaptopStore.Service.dll
+C:\Users\ACER\Downloads\API\LaptopStore.Service\bin\Debug\net6.0\LaptopStore.Service.deps.json
+C:\Users\ACER\Downloads\API\LaptopStore.Service\bin\Debug\net6.0\LaptopStore.Service.dll
+C:\Users\ACER\Downloads\API\LaptopStore.Service\bin\Debug\net6.0\LaptopStore.Service.pdb
+C:\Users\ACER\Downloads\API\LaptopStore.Service\bin\Debug\net6.0\LaptopStore.Data.dll
+C:\Users\ACER\Downloads\API\LaptopStore.Service\bin\Debug\net6.0\LaptopStore.Data.pdb
+C:\Users\ACER\Downloads\API\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.csproj.AssemblyReference.cache
+C:\Users\ACER\Downloads\API\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ACER\Downloads\API\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.AssemblyInfoInputs.cache
+C:\Users\ACER\Downloads\API\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.AssemblyInfo.cs
+C:\Users\ACER\Downloads\API\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.csproj.CoreCompileInputs.cache
+C:\Users\ACER\Downloads\API\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.csproj.CopyComplete
+C:\Users\ACER\Downloads\API\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.dll
+C:\Users\ACER\Downloads\API\LaptopStore.Service\obj\Debug\net6.0\refint\LaptopStore.Service.dll
+C:\Users\ACER\Downloads\API\LaptopStore.Service\obj\Debug\net6.0\LaptopStore.Service.pdb
+C:\Users\ACER\Downloads\API\LaptopStore.Service\obj\Debug\net6.0\ref\LaptopStore.Service.dll

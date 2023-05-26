@@ -23,5 +23,6 @@ namespace LaptopStore.Data.Models
         public List<UserBehaviorTracker> UserBehaviorTrackers { get; set; }
         public List<Cart> Carts { get; set; }
         public List<Order> Orders { get; set; }
+        public List<ShipperOrder> ShipperOrders { get; set; }
     }
 }

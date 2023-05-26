@@ -3939,11 +3939,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LatopStore.MoMo\\LaptopStore.MoMo.csproj",
+      "projectUniqueName": "C:\\Users\\ACER\\Downloads\\API\\LatopStore.MoMo\\LaptopStore.MoMo.csproj",
       "projectName": "LaptopStore.MoMo",
-      "projectPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LatopStore.MoMo\\LaptopStore.MoMo.csproj",
+      "projectPath": "C:\\Users\\ACER\\Downloads\\API\\LatopStore.MoMo\\LaptopStore.MoMo.csproj",
       "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LatopStore.MoMo\\obj\\",
+      "outputPath": "C:\\Users\\ACER\\Downloads\\API\\LatopStore.MoMo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3960,8 +3960,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStore.Service\\LaptopStore.Service.csproj": {
-              "projectPath": "C:\\Users\\ACER\\OneDrive\\Máy tính\\web C# ASP.NET\\Gittest\\Final\\LaptopStoreAPI\\LaptopStore.Service\\LaptopStore.Service.csproj"
+            "C:\\Users\\ACER\\Downloads\\API\\LaptopStore.Service\\LaptopStore.Service.csproj": {
+              "projectPath": "C:\\Users\\ACER\\Downloads\\API\\LaptopStore.Service\\LaptopStore.Service.csproj"
             }
           }
         }
